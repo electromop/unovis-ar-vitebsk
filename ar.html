@@ -137,7 +137,7 @@
 
   <!-- A-Frame сцена с MindAR -->
   <a-scene
-    mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiScanning: no; uiLoading: no; uiError: no;"
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiScanning: no; uiLoading: no; uiError: no; filterMinCF: 0.00001; filterBeta: 0.01; warmupTolerance: 5; missTolerance: 10;"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights, alpha: true"
     vr-mode-ui="enabled: false"
@@ -156,138 +156,141 @@
     <!-- Цель 0: наш плакат -->
     <a-entity mindar-image-target="targetIndex: 0" id="target">
 
-      <!-- DEBUG: большой жёлтый куб в центре плаката, ни от чего не зависит -->
-      <a-box
-        position="0 0 0.1"
-        width="0.4" height="0.4" depth="0.4"
-        material="shader: flat; color: #ff00ff">
-      </a-box>
-
-      <!-- Парящий красный квадрат — классика Малевича -->
-      <a-box
+      <!-- Парящий красный квадрат — классика Малевича — широкий дрейф + wobble вращения + дыхание -->
+      <a-plane
         id="red-square"
-        position="0.25 0.15 0.25"
-        width="0.28" height="0.28" depth="0.015"
-        material="shader: flat; color: #d8301a"
-        animation__rot="property: rotation; to: 0 360 12; loop: true; dur: 10000; easing: linear"
-        animation__float="property: position; dir: alternate; to: 0.25 0.25 0.25; loop: true; dur: 2500; easing: easeInOutSine">
-      </a-box>
+        position="0.25 0.15 0.05"
+        width="0.28" height="0.28"
+        rotation="0 0 10"
+        material="shader: flat; color: #d8301a; side: double"
+        animation__rot="property: rotation; from: 0 0 -8; to: 0 0 22; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
+        animation__float="property: position; from: 0.18 0.08 0.05; to: 0.32 0.22 0.05; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 1 1 1; to: 1.08 1.08 1; dir: alternate; loop: true; dur: 3200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Чёрный круг -->
-      <a-cylinder
+      <!-- Чёрный круг — крупный дрейф по диагонали -->
+      <a-circle
         id="black-disc"
-        position="-0.3 -0.1 0.15"
-        radius="0.13" height="0.01"
-        rotation="90 0 0"
-        color="#111111"
-        animation__orbit="property: position; dir: alternate; to: -0.3 0.1 0.15; loop: true; dur: 3500; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 200; easing: easeOutBack">
-      </a-cylinder>
+        position="-0.3 -0.05 0.03"
+        radius="0.13"
+        material="shader: flat; color: #111111; side: double"
+        animation__float="property: position; from: -0.38 -0.14 0.03; to: -0.22 0.04 0.03; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 200; easing: easeOutCubic">
+      </a-circle>
 
-      <!-- Белое кольцо внутри круга -->
-      <a-cylinder
-        position="-0.3 -0.1 0.16"
-        radius="0.06" height="0.011"
-        rotation="90 0 0"
-        color="#f2ede3"
-        animation__orbit="property: position; dir: alternate; to: -0.3 0.1 0.16; loop: true; dur: 3500; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 350; easing: easeOutBack">
-      </a-cylinder>
+      <!-- Белое кольцо внутри круга — идёт синхронно с чёрным -->
+      <a-circle
+        position="-0.3 -0.05 0.04"
+        radius="0.06"
+        material="shader: flat; color: #f2ede3; side: double"
+        animation__float="property: position; from: -0.38 -0.14 0.04; to: -0.22 0.04 0.04; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
+        animation__pulse="property: scale; from: 0.85 0.85 1; to: 1.15 1.15 1; dir: alternate; loop: true; dur: 2600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 350; easing: easeOutCubic">
+      </a-circle>
 
-      <!-- Синий треугольник (через конус с 3 сторонами) -->
-      <a-entity
+      <!-- Синий треугольник — активное вращение + дрейф -->
+      <a-triangle
         id="blue-tri"
-        position="0.2 -0.3 0.1"
+        position="0.2 -0.3 0.04"
+        vertex-a="0 0.18 0"
+        vertex-b="-0.16 -0.09 0"
+        vertex-c="0.16 -0.09 0"
         rotation="0 0 -20"
-        animation__rot="property: rotation; to: 0 0 340; loop: true; dur: 18000; easing: linear"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutBack">
-        <a-cone
-          radius-bottom="0.18" radius-top="0"
-          segments-radial="3" height="0.02"
-          rotation="90 0 0"
-          color="#0b3d91">
-        </a-cone>
-      </a-entity>
+        material="shader: flat; color: #0b3d91; side: double"
+        animation__rot="property: rotation; to: 0 0 340; loop: true; dur: 16000; easing: linear"
+        animation__float="property: position; from: 0.12 -0.38 0.04; to: 0.28 -0.22 0.04; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutCubic">
+      </a-triangle>
 
-      <!-- Жёлтый брусок -->
-      <a-box
-        position="0 0.35 0.08"
-        width="0.5" height="0.04" depth="0.012"
-        color="#f2b705"
+      <!-- Жёлтый брусок — дрейф + покачивание угла -->
+      <a-plane
+        position="0 0.35 0.02"
+        width="0.5" height="0.04"
         rotation="0 0 6"
-        animation__float="property: position; dir: alternate; to: 0 0.38 0.08; loop: true; dur: 2000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 700; easing: easeOutBack">
-      </a-box>
+        material="shader: flat; color: #f2b705; side: double"
+        animation__rot="property: rotation; from: 0 0 -2; to: 0 0 12; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
+        animation__float="property: position; from: -0.06 0.31 0.02; to: 0.06 0.39 0.02; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 700; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Красная диагональная полоса -->
-      <a-box
-        position="0 -0.45 0.05"
-        width="0.95" height="0.018" depth="0.01"
-        color="#d8301a"
+      <!-- Красная диагональная полоса — горизонтальный дрейф -->
+      <a-plane
+        position="0 -0.45 0.01"
+        width="0.95" height="0.018"
         rotation="0 0 -6"
+        material="shader: flat; color: #d8301a; side: double"
+        animation__rot="property: rotation; from: 0 0 -10; to: 0 0 -2; dir: alternate; loop: true; dur: 7400; easing: easeInOutSine"
+        animation__float="property: position; from: -0.07 -0.47 0.01; to: 0.07 -0.43 0.01; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1200; delay: 900; easing: easeOutCubic">
-      </a-box>
+      </a-plane>
 
-      <!-- Чёрный вертикальный брусок -->
-      <a-box
-        position="0.42 -0.5 0.12"
-        width="0.015" height="0.3" depth="0.01"
-        color="#111111"
-        animation__in="property: scale; from: 1 0 1; to: 1 1 1; dur: 800; delay: 1100; easing: easeOutCubic">
-      </a-box>
+      <!-- Чёрный вертикальный брусок — дрейф + наклон -->
+      <a-plane
+        position="0.42 -0.3 0.02"
+        width="0.015" height="0.3"
+        rotation="0 0 0"
+        material="shader: flat; color: #111111; side: double"
+        animation__rot="property: rotation; from: 0 0 -6; to: 0 0 6; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__float="property: position; from: 0.38 -0.36 0.02; to: 0.46 -0.24 0.02; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
+        animation__in="property: scale; from: 1 0 1; to: 1 1 1; dur: 900; delay: 1100; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Маленький красный круг -->
-      <a-cylinder
-        position="-0.38 -0.55 0.14"
-        radius="0.035" height="0.008"
-        rotation="90 0 0"
-        color="#d8301a"
-        animation__pulse="property: scale; dir: alternate; from: 1 1 1; to: 1.4 1.4 1.4; loop: true; dur: 1400; easing: easeInOutQuad"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1300; easing: easeOutBack">
-      </a-cylinder>
+      <!-- Маленький красный круг — пульсация + широкая орбита -->
+      <a-circle
+        position="-0.38 -0.4 0.03"
+        radius="0.035"
+        material="shader: flat; color: #d8301a; side: double"
+        animation__pulse="property: scale; dir: alternate; from: 0.85 0.85 1; to: 1.55 1.55 1; loop: true; dur: 1800; easing: easeInOutSine"
+        animation__float="property: position; from: -0.44 -0.46 0.03; to: -0.32 -0.34 0.03; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1300; easing: easeOutCubic">
+      </a-circle>
 
-      <!-- Текст "UNOVIS" парящий над плакатом -->
+      <!-- Текст "УНОВИС" парящий над плакатом — более заметный свинг -->
       <a-text
         value="УНОВИС"
-        position="0 0.5 0.35"
+        position="0 0.5 0.08"
         align="center"
         color="#d8301a"
         width="1.6"
         font="kelsonsans"
-        animation__float="property: position; dir: alternate; to: 0 0.55 0.35; loop: true; dur: 2200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1500; easing: easeOutBack">
+        animation__float="property: position; from: -0.06 0.47 0.08; to: 0.06 0.53 0.08; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 1500; easing: easeOutCubic">
       </a-text>
 
       <a-text
         value="VITEBSK 1919-1922"
-        position="0 0.38 0.35"
+        position="0 0.38 0.08"
         align="center"
         color="#f2ede3"
         width="1.2"
         font="kelsonsans"
-        animation__in="property: opacity; from: 0; to: 1; dur: 1000; delay: 1900">
+        animation__float="property: position; from: -0.03 0.37 0.08; to: 0.03 0.39 0.08; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
+        animation__in="property: opacity; from: 0; to: 1; dur: 1200; delay: 1900; easing: easeInOutSine">
       </a-text>
 
-      <!-- Маленькие парящие квадратики-"спутники" -->
-      <a-box position="0.45 0.4 0.2" width="0.04" height="0.04" depth="0.01"
-        color="#111111"
-        animation__orbit="property: rotation; to: 0 0 360; loop: true; dur: 8000; easing: linear"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1700; easing: easeOutBack">
-      </a-box>
+      <!-- Маленькие парящие квадратики-"спутники" — сильнее вращаются и дрейфуют -->
+      <a-plane position="0.45 0.4 0.04" width="0.04" height="0.04"
+        material="shader: flat; color: #111111; side: double"
+        animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 9000; easing: linear"
+        animation__float="property: position; from: 0.38 0.34 0.04; to: 0.5 0.46 0.04; dir: alternate; loop: true; dur: 4600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1700; easing: easeOutCubic">
+      </a-plane>
 
-      <a-box position="-0.45 0.3 0.22" width="0.03" height="0.03" depth="0.01"
-        color="#d8301a"
-        animation__float="property: position; dir: alternate; to: -0.45 0.35 0.22; loop: true; dur: 1800"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1800; easing: easeOutBack">
-      </a-box>
+      <a-plane position="-0.45 0.3 0.04" width="0.03" height="0.03"
+        material="shader: flat; color: #d8301a; side: double"
+        animation__rot="property: rotation; to: 0 0 -360; loop: true; dur: 11000; easing: linear"
+        animation__float="property: position; from: -0.5 0.24 0.04; to: -0.4 0.36 0.04; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1800; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Крест-архитектон (три бруска вместе) -->
-      <a-entity position="-0.15 0.25 0.3"
-        animation__rot="property: rotation; to: 0 360 0; loop: true; dur: 14000; easing: linear"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 2000; easing: easeOutBack">
-        <a-box width="0.12" height="0.02" depth="0.02" color="#111111"></a-box>
-        <a-box width="0.02" height="0.12" depth="0.02" color="#111111"></a-box>
-        <a-box width="0.02" height="0.02" depth="0.12" color="#d8301a"></a-box>
+      <!-- Крест-архитектон (плоский плюс) — вращается быстрее, дрейфует шире -->
+      <a-entity position="-0.15 0.25 0.06"
+        animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 12000; easing: linear"
+        animation__float="property: position; from: -0.22 0.19 0.06; to: -0.08 0.31 0.06; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 2000; easing: easeOutCubic">
+        <a-plane width="0.12" height="0.02" material="shader: flat; color: #111111; side: double"></a-plane>
+        <a-plane width="0.02" height="0.12" material="shader: flat; color: #d8301a; side: double"></a-plane>
       </a-entity>
 
     </a-entity>
