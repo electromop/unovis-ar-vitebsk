@@ -116,6 +116,78 @@
       display: none;
     }
 
+    /* Информационный поп-ап при клике на фигуру */
+    #info-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 17, 17, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    #info-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-card {
+      background: #f2ede3;
+      color: #111;
+      padding: 34px 28px 28px;
+      max-width: 360px;
+      width: 100%;
+      position: relative;
+      border-left: 6px solid #d8301a;
+      font-family: 'Courier New', monospace;
+      box-shadow: 8px 8px 0 rgba(216, 48, 26, 0.25);
+      transform: translateY(12px);
+      transition: transform 0.3s ease;
+    }
+    #info-popup.active .popup-card {
+      transform: translateY(0);
+    }
+    .popup-accent {
+      height: 4px;
+      width: 42px;
+      background: #d8301a;
+      margin-bottom: 14px;
+    }
+    .popup-title {
+      font-family: Impact, 'Arial Black', sans-serif;
+      font-size: 26px;
+      letter-spacing: 3px;
+      margin: 0 0 14px;
+      color: #111;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .popup-body {
+      font-size: 14px;
+      line-height: 1.65;
+      letter-spacing: 0.3px;
+      color: #1a1a1a;
+    }
+    .popup-close {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 32px;
+      font-family: Impact, sans-serif;
+      cursor: pointer;
+      color: #111;
+      line-height: 1;
+      padding: 4px 10px;
+    }
+    .popup-close:active {
+      transform: translate(1px, 1px);
+    }
+
   </style>
 </head>
 <body>
@@ -132,8 +204,18 @@
     </p>
   </div>
 
-  <div id="scan-hint">НАВЕДИ · КАМЕРУ · НА · ПЛАКАТ</div>
+  <div id="scan-hint">НАВЕДИ · КАМЕРУ · НА · ПЛАКАТ <span style="opacity:0.6">· ТАПНИ ФИГУРУ</span></div>
   <div id="detected-banner">● AR АКТИВЕН</div>
+
+  <!-- Информационный поп-ап -->
+  <div id="info-popup" aria-hidden="true">
+    <div class="popup-card">
+      <button class="popup-close" aria-label="Закрыть">×</button>
+      <div class="popup-accent"></div>
+      <h2 class="popup-title"></h2>
+      <div class="popup-body"></div>
+    </div>
+  </div>
 
   <!-- A-Frame сцена с MindAR -->
   <a-scene
@@ -147,7 +229,10 @@
       <!-- Локальные ресурсы можно положить сюда -->
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false">
+      <!-- Курсор на основе тапа по экрану -->
+      <a-entity cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .clickable; far: 20;"></a-entity>
+    </a-camera>
 
     <!-- Свет — принудительно, чтобы материалы светились одинаково с любых углов -->
     <a-entity light="type: ambient; color: #ffffff; intensity: 1.2"></a-entity>
@@ -159,6 +244,8 @@
       <!-- Парящий красный квадрат — классика Малевича — широкий дрейф + wobble вращения + дыхание -->
       <a-plane
         id="red-square"
+        class="clickable"
+        data-info="red-square"
         position="0.25 0.15 0.05"
         width="0.28" height="0.28"
         rotation="0 0 10"
@@ -172,6 +259,8 @@
       <!-- Чёрный круг — крупный дрейф по диагонали -->
       <a-circle
         id="black-disc"
+        class="clickable"
+        data-info="black-disc"
         position="-0.3 -0.05 0.03"
         radius="0.13"
         material="shader: flat; color: #111111; side: double"
@@ -192,6 +281,8 @@
       <!-- Синий треугольник — активное вращение + дрейф -->
       <a-triangle
         id="blue-tri"
+        class="clickable"
+        data-info="blue-tri"
         position="0.2 -0.3 0.04"
         vertex-a="0 0.18 0"
         vertex-b="-0.16 -0.09 0"
@@ -205,6 +296,8 @@
 
       <!-- Жёлтый брусок — дрейф + покачивание угла -->
       <a-plane
+        class="clickable"
+        data-info="yellow-bar"
         position="0 0.35 0.02"
         width="0.5" height="0.04"
         rotation="0 0 6"
@@ -216,6 +309,8 @@
 
       <!-- Красная диагональная полоса — горизонтальный дрейф -->
       <a-plane
+        class="clickable"
+        data-info="red-diagonal"
         position="0 -0.45 0.01"
         width="0.95" height="0.018"
         rotation="0 0 -6"
@@ -227,6 +322,8 @@
 
       <!-- Чёрный вертикальный брусок — дрейф + наклон -->
       <a-plane
+        class="clickable"
+        data-info="black-vertical"
         position="0.42 -0.3 0.02"
         width="0.015" height="0.3"
         rotation="0 0 0"
@@ -238,6 +335,8 @@
 
       <!-- Маленький красный круг — пульсация + широкая орбита -->
       <a-circle
+        class="clickable"
+        data-info="small-red"
         position="-0.38 -0.4 0.03"
         radius="0.035"
         material="shader: flat; color: #d8301a; side: double"
@@ -248,6 +347,8 @@
 
       <!-- Текст "УНОВИС" парящий над плакатом — более заметный свинг -->
       <a-text
+        class="clickable"
+        data-info="unovis-text"
         value="УНОВИС"
         position="0 0.5 0.08"
         align="center"
@@ -289,8 +390,8 @@
         animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 12000; easing: linear"
         animation__float="property: position; from: -0.22 0.19 0.06; to: -0.08 0.31 0.06; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 2000; easing: easeOutCubic">
-        <a-plane width="0.12" height="0.02" material="shader: flat; color: #111111; side: double"></a-plane>
-        <a-plane width="0.02" height="0.12" material="shader: flat; color: #d8301a; side: double"></a-plane>
+        <a-plane class="clickable" data-info="architekton" width="0.12" height="0.02" material="shader: flat; color: #111111; side: double"></a-plane>
+        <a-plane class="clickable" data-info="architekton" width="0.02" height="0.12" material="shader: flat; color: #d8301a; side: double"></a-plane>
       </a-entity>
 
     </a-entity>
@@ -302,6 +403,146 @@
     const scanHint = document.getElementById('scan-hint');
     const banner = document.getElementById('detected-banner');
     const sceneEl = document.querySelector('a-scene');
+
+    // ======== Инфо-поп-ап для фигур ========
+    const INFO = {
+      'red-square': {
+        title: 'Красный квадрат',
+        body: 'Малевич, 1915. Красный квадрат — «крестьянка в двух измерениях», живое в противовес чёрному. Цвет как чистая энергия, освобождённая от вещи.'
+      },
+      'black-disc': {
+        title: 'Круг',
+        body: 'Одна из трёх супрематических праформ вместе с квадратом и крестом. Круг — движение, планета, полное отрицание земного притяжения.'
+      },
+      'blue-tri': {
+        title: 'Треугольник',
+        body: '«Клином красным бей белых!» — плакат Лисицкого, 1919. Треугольник стал у УНОВИСа знаком удара, вектора, революционного движения.'
+      },
+      'yellow-bar': {
+        title: 'Жёлтая горизонталь',
+        body: 'Горизонталь — основание нового мира. Жёлтый у супрематистов — цвет света и энергии, маркер границы между старым и новым порядком.'
+      },
+      'red-diagonal': {
+        title: 'Диагональ',
+        body: 'Диагональ взрывает статику прямоугольного мира. Для Лисицкого это траектория полёта, ось космической динамики. «ПРОУН» — проект утверждения нового.'
+      },
+      'black-vertical': {
+        title: 'Вертикаль',
+        body: 'Минимум средств — максимум смысла. Вертикаль как ось мира, опора супрематической архитектуры. Чашник и Суетин строили из таких элементов фарфор и ткани.'
+      },
+      'small-red': {
+        title: 'Точка',
+        body: 'Элементарная частица супрематизма. По Малевичу: из точки рождается линия, из линии — плоскость, из плоскости — новая вселенная.'
+      },
+      'unovis-text': {
+        title: 'УНОВИС',
+        body: 'Утвердители Нового Искусства. Витебск, 1919–1922. Малевич, Лисицкий, Чашник, Суетин, Хидекель, Юдин. Коллектив, впервые объявивший искусство инструментом построения мира.'
+      },
+      'architekton': {
+        title: 'Архитектон',
+        body: 'Объёмная супрематическая композиция. Малевич проектировал архитектоны как модели городов будущего — летающих, вне гравитации, из чистых геометрических форм.'
+      }
+    };
+
+    const popup = document.getElementById('info-popup');
+    const popupTitle = popup.querySelector('.popup-title');
+    const popupBody = popup.querySelector('.popup-body');
+    const popupClose = popup.querySelector('.popup-close');
+
+    function openPopup(key) {
+      const entry = INFO[key];
+      if (!entry) return;
+      popupTitle.textContent = entry.title;
+      popupBody.textContent = entry.body;
+      popup.classList.add('active');
+      popup.setAttribute('aria-hidden', 'false');
+    }
+    function closePopup() {
+      popup.classList.remove('active');
+      popup.setAttribute('aria-hidden', 'true');
+    }
+
+    popupClose.addEventListener('click', closePopup);
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) closePopup();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePopup();
+    });
+
+    // ======== Надёжный обработчик тапов через THREE.Raycaster ========
+    // A-Frame cursor не всегда срабатывает с MindAR, поэтому кастуем луч вручную.
+    function setupTapHandler() {
+      const THREE_LIB = AFRAME.THREE;
+      const raycaster = new THREE_LIB.Raycaster();
+      const pointer = new THREE_LIB.Vector2();
+
+      function performRaycast(clientX, clientY) {
+        const canvas = sceneEl.canvas;
+        if (!canvas) return;
+        const rect = canvas.getBoundingClientRect();
+        pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+        const threeCamera = sceneEl.camera;
+        if (!threeCamera) return;
+        raycaster.setFromCamera(pointer, threeCamera);
+
+        // Собираем все mesh'и из .clickable энтити (для плоскостей, кругов, текста и т.п.)
+        const clickableEls = Array.from(document.querySelectorAll('.clickable'));
+        const meshes = [];
+        const meshToEl = new Map();
+        clickableEls.forEach(el => {
+          if (!el.object3D) return;
+          el.object3D.traverse(node => {
+            if (node.isMesh) {
+              meshes.push(node);
+              meshToEl.set(node, el);
+            }
+          });
+        });
+
+        if (meshes.length === 0) return;
+
+        const hits = raycaster.intersectObjects(meshes, false);
+        if (hits.length === 0) {
+          console.log('[AR] tap miss');
+          return;
+        }
+        const el = meshToEl.get(hits[0].object);
+        if (!el) return;
+        const key = el.dataset.info;
+        console.log('[AR] hit:', key);
+        if (key) openPopup(key);
+      }
+
+      const canvas = sceneEl.canvas;
+      if (!canvas) {
+        console.warn('[AR] canvas not ready yet');
+        return;
+      }
+      // pointerup работает и для мыши, и для касаний; в отличие от click, не имеет 300ms задержки на iOS
+      canvas.addEventListener('pointerup', (e) => {
+        // Игнорируем тапы с зажатой правой кнопкой и т.п.
+        if (e.button && e.button !== 0) return;
+        performRaycast(e.clientX, e.clientY);
+      });
+      // Фолбэк для старых браузеров без PointerEvent
+      canvas.addEventListener('touchend', (e) => {
+        if (window.PointerEvent) return; // иначе задвоит
+        const t = e.changedTouches && e.changedTouches[0];
+        if (!t) return;
+        performRaycast(t.clientX, t.clientY);
+      });
+
+      console.log('[AR] tap handler ready, clickable elements:', document.querySelectorAll('.clickable').length);
+    }
+
+    if (sceneEl.hasLoaded && sceneEl.canvas) {
+      setupTapHandler();
+    } else {
+      sceneEl.addEventListener('loaded', setupTapHandler);
+    }
 
     // Глобальные обработчики MindAR
     sceneEl.addEventListener('arReady', () => {
