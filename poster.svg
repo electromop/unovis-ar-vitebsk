@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1131" width="800" height="1131">
+  <!-- UNOVIS × VITEBSK — плакат/AR-маркер, A4 пропорции -->
+
+  <!-- Фон кремовый -->
+  <rect width="800" height="1131" fill="#f2ede3"/>
+
+  <!-- Верхний чёрный прямоугольник для заголовка -->
+  <rect x="0" y="0" width="800" height="260" fill="#111111"/>
+
+  <!-- Тонкая красная полоса под хедером -->
+  <rect x="0" y="260" width="800" height="10" fill="#d8301a"/>
+
+  <!-- Большой красный квадрат (основной супрематический элемент) -->
+  <rect x="420" y="340" width="280" height="280" fill="#d8301a" transform="rotate(12 560 480)"/>
+
+  <!-- Чёрный круг слева -->
+  <circle cx="200" cy="480" r="120" fill="#111111"/>
+
+  <!-- Белое кольцо внутри круга -->
+  <circle cx="200" cy="480" r="50" fill="#f2ede3"/>
+
+  <!-- Жёлтый прямоугольник -->
+  <rect x="80" y="700" width="260" height="42" fill="#f2b705"/>
+
+  <!-- Длинная тонкая красная диагональ -->
+  <rect x="-40" y="760" width="900" height="20" fill="#d8301a" transform="rotate(-7 400 770)"/>
+
+  <!-- Синий треугольник -->
+  <polygon points="560,660 760,900 480,900" fill="#0b3d91"/>
+
+  <!-- Белый маленький квадратик в треугольнике -->
+  <rect x="600" y="820" width="52" height="52" fill="#f2ede3" transform="rotate(20 626 846)"/>
+
+  <!-- Чёрная архитектоника: горизонтальный брусок -->
+  <rect x="40" y="820" width="380" height="12" fill="#111111"/>
+
+  <!-- Чёрный вертикальный брусок -->
+  <rect x="380" y="820" width="12" height="140" fill="#111111"/>
+
+  <!-- Маленький красный круг -->
+  <circle cx="90" cy="890" r="30" fill="#d8301a"/>
+
+  <!-- Маленький синий квадрат -->
+  <rect x="140" y="870" width="40" height="40" fill="#0b3d91"/>
+
+  <!-- Типографика: УНОВИС на чёрном хедере -->
+  <text x="40" y="160" font-family="'Arial Black', 'Liberation Sans', 'DejaVu Sans', sans-serif"
+        font-size="120" font-weight="900" fill="#f2ede3" letter-spacing="6">УНОВИС</text>
+
+  <text x="44" y="205" font-family="'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace"
+        font-size="16" fill="#d8301a" letter-spacing="6">УТВЕРДИТЕЛИ · НОВОГО · ИСКУССТВА</text>
+
+  <!-- 0,10 в правом верхнем углу -->
+  <text x="760" y="240" font-family="'Arial Black', 'Liberation Sans', 'DejaVu Sans', sans-serif"
+        font-size="40" font-weight="900" fill="#d8301a" text-anchor="end" letter-spacing="2">0,10</text>
+
+  <!-- Цветные квадратики-акценты в хедере -->
+  <rect x="620" y="40" width="24" height="24" fill="#f2ede3"/>
+  <rect x="654" y="40" width="24" height="24" fill="#d8301a"/>
+  <rect x="688" y="40" width="24" height="24" fill="#0b3d91"/>
+  <rect x="722" y="40" width="24" height="24" fill="#f2b705"/>
+
+  <!-- Низ плаката: ВИТЕБСК и метаданные -->
+  <!-- Чёрная полоса-подвал -->
+  <rect x="0" y="1000" width="800" height="131" fill="#111111"/>
+
+  <text x="40" y="1075" font-family="'Arial Black', 'Liberation Sans', 'DejaVu Sans', sans-serif"
+        font-size="72" font-weight="900" fill="#f2ede3" letter-spacing="4">ВИТЕБСК</text>
+
+  <text x="44" y="1108" font-family="'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace"
+        font-size="16" fill="#d8301a" letter-spacing="6">1919 — 1922</text>
+
+  <!-- Инструкция про AR в правом нижнем -->
+  <text x="760" y="1055" font-family="'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace"
+        font-size="14" fill="#f2ede3" letter-spacing="3" text-anchor="end">НАВЕДИ · КАМЕРУ</text>
+  <text x="760" y="1080" font-family="'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace"
+        font-size="14" fill="#f2ede3" letter-spacing="3" text-anchor="end">СМОТРИ · AR</text>
+  <text x="760" y="1115" font-family="'Arial Black', 'Liberation Sans', 'DejaVu Sans', sans-serif"
+        font-size="22" font-weight="900" fill="#d8301a" text-anchor="end">→</text>
+
+  <!-- Вертикальная подпись справа -->
+  <text x="745" y="950" font-family="'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace"
+        font-size="12" fill="#111111" letter-spacing="4"
+        transform="rotate(-90 745 950)">МАЛЕВИЧ · ЛИСИЦКИЙ · ЧАШНИК · СУЕТИН · ЕРМОЛАЕВА</text>
+</svg>

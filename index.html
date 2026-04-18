@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>УНОВИС × Витебск · AR-проект</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f2ede3;
+      --ink: #111111;
+      --red: #d8301a;
+      --blue: #0b3d91;
+      --yellow: #f2b705;
+    }
+    html, body { background: var(--cream); color: var(--ink); font-family: 'Courier New', monospace; }
+
+    /* Хедер в духе Лисицкого */
+    header {
+      position: relative;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 60px 40px 80px;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 20px; right: -40px;
+      width: 220px; height: 220px;
+      background: var(--red);
+      transform: rotate(18deg);
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -30px; left: 30%;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--cream);
+      opacity: 0.15;
+    }
+    header .stripes {
+      display: flex; gap: 6px; margin-bottom: 40px;
+    }
+    header .stripes div { width: 24px; height: 24px; }
+    .s1 { background: var(--cream); }
+    .s2 { background: var(--red); }
+    .s3 { background: var(--blue); }
+
+    header h1 {
+      font-family: Impact, 'Arial Black', sans-serif;
+      font-size: clamp(48px, 12vw, 140px);
+      letter-spacing: 4px;
+      line-height: 0.9;
+      position: relative; z-index: 1;
+    }
+    header h1 .dot { color: var(--red); }
+    header .subtitle {
+      font-size: 14px; letter-spacing: 8px;
+      margin-top: 12px;
+      opacity: 0.85;
+      position: relative; z-index: 1;
+    }
+    header .year {
+      position: absolute;
+      top: 50px; right: 50px;
+      font-family: Impact, sans-serif;
+      font-size: 90px;
+      color: var(--cream);
+      z-index: 2;
+    }
+    header .year small { font-size: 14px; display: block; letter-spacing: 3px; font-family: 'Courier New', monospace; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 60px 24px; }
+
+    .manifesto {
+      font-size: 18px;
+      line-height: 1.7;
+      padding: 32px;
+      border-left: 6px solid var(--red);
+      background: #fff;
+      margin-bottom: 48px;
+    }
+    .manifesto strong { color: var(--red); }
+
+    h2 {
+      font-family: Impact, sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      margin: 40px 0 20px;
+      position: relative;
+      padding-left: 20px;
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 6px;
+      width: 10px; height: 24px;
+      background: var(--red);
+    }
+
+    .steps { display: grid; gap: 14px; margin-bottom: 48px; }
+    .step {
+      display: flex; gap: 18px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 2px solid var(--ink);
+    }
+    .step-num {
+      font-family: Impact, sans-serif;
+      font-size: 36px;
+      color: var(--red);
+      line-height: 1;
+      min-width: 40px;
+    }
+    .step-body { font-size: 15px; line-height: 1.5; }
+    .step-body strong { display: block; font-family: Impact, sans-serif; font-size: 18px; letter-spacing: 2px; margin-bottom: 6px; }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 40px 0;
+    }
+    .cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-family: Impact, sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      text-align: center;
+      transition: transform 0.1s;
+    }
+    .cta:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
+    .cta.red { background: var(--red); }
+    .cta small { display: block; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px; opacity: 0.8; margin-top: 8px; }
+
+    #qr-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 24px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      margin: 32px 0;
+    }
+    #qr-box .label {
+      font-family: Impact, sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+    }
+    #qrcode img, #qrcode canvas { display: block; }
+
+    .poster-preview {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0;
+    }
+    .poster-preview img {
+      max-width: 100%;
+      width: 400px;
+      border: 8px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--red);
+    }
+
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 40px;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 3px;
+      opacity: 0.9;
+    }
+    footer .line { display: inline-block; margin: 0 10px; color: var(--red); }
+
+    @media (max-width: 600px) {
+      header .year { display: none; }
+      .cta-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="stripes"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
+  <h1>УНОВИС<span class="dot">.</span></h1>
+  <div class="subtitle">УТВЕРДИТЕЛИ · НОВОГО · ИСКУССТВА</div>
+  <div class="year">
+    0,10
+    <small>ВИТЕБСК · 1919—1922</small>
+  </div>
+</header>
+
+<main>
+
+  <div class="manifesto">
+    В 1919 году в Витебске Казимир Малевич и его ученики — Лисицкий, Чашник, Суетин, Ермолаева — объединились в группу <strong>УНОВИС</strong>. Они превратили город в первую в мире «супрематическую лабораторию»: расписывали трамваи, вывески, здания. <br><br>
+    Этот проект — <strong>переосмысление</strong> УНОВИСа в 2026 году. Плакат в духе 1920-х + AR-слой, который оживляет супрематические формы через камеру телефона.
+  </div>
+
+  <h2>Как это работает</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <strong>Напечатай плакат</strong>
+        Скачай SVG, распечатай на А4/А3 или наклей на стене Витебска.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <strong>Открой AR на телефоне</strong>
+        Отсканируй QR-код ниже или перейди по ссылке в Safari / Chrome.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <strong>Наведи камеру на плакат</strong>
+        Плакат оживает: красный квадрат парит, чёрный круг вращается, появляется надпись УНОВИС.
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a href="ar.html" class="cta red">
+      ЗАПУСТИТЬ AR →
+      <small>Открой на телефоне</small>
+    </a>
+    <a href="poster.svg" class="cta" download>
+      СКАЧАТЬ ПЛАКАТ
+      <small>SVG · A4</small>
+    </a>
+  </div>
+
+  <div id="qr-box">
+    <div class="label">QR · НА · AR</div>
+    <div id="qrcode"></div>
+    <div style="font-size:11px; opacity:0.6; letter-spacing:2px;">СКАНИРУЙ · ТЕЛЕФОНОМ</div>
+  </div>
+
+  <h2>Плакат</h2>
+  <div class="poster-preview">
+    <img src="poster.svg" alt="UNOVIS × Vitebsk poster">
+  </div>
+
+  <h2>Что дальше</h2>
+  <p style="line-height:1.7; margin-bottom: 20px;">
+    Этот плакат — только начало. Можно напечатать серию разных плакатов с маршрутом по ключевым местам Витебска (Народное художественное училище, дом Шагала, Замковая ул.) — и каждый будет оживать своим уникальным AR-слоем. Получится супрематический квест по городу.
+  </p>
+
+</main>
+
+<footer>
+  УНОВИС · 2026<span class="line">●</span>ПЕРЕОСМЫСЛЕНИЕ<span class="line">●</span>ВИТЕБСК
+</footer>
+
+<script>
+  // QR-код на ar.html (относительный путь)
+  window.addEventListener('DOMContentLoaded', () => {
+    const arUrl = new URL('ar.html', window.location.href).toString();
+    new QRCode(document.getElementById('qrcode'), {
+      text: arUrl,
+      width: 180,
+      height: 180,
+      colorDark: '#111111',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+</script>
+</body>
+</html>

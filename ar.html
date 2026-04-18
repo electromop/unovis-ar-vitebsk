@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>УНОВИС × Витебск — AR</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <!-- MindAR image tracking (A-Frame build) -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: #111;
+      font-family: 'Courier New', monospace;
+      color: #f2ede3;
+    }
+
+    /* Стартовый экран */
+    #start-screen {
+      position: fixed; inset: 0;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 32px;
+      text-align: center;
+    }
+    #start-screen h1 {
+      font-family: Impact, 'Arial Black', sans-serif;
+      font-size: 56px;
+      margin: 0 0 8px;
+      letter-spacing: 4px;
+      color: #f2ede3;
+    }
+    #start-screen .accent { color: #d8301a; }
+    #start-screen .sub {
+      font-size: 13px;
+      letter-spacing: 6px;
+      opacity: 0.7;
+      margin-bottom: 40px;
+    }
+    #start-screen p {
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 0 32px;
+      opacity: 0.85;
+    }
+    #start-btn {
+      background: #d8301a;
+      color: #f2ede3;
+      border: none;
+      padding: 18px 42px;
+      font-family: Impact, sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    #start-btn:active { transform: translate(2px, 2px); }
+
+    /* Полоски-акценты */
+    .stripes {
+      position: absolute;
+      top: 24px; right: 24px;
+      display: flex; gap: 6px;
+    }
+    .stripes div { width: 22px; height: 22px; }
+    .s1 { background: #111111; border: 1px solid #f2ede3; }
+    .s2 { background: #d8301a; }
+    .s3 { background: #0b3d91; }
+
+    /* Подсказка сканирования */
+    #scan-hint {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(17,17,17,0.75);
+      color: #f2ede3;
+      padding: 10px 18px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      border-left: 3px solid #d8301a;
+      z-index: 500;
+      display: none;
+    }
+
+    /* Статус при обнаружении */
+    #detected-banner {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #d8301a;
+      color: #f2ede3;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      z-index: 500;
+      display: none;
+    }
+
+    a-scene { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+
+  <!-- Старт -->
+  <div id="start-screen">
+    <div class="stripes"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
+    <h1>УНОВИС<span class="accent">.</span></h1>
+    <div class="sub">ВИТЕБСК · 1919—1922</div>
+    <p>Наведи камеру на плакат<br>и увидишь, как супрематизм оживает<br>спустя 100 лет.</p>
+    <button id="start-btn">НАЧАТЬ AR →</button>
+    <p style="font-size:11px; opacity:0.5; margin-top:32px; letter-spacing:2px;">
+      Требуется доступ к камере<br>Работает в Safari / Chrome на телефоне
+    </p>
+  </div>
+
+  <div id="scan-hint">НАВЕДИ · КАМЕРУ · НА · ПЛАКАТ</div>
+  <div id="detected-banner">● AR АКТИВЕН</div>
+
+  <!-- A-Frame сцена с MindAR -->
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiScanning: no; uiLoading: no; uiError: no;"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <!-- Локальные ресурсы можно положить сюда -->
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Цель 0: наш плакат -->
+    <a-entity mindar-image-target="targetIndex: 0" id="target">
+
+      <!-- Чёрный большой квадрат-основа (лежит плоско на плакате) -->
+      <a-plane
+        position="0 0 0.001"
+        width="0.9" height="1.27"
+        color="#111111"
+        opacity="0.0">
+      </a-plane>
+
+      <!-- Парящий красный квадрат — классика Малевича -->
+      <a-box
+        id="red-square"
+        position="0.25 0.15 0.25"
+        width="0.28" height="0.28" depth="0.015"
+        color="#d8301a"
+        animation__rot="property: rotation; to: 0 360 12; loop: true; dur: 10000; easing: linear"
+        animation__float="property: position; dir: alternate; to: 0.25 0.25 0.25; loop: true; dur: 2500; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutBack">
+      </a-box>
+
+      <!-- Чёрный круг -->
+      <a-cylinder
+        id="black-disc"
+        position="-0.3 -0.1 0.15"
+        radius="0.13" height="0.01"
+        rotation="90 0 0"
+        color="#111111"
+        animation__orbit="property: position; dir: alternate; to: -0.3 0.1 0.15; loop: true; dur: 3500; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 200; easing: easeOutBack">
+      </a-cylinder>
+
+      <!-- Белое кольцо внутри круга -->
+      <a-cylinder
+        position="-0.3 -0.1 0.16"
+        radius="0.06" height="0.011"
+        rotation="90 0 0"
+        color="#f2ede3"
+        animation__orbit="property: position; dir: alternate; to: -0.3 0.1 0.16; loop: true; dur: 3500; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 350; easing: easeOutBack">
+      </a-cylinder>
+
+      <!-- Синий треугольник (через конус с 3 сторонами) -->
+      <a-entity
+        id="blue-tri"
+        position="0.2 -0.3 0.1"
+        rotation="0 0 -20"
+        animation__rot="property: rotation; to: 0 0 340; loop: true; dur: 18000; easing: linear"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutBack">
+        <a-cone
+          radius-bottom="0.18" radius-top="0"
+          segments-radial="3" height="0.02"
+          rotation="90 0 0"
+          color="#0b3d91">
+        </a-cone>
+      </a-entity>
+
+      <!-- Жёлтый брусок -->
+      <a-box
+        position="0 0.35 0.08"
+        width="0.5" height="0.04" depth="0.012"
+        color="#f2b705"
+        rotation="0 0 6"
+        animation__float="property: position; dir: alternate; to: 0 0.38 0.08; loop: true; dur: 2000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 700; easing: easeOutBack">
+      </a-box>
+
+      <!-- Красная диагональная полоса -->
+      <a-box
+        position="0 -0.45 0.05"
+        width="0.95" height="0.018" depth="0.01"
+        color="#d8301a"
+        rotation="0 0 -6"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1200; delay: 900; easing: easeOutCubic">
+      </a-box>
+
+      <!-- Чёрный вертикальный брусок -->
+      <a-box
+        position="0.42 -0.5 0.12"
+        width="0.015" height="0.3" depth="0.01"
+        color="#111111"
+        animation__in="property: scale; from: 1 0 1; to: 1 1 1; dur: 800; delay: 1100; easing: easeOutCubic">
+      </a-box>
+
+      <!-- Маленький красный круг -->
+      <a-cylinder
+        position="-0.38 -0.55 0.14"
+        radius="0.035" height="0.008"
+        rotation="90 0 0"
+        color="#d8301a"
+        animation__pulse="property: scale; dir: alternate; from: 1 1 1; to: 1.4 1.4 1.4; loop: true; dur: 1400; easing: easeInOutQuad"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1300; easing: easeOutBack">
+      </a-cylinder>
+
+      <!-- Текст "UNOVIS" парящий над плакатом -->
+      <a-text
+        value="УНОВИС"
+        position="0 0.5 0.35"
+        align="center"
+        color="#d8301a"
+        width="1.6"
+        font="kelsonsans"
+        animation__float="property: position; dir: alternate; to: 0 0.55 0.35; loop: true; dur: 2200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1500; easing: easeOutBack">
+      </a-text>
+
+      <a-text
+        value="VITEBSK 1919-1922"
+        position="0 0.38 0.35"
+        align="center"
+        color="#f2ede3"
+        width="1.2"
+        font="kelsonsans"
+        animation__in="property: opacity; from: 0; to: 1; dur: 1000; delay: 1900">
+      </a-text>
+
+      <!-- Маленькие парящие квадратики-"спутники" -->
+      <a-box position="0.45 0.4 0.2" width="0.04" height="0.04" depth="0.01"
+        color="#111111"
+        animation__orbit="property: rotation; to: 0 0 360; loop: true; dur: 8000; easing: linear"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1700; easing: easeOutBack">
+      </a-box>
+
+      <a-box position="-0.45 0.3 0.22" width="0.03" height="0.03" depth="0.01"
+        color="#d8301a"
+        animation__float="property: position; dir: alternate; to: -0.45 0.35 0.22; loop: true; dur: 1800"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1800; easing: easeOutBack">
+      </a-box>
+
+      <!-- Крест-архитектон (три бруска вместе) -->
+      <a-entity position="-0.15 0.25 0.3"
+        animation__rot="property: rotation; to: 0 360 0; loop: true; dur: 14000; easing: linear"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 2000; easing: easeOutBack">
+        <a-box width="0.12" height="0.02" depth="0.02" color="#111111"></a-box>
+        <a-box width="0.02" height="0.12" depth="0.02" color="#111111"></a-box>
+        <a-box width="0.02" height="0.02" depth="0.12" color="#d8301a"></a-box>
+      </a-entity>
+
+    </a-entity>
+  </a-scene>
+
+  <script>
+    const startBtn = document.getElementById('start-btn');
+    const startScreen = document.getElementById('start-screen');
+    const scanHint = document.getElementById('scan-hint');
+    const banner = document.getElementById('detected-banner');
+    const sceneEl = document.querySelector('a-scene');
+
+    // Старт по нажатию — важно для iOS Safari (нужен user gesture для камеры)
+    startBtn.addEventListener('click', async () => {
+      startScreen.style.display = 'none';
+      scanHint.style.display = 'block';
+
+      // Ждём, пока A-Frame загрузится
+      if (sceneEl.hasLoaded) {
+        startMindAR();
+      } else {
+        sceneEl.addEventListener('loaded', startMindAR);
+      }
+    });
+
+    function startMindAR() {
+      const ar = sceneEl.systems['mindar-image-system'];
+      ar.start().catch(err => {
+        alert('Не удалось запустить камеру: ' + err.message + '\n\nПроверь, что сайт открыт по https:// и даны права на камеру.');
+        console.error(err);
+      });
+    }
+
+    // Событие обнаружения плаката
+    sceneEl.addEventListener('loaded', () => {
+      const target = document.querySelector('#target');
+      target.addEventListener('targetFound', () => {
+        scanHint.style.display = 'none';
+        banner.style.display = 'block';
+      });
+      target.addEventListener('targetLost', () => {
+        banner.style.display = 'none';
+        scanHint.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
