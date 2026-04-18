@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>УНОВИС × Витебск — AR</title>
 
-  <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <!-- A-Frame 1.3.0 — официально поддерживаемая MindAR 1.2.5 версия -->
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <!-- MindAR image tracking (A-Frame build) -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
@@ -17,9 +17,16 @@
       padding: 0;
       overflow: hidden;
       height: 100%;
-      background: #111;
+      width: 100%;
+      /* background НЕ задаём — иначе перекрывает видео камеры,
+         которое MindAR вставляет с z-index: -2 */
       font-family: 'Courier New', monospace;
       color: #f2ede3;
+    }
+
+    /* Оверлеи поверх AR-сцены */
+    #start-screen, #scan-hint, #detected-banner {
+      z-index: 9999;
     }
 
     /* Стартовый экран */
@@ -109,7 +116,6 @@
       display: none;
     }
 
-    a-scene { width: 100vw; height: 100vh; }
   </style>
 </head>
 <body>
@@ -133,7 +139,7 @@
   <a-scene
     mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiScanning: no; uiLoading: no; uiError: no;"
     color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights"
+    renderer="colorManagement: true, physicallyCorrectLights, alpha: true"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
 
@@ -143,26 +149,28 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+    <!-- Свет — принудительно, чтобы материалы светились одинаково с любых углов -->
+    <a-entity light="type: ambient; color: #ffffff; intensity: 1.2"></a-entity>
+    <a-entity light="type: directional; color: #ffffff; intensity: 0.8" position="1 1 1"></a-entity>
+
     <!-- Цель 0: наш плакат -->
     <a-entity mindar-image-target="targetIndex: 0" id="target">
 
-      <!-- Чёрный большой квадрат-основа (лежит плоско на плакате) -->
-      <a-plane
-        position="0 0 0.001"
-        width="0.9" height="1.27"
-        color="#111111"
-        opacity="0.0">
-      </a-plane>
+      <!-- DEBUG: большой жёлтый куб в центре плаката, ни от чего не зависит -->
+      <a-box
+        position="0 0 0.1"
+        width="0.4" height="0.4" depth="0.4"
+        material="shader: flat; color: #ff00ff">
+      </a-box>
 
       <!-- Парящий красный квадрат — классика Малевича -->
       <a-box
         id="red-square"
         position="0.25 0.15 0.25"
         width="0.28" height="0.28" depth="0.015"
-        color="#d8301a"
+        material="shader: flat; color: #d8301a"
         animation__rot="property: rotation; to: 0 360 12; loop: true; dur: 10000; easing: linear"
-        animation__float="property: position; dir: alternate; to: 0.25 0.25 0.25; loop: true; dur: 2500; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutBack">
+        animation__float="property: position; dir: alternate; to: 0.25 0.25 0.25; loop: true; dur: 2500; easing: easeInOutSine">
       </a-box>
 
       <!-- Чёрный круг -->
@@ -292,38 +300,57 @@
     const banner = document.getElementById('detected-banner');
     const sceneEl = document.querySelector('a-scene');
 
+    // Глобальные обработчики MindAR
+    sceneEl.addEventListener('arReady', () => {
+      console.log('MindAR готов');
+    });
+    sceneEl.addEventListener('arError', (e) => {
+      console.error('MindAR error', e);
+      alert('Не удалось запустить AR.\n\nПроверь:\n1. Сайт открыт по https:// или localhost\n2. Браузер получил доступ к камере\n3. Файл targets.mind лежит рядом с ar.html');
+    });
+
+    // Таргет-события
+    const target = document.querySelector('#target');
+    target.addEventListener('targetFound', () => {
+      scanHint.style.display = 'none';
+      banner.style.display = 'block';
+    });
+    target.addEventListener('targetLost', () => {
+      banner.style.display = 'none';
+      scanHint.style.display = 'block';
+    });
+
     // Старт по нажатию — важно для iOS Safari (нужен user gesture для камеры)
-    startBtn.addEventListener('click', async () => {
+    startBtn.addEventListener('click', () => {
       startScreen.style.display = 'none';
       scanHint.style.display = 'block';
 
-      // Ждём, пока A-Frame загрузится
+      const begin = () => {
+        const arSystem = sceneEl.systems['mindar-image-system'];
+        if (!arSystem) {
+          alert('MindAR не инициализирован. Перезагрузи страницу.');
+          return;
+        }
+        try {
+          const result = arSystem.start();
+          // В разных версиях MindAR start() может или возвращать Promise, или нет
+          if (result && typeof result.then === 'function') {
+            result.catch(err => {
+              console.error(err);
+              alert('Не удалось запустить камеру: ' + (err && err.message ? err.message : err));
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Ошибка запуска AR: ' + (err && err.message ? err.message : err));
+        }
+      };
+
       if (sceneEl.hasLoaded) {
-        startMindAR();
+        begin();
       } else {
-        sceneEl.addEventListener('loaded', startMindAR);
+        sceneEl.addEventListener('loaded', begin, { once: true });
       }
-    });
-
-    function startMindAR() {
-      const ar = sceneEl.systems['mindar-image-system'];
-      ar.start().catch(err => {
-        alert('Не удалось запустить камеру: ' + err.message + '\n\nПроверь, что сайт открыт по https:// и даны права на камеру.');
-        console.error(err);
-      });
-    }
-
-    // Событие обнаружения плаката
-    sceneEl.addEventListener('loaded', () => {
-      const target = document.querySelector('#target');
-      target.addEventListener('targetFound', () => {
-        scanHint.style.display = 'none';
-        banner.style.display = 'block';
-      });
-      target.addEventListener('targetLost', () => {
-        banner.style.display = 'none';
-        scanHint.style.display = 'block';
-      });
     });
   </script>
 </body>
