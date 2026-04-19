@@ -204,7 +204,7 @@
     </p>
   </div>
 
-  <div id="scan-hint">НАВЕДИ · КАМЕРУ · НА · ПЛАКАТ <span style="opacity:0.6">· ТАПНИ ФИГУРУ</span></div>
+  <div id="scan-hint">НАВЕДИ · КАМЕРУ · НА · ЛЮБОЙ · ПЛАКАТ <span style="opacity:0.6">· ТАПНИ ФИГУРУ</span></div>
   <div id="detected-banner">● AR АКТИВЕН</div>
 
   <!-- Информационный поп-ап -->
@@ -395,6 +395,144 @@
       </a-entity>
 
     </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 1: плакат "Ритм города" — пульсирующая, ритмичная сцена -->
+    <!-- Координаты: width=1 → X от -0.5 до 0.5; aspect 1697:2400 →    -->
+    <!-- height=1.414 → Y от -0.707 до +0.707                         -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 1" id="target-rhythm">
+
+      <!-- Крупный терракотовый блок (дом/квартал) — медленное дыхание + лёгкий дрейф -->
+      <a-plane
+        class="clickable"
+        data-info="rg-big-block"
+        position="-0.13 0.38 0.04"
+        width="0.36" height="0.22"
+        rotation="0 0 2"
+        material="shader: flat; color: #c03c19; side: double"
+        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3200; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.15 0.36 0.04; to: -0.11 0.40 0.04; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1; to: 0 0 5; dir: alternate; loop: true; dur: 7200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Верхняя длинная чёрная линия — "улица", пульсирует шириной (ток движения) -->
+      <a-plane
+        class="clickable"
+        data-info="rg-tram-top"
+        position="0.05 0.18 0.02"
+        width="0.55" height="0.014"
+        rotation="0 0 -4"
+        material="shader: flat; color: #191919; side: double"
+        animation__pulse="property: scale; from: 0.85 1 1; to: 1.15 1 1; dir: alternate; loop: true; dur: 1600; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.00 0.18 0.02; to: 0.10 0.18 0.02; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 900; delay: 200; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Маленький терракотовый квадрат 1 — первый такт метронома -->
+      <a-plane
+        class="clickable"
+        data-info="rg-beat-1"
+        position="-0.04 0.02 0.03"
+        width="0.08" height="0.08"
+        rotation="0 0 6"
+        material="shader: flat; color: #c03c19; side: double"
+        animation__beat="property: scale; from: 0.9 0.9 1; to: 1.25 1.25 1; dir: alternate; loop: true; dur: 800; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.07 0.02 0.03; to: -0.01 0.02 0.03; dir: alternate; loop: true; dur: 3200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 400; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Двойная чёрная линия (средняя) — поток транспорта, дрейфует по оси X -->
+      <a-entity position="-0.14 -0.12 0.02"
+        animation__flow="property: position; from: -0.20 -0.12 0.02; to: -0.08 -0.12 0.02; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 900; delay: 600; easing: easeOutCubic">
+        <a-plane class="clickable" data-info="rg-tram-mid" position="0 0.012 0" width="0.48" height="0.012" rotation="0 0 -4"
+          material="shader: flat; color: #191919; side: double"></a-plane>
+        <a-plane class="clickable" data-info="rg-tram-mid" position="0 -0.012 0" width="0.48" height="0.012" rotation="0 0 -4"
+          material="shader: flat; color: #191919; side: double"></a-plane>
+      </a-entity>
+
+      <!-- Маленький терракотовый квадрат 2 — второй такт (смещение по фазе) -->
+      <a-plane
+        class="clickable"
+        data-info="rg-beat-2"
+        position="0.10 -0.16 0.03"
+        width="0.08" height="0.08"
+        rotation="0 0 6"
+        material="shader: flat; color: #c03c19; side: double"
+        animation__beat="property: scale; from: 0.9 0.9 1; to: 1.25 1.25 1; dir: alternate; loop: true; dur: 800; delay: 400; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.07 -0.16 0.03; to: 0.13 -0.16 0.03; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 800; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Двойная чёрная линия (нижняя) — аналогичный поток, противофаза -->
+      <a-entity position="-0.18 -0.30 0.02"
+        animation__flow="property: position; from: -0.12 -0.30 0.02; to: -0.24 -0.30 0.02; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 900; delay: 1000; easing: easeOutCubic">
+        <a-plane class="clickable" data-info="rg-tram-low" position="0 0.012 0" width="0.48" height="0.012" rotation="0 0 -4"
+          material="shader: flat; color: #191919; side: double"></a-plane>
+        <a-plane class="clickable" data-info="rg-tram-low" position="0 -0.012 0" width="0.48" height="0.012" rotation="0 0 -4"
+          material="shader: flat; color: #191919; side: double"></a-plane>
+      </a-entity>
+
+      <!-- Маленький терракотовый квадрат 3 — третий такт -->
+      <a-plane
+        class="clickable"
+        data-info="rg-beat-3"
+        position="0.22 -0.42 0.03"
+        width="0.08" height="0.08"
+        rotation="0 0 6"
+        material="shader: flat; color: #c03c19; side: double"
+        animation__beat="property: scale; from: 0.9 0.9 1; to: 1.25 1.25 1; dir: alternate; loop: true; dur: 800; delay: 200; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.19 -0.42 0.03; to: 0.25 -0.42 0.03; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1200; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Текст "РИТМ ГОРОДА" — появляется тиканьем -->
+      <a-text
+        class="clickable"
+        data-info="rg-title"
+        value="РИТМ ГОРОДА"
+        position="0.2 0.58 0.06"
+        align="center"
+        color="#111111"
+        width="1.3"
+        font="kelsonsans"
+        animation__pulse="property: scale; from: 0.97 0.97 1; to: 1.04 1.04 1; dir: alternate; loop: true; dur: 1600; easing: easeInOutSine"
+        animation__in="property: opacity; from: 0; to: 1; dur: 1000; delay: 1400; easing: easeInOutSine">
+      </a-text>
+
+      <!-- Текст "ВІЦЕБСК" — солидный низ -->
+      <a-text
+        class="clickable"
+        data-info="rg-vitebsk"
+        value="ВIЦЕБСК"
+        position="0 -0.56 0.06"
+        align="center"
+        color="#c03c19"
+        width="1.4"
+        font="kelsonsans"
+        animation__float="property: position; from: -0.02 -0.57 0.06; to: 0.02 -0.55 0.06; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: opacity; from: 0; to: 1; dur: 1200; delay: 1700; easing: easeInOutSine">
+      </a-text>
+
+      <!-- Парящие искры-квадратики вокруг композиции — ощущение живого города -->
+      <a-plane position="-0.38 0.15 0.05" width="0.018" height="0.018"
+        material="shader: flat; color: #c03c19; side: double"
+        animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 8000; easing: linear"
+        animation__float="property: position; from: -0.42 0.10 0.05; to: -0.34 0.20 0.05; dir: alternate; loop: true; dur: 4400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 1800; easing: easeOutCubic">
+      </a-plane>
+
+      <a-plane position="0.38 0.05 0.05" width="0.014" height="0.014"
+        material="shader: flat; color: #191919; side: double"
+        animation__rot="property: rotation; to: 0 0 -360; loop: true; dur: 9000; easing: linear"
+        animation__float="property: position; from: 0.34 0.00 0.05; to: 0.42 0.10 0.05; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 700; delay: 2000; easing: easeOutCubic">
+      </a-plane>
+
+    </a-entity>
   </a-scene>
 
   <script>
@@ -441,6 +579,43 @@
       'architekton': {
         title: 'Архитектон',
         body: 'Объёмная супрематическая композиция. Малевич проектировал архитектоны как модели городов будущего — летающих, вне гравитации, из чистых геометрических форм.'
+      },
+      // ---- Плакат "Ритм города" ----
+      'rg-big-block': {
+        title: 'Квартал',
+        body: 'Крупный терракотовый блок — образ здания, дома, квартала. В супрематизме прямоугольник перестаёт быть стеной и становится чистой массой, ритмической единицей города.'
+      },
+      'rg-tram-top': {
+        title: 'Трамвайная линия',
+        body: 'В Витебске трамвай появился в 1898 — один из первых в Российской империи. Для УНОВИСа трамвай — знак индустриальной скорости, прямая, проведённая через плоть города.'
+      },
+      'rg-tram-mid': {
+        title: 'Поток',
+        body: 'Парные чёрные линии — это движение: трамвайные пути, улицы, потоки людей. У Лисицкого горизонталь всегда несёт направление, а не просто делит плоскость.'
+      },
+      'rg-tram-low': {
+        title: 'Ритм путей',
+        body: 'Повторяющиеся линии создают визуальный темп. Город читается как партитура: каждая улица — такт, каждое пересечение — акцент.'
+      },
+      'rg-beat-1': {
+        title: 'Такт I',
+        body: 'Малые красные квадраты — пульсация. У супрематистов квадрат — первичный знак, ноль формы. Здесь он становится битом, на который насажен весь ритм композиции.'
+      },
+      'rg-beat-2': {
+        title: 'Такт II',
+        body: 'Сдвиг по фазе: второй квадрат бьёт со смещением. Так работает синкопа — и так живёт город: светофоры, шаги, колёса, голоса — в одном сбитом ритме.'
+      },
+      'rg-beat-3': {
+        title: 'Такт III',
+        body: 'Третий удар замыкает мотив. УНОВИС мыслил композицию музыкально: композиции Малевича и Суетина прямо называли «супрематическими партитурами».'
+      },
+      'rg-title': {
+        title: 'Ритм города',
+        body: 'Понятие, которое УНОВИС превратил из метафоры в метод. Город — не фон, а материал: его линии, темпы и разрывы становятся языком нового искусства. «Мир как ритм» — формула эпохи.'
+      },
+      'rg-vitebsk': {
+        title: 'Віцебск',
+        body: 'Витебск 1919–1922 — парадоксальная столица авангарда. Провинциальный город с населением 90 тысяч стал центром русского модернизма: здесь жили Шагал, Малевич, Лисицкий, Добужинский, Пэн, Цадкин.'
       }
     };
 
@@ -553,15 +728,27 @@
       alert('Не удалось запустить AR.\n\nПроверь:\n1. Сайт открыт по https:// или localhost\n2. Браузер получил доступ к камере\n3. Файл targets.mind лежит рядом с ar.html');
     });
 
-    // Таргет-события
-    const target = document.querySelector('#target');
-    target.addEventListener('targetFound', () => {
-      scanHint.style.display = 'none';
-      banner.style.display = 'block';
-    });
-    target.addEventListener('targetLost', () => {
-      banner.style.display = 'none';
-      scanHint.style.display = 'block';
+    // Таргет-события — оба плаката шарят один баннер/хинт
+    const targets = [
+      { el: document.querySelector('#target'), label: 'УНОВИС' },
+      { el: document.querySelector('#target-rhythm'), label: 'РИТМ ГОРОДА' }
+    ];
+    let activeTargets = 0;
+    targets.forEach(({ el, label }) => {
+      if (!el) return;
+      el.addEventListener('targetFound', () => {
+        activeTargets++;
+        scanHint.style.display = 'none';
+        banner.textContent = '● AR · ' + label;
+        banner.style.display = 'block';
+      });
+      el.addEventListener('targetLost', () => {
+        activeTargets = Math.max(0, activeTargets - 1);
+        if (activeTargets === 0) {
+          banner.style.display = 'none';
+          scanHint.style.display = 'block';
+        }
+      });
     });
 
     // Старт по нажатию — важно для iOS Safari (нужен user gesture для камеры)
