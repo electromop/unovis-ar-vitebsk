@@ -40,12 +40,6 @@
     .mindar-ui-error {
       display: none !important;
     }
-    /* Видеопоток камеры под прозрачной сценой A-Frame — на iOS Safari
-       до первого кадра показывает цветную заглушку. Заливаем чёрным. */
-    video, a-scene canvas, .a-canvas {
-      background: #090910 !important;
-    }
-
     /* ===== Loading splash — виден сразу при загрузке страницы =====
        Не зависит от A-Frame/MindAR (они грузятся defer). Прячется при arReady. */
     #ar-loading {
