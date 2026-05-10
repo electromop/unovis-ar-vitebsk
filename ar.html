@@ -11,14 +11,19 @@
 
   <style>
     * { box-sizing: border-box; }
+    /* HTML — тёмный фон. На <body> background НЕ ставим — там через
+       z-index: -2 лежит <video> с камерой, body должен быть прозрачным.
+       Тёмный фон html виден только когда камера ещё не отдаёт кадры
+       (или эмулятор без камеры), вместо браузерного белого. */
+    html {
+      background: #090910;
+    }
     html, body {
       margin: 0;
       padding: 0;
       overflow: hidden;
       height: 100%;
       width: 100%;
-      /* background НЕ задаём — иначе перекрывает видео камеры,
-         которое MindAR вставляет с z-index: -2 */
       font-family: 'Courier New', monospace;
       color: #FFFFFF;
     }
