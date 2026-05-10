@@ -2,283 +2,382 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>УНОВИС × Витебск · AR-проект</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Наследие УНОВИСа · Витебск 1920—1922</title>
+
+  <!-- Шрифты: Bebas Neue Cyrillic для заголовков, Onest 400/500 для текста -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Onest:wght@400;500&display=swap">
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ========== Сетка и базовые единицы ========== */
+    /* base unit = 8px; вертикальный ритм кратен 8 */
     :root {
-      --cream: #f2ede3;
-      --ink: #111111;
-      --red: #d8301a;
-      --blue: #0b3d91;
-      --yellow: #f2b705;
-    }
-    html, body { background: var(--cream); color: var(--ink); font-family: 'Courier New', monospace; }
+      --white:  #FFFFFF;
+      --red:    #CF1417;
+      --blue:   #2D2C7F;
+      --green:  #0D803C;
+      --yellow: #EDC205;
+      --gray:   #EAEAEA;
+      --black:  #090910;
 
-    /* Хедер в духе Лисицкого */
-    header {
+      --container: 480px;
+      --pad-x: 24px;
+      --u: 8px;          /* базовая единица сетки */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Onest', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.55;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Шорткат для заголовков */
+    .h-display {
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* ========== Контейнер ========== */
+    .page {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--pad-x) calc(var(--u) * 6);
       position: relative;
-      background: var(--ink);
-      color: var(--cream);
-      padding: 60px 40px 80px;
-      overflow: hidden;
     }
-    header::before {
-      content: "";
-      position: absolute;
-      top: 20px; right: -40px;
-      width: 220px; height: 220px;
+
+    /* Первый экран: фиксированная высота viewport — внутрь укладываются topbar / hero / more-link */
+    .first-screen {
+      min-height: 100vh;
+      min-height: 100dvh;  /* учёт адресных строк iOS Safari / Chrome */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== Хедер: жёлтая полоса слева вплотную + акценты справа ========== */
+    .topbar {
+      /* Выход за паддинг страницы — жёлтая полоса прижата к левому краю экрана */
+      margin: 0 calc(var(--pad-x) * -1) calc(var(--u) * 5);
+      display: flex;
+      align-items: flex-start;          /* верхняя кромка — общая, акценты сдвинутся вниз через margin-top */
+      justify-content: space-between;
+      min-height: calc(var(--u) * 10);  /* 80px — выросло, чтобы акценты помещались ниже */
+      position: relative;
+    }
+
+    /* Жёлтая полоса: ≤25% ширины экрана, прижата к левому краю без отступа */
+    .logo-block {
+      background: var(--yellow);
+      width: 25%;
+      max-width: 144px;
+      height: calc(var(--u) * 5);          /* 40px — выше на 8px (≈25%, ближайшее к +20% на 8u-сетке) */
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding-right: calc(var(--u) * 3);   /* 24px от правого края */
+      flex-shrink: 0;
+      margin-top: calc(var(--u) * 3);      /* 24px — полоса продлена ВВЕРХ от прежней позиции */
+    }
+    .logo {
+      display: block;
+      height: calc(var(--u) * 6);          /* 48px */
+      width: auto;
+      margin-top: calc(var(--u) * 1);      /* 8px — компенсация: лого визуально остаётся на прежнем y */
+    }
+
+    /* Акценты: красный квадрат-ромб слева, зелёный наклонённый над жёлтым кругом */
+    .accents {
+      display: flex;
+      align-items: center;
+      gap: calc(var(--u) * 3);             /* 24px между красным и стеком */
+      margin-right: var(--pad-x);
+      margin-top: calc(var(--u) * 4);      /* 32px ниже от верхнего края экрана */
+    }
+    .accents .a-red {
+      width: 22px;
+      height: 22px;
       background: var(--red);
-      transform: rotate(18deg);
+      transform: rotate(20deg);            /* наклон вправо */
+      flex-shrink: 0;
+      margin: 0 4px;                       /* компенсация ширины при повороте */
     }
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: -30px; left: 30%;
-      width: 140px; height: 140px;
+    .accents .a-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(var(--u) * 1);             /* 8px между зелёным и жёлтым */
+    }
+    .accents .a-green {
+      width: 48px;
+      height: 10px;
+      background: var(--green);
+      transform: rotate(-30deg);           /* верхний край вверх-направо */
+    }
+    .accents .a-yellow {
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      background: var(--cream);
-      opacity: 0.15;
-    }
-    header .stripes {
-      display: flex; gap: 6px; margin-bottom: 40px;
-    }
-    header .stripes div { width: 24px; height: 24px; }
-    .s1 { background: var(--cream); }
-    .s2 { background: var(--red); }
-    .s3 { background: var(--blue); }
-
-    header h1 {
-      font-family: Impact, 'Arial Black', sans-serif;
-      font-size: clamp(48px, 12vw, 140px);
-      letter-spacing: 4px;
-      line-height: 0.9;
-      position: relative; z-index: 1;
-    }
-    header h1 .dot { color: var(--red); }
-    header .subtitle {
-      font-size: 14px; letter-spacing: 8px;
-      margin-top: 12px;
-      opacity: 0.85;
-      position: relative; z-index: 1;
-    }
-    header .year {
-      position: absolute;
-      top: 50px; right: 50px;
-      font-family: Impact, sans-serif;
-      font-size: 90px;
-      color: var(--cream);
-      z-index: 2;
-    }
-    header .year small { font-size: 14px; display: block; letter-spacing: 3px; font-family: 'Courier New', monospace; }
-
-    main { max-width: 860px; margin: 0 auto; padding: 60px 24px; }
-
-    .manifesto {
-      font-size: 18px;
-      line-height: 1.7;
-      padding: 32px;
-      border-left: 6px solid var(--red);
-      background: #fff;
-      margin-bottom: 48px;
-    }
-    .manifesto strong { color: var(--red); }
-
-    h2 {
-      font-family: Impact, sans-serif;
-      font-size: 32px;
-      letter-spacing: 2px;
-      margin: 40px 0 20px;
-      position: relative;
-      padding-left: 20px;
-    }
-    h2::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 6px;
-      width: 10px; height: 24px;
-      background: var(--red);
+      background: var(--yellow);
     }
 
-    .steps { display: grid; gap: 14px; margin-bottom: 48px; }
-    .step {
-      display: flex; gap: 18px;
-      padding: 18px 20px;
-      background: #fff;
-      border: 2px solid var(--ink);
+    /* ========== Hero — занимает основной экран, текст по центру ========== */
+    .hero-block {
+      flex: 1;                 /* растягивает hero, отжимает карточки вниз */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--u) * 4) 0;
     }
-    .step-num {
-      font-family: Impact, sans-serif;
-      font-size: 36px;
+    .hero h1 {
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+    .hero h1 .accent {
       color: var(--red);
-      line-height: 1;
-      min-width: 40px;
+      display: block;
+      margin-top: calc(var(--u) * 1);        /* 8px — на сетке */
     }
-    .step-body { font-size: 15px; line-height: 1.5; }
-    .step-body strong { display: block; font-family: Impact, sans-serif; font-size: 18px; letter-spacing: 2px; margin-bottom: 6px; }
 
-    .cta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 40px 0;
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: calc(var(--u) * 6);
+      margin-top: calc(var(--u) * 3);            /* 24px */
+      font-family: 'Onest', system-ui, sans-serif;  /* как у лида ниже */
+      font-weight: 500;                          /* Medium */
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-align: center;
     }
+
+    /* ========== Описание + CTA ========== */
+    .lede {
+      margin-top: calc(var(--u) * 5);
+      font-family: 'Onest', system-ui, sans-serif;
+      font-weight: 500;                 /* Medium для лида */
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--white);
+      opacity: 0.92;
+      text-align: center;
+      /* без max-width — занимает всю ширину контента (4 колонки) */
+    }
+
     .cta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
-      background: var(--ink);
-      color: var(--cream);
+      display: block;
+      width: 100%;
+      max-width: 208px;                    /* спан колонок 2–3 + gutter (96+16+96) на 4-колонной сетке */
+      margin: calc(var(--u) * 5) auto 0;
+      padding: calc(var(--u) * 2) 0;       /* 16px — было 24, на сетке */
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      font-size: 16px;                     /* было 22 */
+      letter-spacing: 3px;
+      text-align: center;
+      cursor: pointer;
       text-decoration: none;
-      font-family: Impact, sans-serif;
-      font-size: 22px;
-      letter-spacing: 3px;
-      text-align: center;
-      transition: transform 0.1s;
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
     }
-    .cta:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
-    .cta.red { background: var(--red); }
-    .cta small { display: block; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px; opacity: 0.8; margin-top: 8px; }
+    .cta:active {
+      transform: translateY(1px);
+    }
 
-    #qr-box {
+    .more-link {
+      display: block;
+      margin: calc(var(--u) * 4) auto calc(var(--u) * 2);
+      padding-bottom: calc(var(--u) * 1);
+      text-align: center;
+      color: var(--red);
+      font-size: 13px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;          /* не сжимать */
+    }
+    .more-link .arrow {
+      display: block;
+      margin-top: calc(var(--u) * 1);      /* 8px — на сетке */
+      font-size: 16px;
+      opacity: 0.85;
+    }
+
+    /* ========== Карточки — отделены большим отступом от hero, текст по левому краю ========== */
+    .cards {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      padding: 24px;
-      background: #fff;
-      border: 2px solid var(--ink);
-      margin: 32px 0;
-    }
-    #qr-box .label {
-      font-family: Impact, sans-serif;
-      font-size: 18px;
-      letter-spacing: 3px;
-    }
-    #qrcode img, #qrcode canvas { display: block; }
-
-    .poster-preview {
-      display: flex;
-      justify-content: center;
-      margin: 32px 0;
-    }
-    .poster-preview img {
-      max-width: 100%;
-      width: 400px;
-      border: 8px solid var(--ink);
-      box-shadow: 12px 12px 0 var(--red);
+      gap: calc(var(--u) * 2);          /* 16px между карточками */
+      margin-top: calc(var(--u) * 8);   /* 64px от первого экрана */
     }
 
-    footer {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 40px;
+    .card {
+      border: 1px solid var(--red);
+      padding: calc(var(--u) * 3);      /* 24px — на сетке */
+    }
+    .card h3 {
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      font-size: 28px;                  /* ×2 от 14px — увеличены только заголовки карточек */
+      line-height: 1.05;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: calc(var(--u) * 2); /* 16px — на сетке */
+      text-align: left;
+    }
+    .card p {
+      font-family: 'Onest', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--white);
+      opacity: 0.85;
+      text-align: left;
+    }
+    .card p + p {
+      margin-top: calc(var(--u) * 2);    /* 16px — на сетке */
+    }
+
+    /* ========== Футер ========== */
+    .legal {
+      margin-top: calc(var(--u) * 6);
       text-align: center;
-      font-size: 12px;
-      letter-spacing: 3px;
-      opacity: 0.9;
+      font-size: 11px;
+      color: var(--white);
+      opacity: 0.45;
+      line-height: 1.6;
     }
-    footer .line { display: inline-block; margin: 0 10px; color: var(--red); }
 
-    @media (max-width: 600px) {
-      header .year { display: none; }
-      .cta-row { grid-template-columns: 1fr; }
+    /* ========== Адаптация на маленьких экранах ========== */
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 48px; }
+      .meta { gap: calc(var(--u) * 4); }
+    }
+
+    /* ========== Десктоп: центрируем мобильную колонку ========== */
+    @media (min-width: 700px) {
+      body {
+        background:
+          radial-gradient(ellipse at top, #15151c 0%, var(--black) 60%);
+      }
+      .page {
+        margin: calc(var(--u) * 6) auto;
+        outline: 1px solid rgba(255,255,255,0.04);
+      }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="stripes"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
-  <h1>УНОВИС<span class="dot">.</span></h1>
-  <div class="subtitle">УТВЕРДИТЕЛИ · НОВОГО · ИСКУССТВА</div>
-  <div class="year">
-    0,10
-    <small>ВИТЕБСК · 1919—1922</small>
-  </div>
-</header>
+<main class="page">
 
-<main>
+  <!-- Первый экран: занимает 100dvh, под низ прижата ссылка "Подробнее о проекте" -->
+  <section class="first-screen">
 
-  <div class="manifesto">
-    В 1919 году в Витебске Казимир Малевич и его ученики — Лисицкий, Чашник, Суетин, Ермолаева — объединились в группу <strong>УНОВИС</strong>. Они превратили город в первую в мире «супрематическую лабораторию»: расписывали трамваи, вывески, здания. <br><br>
-    Этот проект — <strong>переосмысление</strong> УНОВИСа в 2026 году. Плакат в духе 1920-х + AR-слой, который оживляет супрематические формы через камеру телефона.
-  </div>
-
-  <h2>Как это работает</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-body">
-        <strong>Напечатай плакат</strong>
-        Скачай SVG, распечатай на А4/А3 или наклей на стене Витебска.
-      </div>
+  <!-- Хедер: жёлтая полоса вплотную к левому краю + монограмма поверх + акценты справа -->
+  <div class="topbar">
+    <div class="logo-block">
+      <img src="logo-mono.svg" class="logo" alt="Витебск · УНОВИС">
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-body">
-        <strong>Открой AR на телефоне</strong>
-        Отсканируй QR-код ниже или перейди по ссылке в Safari / Chrome.
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-body">
-        <strong>Наведи камеру на плакат</strong>
-        Плакат оживает: красный квадрат парит, чёрный круг вращается, появляется надпись УНОВИС.
+    <div class="accents" aria-hidden="true">
+      <div class="a-red"></div>
+      <div class="a-stack">
+        <div class="a-green"></div>
+        <div class="a-yellow"></div>
       </div>
     </div>
   </div>
 
-  <div class="cta-row">
-    <a href="ar.html" class="cta red">
-      ЗАПУСТИТЬ AR →
-      <small>Открой на телефоне</small>
-    </a>
-    <a href="poster.svg" class="cta" download>
-      СКАЧАТЬ ПЛАКАТ
-      <small>SVG · A4</small>
-    </a>
-  </div>
+  <!-- Hero — занимает оставшуюся высоту первого экрана, контент по центру -->
+  <section class="hero-block">
+    <section class="hero">
+      <h1>
+        НАСЛЕДИЕ
+        <span class="accent">УНОВИСА</span>
+      </h1>
+      <div class="meta">
+        <span>ВИТЕБСК</span>
+        <span>1920—1922</span>
+      </div>
+    </section>
 
-  <div id="qr-box">
-    <div class="label">QR · НА · AR</div>
-    <div id="qrcode"></div>
-    <div style="font-size:11px; opacity:0.6; letter-spacing:2px;">СКАНИРУЙ · ТЕЛЕФОНОМ</div>
-  </div>
+    <p class="lede">
+      Наведите камеру смартфона на плакат и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
+    </p>
 
-  <h2>Плакат</h2>
-  <div class="poster-preview">
-    <img src="poster.svg" alt="UNOVIS × Vitebsk poster">
-  </div>
+    <a href="ar.html?go=1" class="cta" id="cta-ar">ЗАПУСТИТЬ AR</a>
+  </section>
 
-  <h2>Что дальше</h2>
-  <p style="line-height:1.7; margin-bottom: 20px;">
-    Этот плакат — только начало. Можно напечатать серию разных плакатов с маршрутом по ключевым местам Витебска (Народное художественное училище, дом Шагала, Замковая ул.) — и каждый будет оживать своим уникальным AR-слоем. Получится супрематический квест по городу.
+  <!-- Ссылка на карточки — прижата к низу первого экрана (viewport bottom) -->
+  <a href="#about" class="more-link">
+    Подробнее о&nbsp;проекте
+    <span class="arrow">↓</span>
+  </a>
+
+  </section><!-- /first-screen -->
+
+  <!-- Карточки — на втором экране, по скроллу -->
+  <section class="cards" id="about">
+
+    <article class="card">
+      <h3>МАРШРУТ НОВОГО ИСКУССТВА</h3>
+      <p>
+        Это маршрут по&nbsp;Витебску, который раскрывает наследие УНОВИСа через современный дизайн, городские плакаты и&nbsp;AR-взаимодействие.
+      </p>
+      <p>
+        Маршрут создан с&nbsp;целью показать знаковые места, связанные с&nbsp;авангардом, изучить исторические справки и&nbsp;взаимодействовать с&nbsp;визуальными объектами через цифровую среду.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>ЧТО ТАКОЕ УНОВИС?</h3>
+      <p>
+        Это объединение художников, которое было создано в&nbsp;1920 году в&nbsp;городе Витебске и&nbsp;его основал К.&nbsp;С.&nbsp;Малевич.
+      </p>
+      <p>
+        Участники стремились выйти за&nbsp;пределы традиционного искусства и&nbsp;создать новый визуальный язык, который связан с&nbsp;идеями авангарда, супрематизма и&nbsp;преобразования городской среды.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>ПОЧЕМУ ЭТО ВАЖНО</h3>
+      <p>
+        Деятельность объединения УНОВИС&nbsp;— это часть культурной идентичности Витебска. Этот проект помогает вернуть авангард в&nbsp;городскую среду и&nbsp;показать его через современный визуальный язык: маршрут, плакаты и&nbsp;AR-взаимодействие.
+      </p>
+    </article>
+
+  </section>
+
+  <p class="legal">
+    Для стабильной работы требуется доступ к&nbsp;камере.<br>
+    Работает в&nbsp;Safari&nbsp;/&nbsp;Chrome
   </p>
 
 </main>
 
-<footer>
-  УНОВИС · 2026<span class="line">●</span>ПЕРЕОСМЫСЛЕНИЕ<span class="line">●</span>ВИТЕБСК
-</footer>
-
 <script>
-  // QR-код на ar.html (относительный путь)
-  window.addEventListener('DOMContentLoaded', () => {
-    const arUrl = new URL('ar.html', window.location.href).toString();
-    new QRCode(document.getElementById('qrcode'), {
-      text: arUrl,
-      width: 180,
-      height: 180,
-      colorDark: '#111111',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-  });
+  // Кнопка "ЗАПУСТИТЬ AR" уже ведёт на ar.html?go=1.
+  // Параметр go=1 в ar.html авто-запускает камеру без второго клика.
+  // Тег <a> с user-gesture сохраняет жест запроса камеры в новой странице
+  // на iOS Safari / Chrome.
 </script>
+
 </body>
 </html>

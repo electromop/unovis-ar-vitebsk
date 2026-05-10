@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Grid debug — Наследие УНОВИСа</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --container: 480px;
+      --pad-x: 24px;          /* поля страницы */
+      --gutter: 16px;          /* gap между колонками */
+      --cols: 4;               /* кол-во колонок */
+      --col-tint: rgba(207, 20, 23, 0.13);
+      --col-line: rgba(207, 20, 23, 0.55);
+    }
+
+    html, body { height: 100%; }
+    body {
+      background: #090910;
+      font-family: system-ui, sans-serif;
+    }
+
+    .frame-wrap {
+      position: relative;
+      max-width: var(--container);
+      margin: 0 auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100vh;
+      min-height: 800px;
+      border: 0;
+      background: #090910;
+    }
+
+    /* ========== Колончатая сетка-оверлей ========== */
+    /* 4 колонки × 1fr + gutter 16px, отступы 24px по краям.
+       На контейнере 480px: (480 − 48 − 3×16) / 4 = 96px на колонку. */
+    .col-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), 1fr);
+      column-gap: var(--gutter);
+      padding: 0 var(--pad-x);
+    }
+    .col {
+      background: var(--col-tint);
+      border-left: 1px solid var(--col-line);
+      border-right: 1px solid var(--col-line);
+    }
+  </style>
+</head>
+<body>
+
+<div class="frame-wrap" id="wrap">
+  <iframe id="frame" src="index.html" title="Index page"></iframe>
+
+  <!-- 4-колоночная сетка с полями 24px и gutter 16px -->
+  <div class="col-overlay" aria-hidden="true">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+  </div>
+</div>
+
+<script>
+  // Подгоняем высоту iframe под полный скролл-контент страницы
+  const frame = document.getElementById('frame');
+
+  function fitFrame() {
+    try {
+      const docEl = frame.contentDocument && frame.contentDocument.documentElement;
+      if (docEl) {
+        const h = Math.max(docEl.scrollHeight, 800);
+        frame.style.height = h + 'px';
+      }
+    } catch (e) { /* cross-origin — пропускаем */ }
+  }
+
+  frame.addEventListener('load', fitFrame);
+  window.addEventListener('resize', fitFrame);
+  // На случай, если iframe уже успел загрузиться
+  setTimeout(fitFrame, 250);
+</script>
+
+</body>
+</html>
