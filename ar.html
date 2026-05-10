@@ -28,6 +28,23 @@
       z-index: 9999;
     }
 
+    /* ===== Жёстко глушим встроенные оверлеи MindAR =====
+       Атрибут uiLoading/uiScanning/uiError "no" иногда не отрабатывает
+       (синее окно с тремя точками — это как раз MindAR's default loading UI).
+       Дублируем CSS-ом, чтобы НИКАКАЯ системная заглушка MindAR не показывалась. */
+    .mindar-ui-overlay,
+    .mindar-ui-loading,
+    .mindar-ui-scanning,
+    .mindar-ui-compatibility,
+    .mindar-ui-error {
+      display: none !important;
+    }
+    /* Видеопоток камеры под прозрачной сценой A-Frame — на iOS Safari
+       до первого кадра показывает цветную заглушку. Заливаем чёрным. */
+    video, a-scene canvas, .a-canvas {
+      background: #090910 !important;
+    }
+
     /* ===== Loading splash — виден сразу при загрузке страницы =====
        Не зависит от A-Frame/MindAR (они грузятся defer). Прячется при arReady. */
     #ar-loading {
@@ -774,7 +791,22 @@
     sceneEl.addEventListener('arReady', () => {
       console.log('MindAR готов');
       clearTimeout(loadingSafetyTimeout);
-      hideLoading();
+      // arReady — это инит трекера. Видеопоток камеры может ещё не показаться.
+      // Ждём первый кадр в <video>, чтобы splash скрылся, когда экран реально готов.
+      const video = document.querySelector('video');
+      if (video) {
+        const onFirst = () => {
+          hideLoading();
+          video.removeEventListener('loadeddata', onFirst);
+          video.removeEventListener('playing', onFirst);
+        };
+        video.addEventListener('loadeddata', onFirst);
+        video.addEventListener('playing', onFirst);
+        // Страховка: если события не сработают за 1.5с — всё равно скрыть.
+        setTimeout(hideLoading, 1500);
+      } else {
+        hideLoading();
+      }
     });
     sceneEl.addEventListener('arError', (e) => {
       console.error('MindAR error', e);
