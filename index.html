@@ -254,9 +254,9 @@
     .card h3 {
       font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
       font-weight: 400;
-      font-size: 28px;                  /* ×2 от 14px — увеличены только заголовки карточек */
-      line-height: 1.05;
-      letter-spacing: 2px;
+      font-size: 22px;                  /* было 28px — уменьшил */
+      line-height: 1.1;
+      letter-spacing: 1.5px;
       color: var(--white);
       margin-bottom: calc(var(--u) * 2); /* 16px — на сетке */
       text-align: left;
@@ -268,7 +268,9 @@
       line-height: 1.6;
       color: var(--white);
       opacity: 0.85;
-      text-align: left;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
     }
     .card p + p {
       margin-top: calc(var(--u) * 2);    /* 16px — на сетке */
