@@ -332,7 +332,7 @@
 
       <!-- Большой красный прямоугольник (верх) — поверх фразы "ПРОЕКТ КЕЙС" -->
       <a-plane
-        class="clickable" data-info="red-bar-1"
+        class="clickable" data-info="p1-red-squares"
         position="-0.188 0.310 0.03"
         width="0.439" height="0.229"
         rotation="0 0 -11"
@@ -344,7 +344,7 @@
 
       <!-- Маленький чёрный квадрат верх-лево (под угловой меткой) -->
       <a-plane
-        class="clickable" data-info="black-square"
+        class="clickable" data-info="p1-black-square"
         position="-0.277 0.445 0.03"
         width="0.077" height="0.077"
         rotation="0 0 -11"
@@ -356,7 +356,7 @@
 
       <!-- Чёрная горизонтальная полоса (тонкая, длинная) — над лестницей квадратов -->
       <a-plane
-        class="clickable" data-info="black-line"
+        class="clickable" data-info="p1-lines"
         position="0.046 0.098 0.03"
         width="0.677" height="0.023"
         rotation="0 0 -11"
@@ -368,7 +368,7 @@
 
       <!-- Красный квадрат 1 — первая ступень "лестницы" -->
       <a-plane
-        class="clickable" data-info="red-square"
+        class="clickable" data-info="p1-red-squares"
         position="-0.042 -0.005 0.04"
         width="0.143" height="0.143"
         rotation="0 0 -11"
@@ -381,7 +381,7 @@
 
       <!-- Красный квадрат 2 — вторая ступень -->
       <a-plane
-        class="clickable" data-info="red-square"
+        class="clickable" data-info="p1-red-squares"
         position="0.092 -0.196 0.04"
         width="0.143" height="0.143"
         rotation="0 0 -11"
@@ -394,7 +394,7 @@
 
       <!-- Красный квадрат 3 — третья ступень -->
       <a-plane
-        class="clickable" data-info="red-square"
+        class="clickable" data-info="p1-red-squares"
         position="0.228 -0.393 0.04"
         width="0.143" height="0.143"
         rotation="0 0 -11"
@@ -407,7 +407,7 @@
 
       <!-- Чёрные полосы вокруг лестницы — двойная пара слева, двойная пара справа -->
       <a-plane
-        class="clickable" data-info="black-line"
+        class="clickable" data-info="p1-lines"
         position="-0.346 -0.088 0.02"
         width="0.698" height="0.023"
         rotation="0 0 -11"
@@ -417,7 +417,7 @@
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1100; easing: easeOutCubic">
       </a-plane>
       <a-plane
-        class="clickable" data-info="black-line"
+        class="clickable" data-info="p1-lines"
         position="-0.355 -0.133 0.02"
         width="0.698" height="0.023"
         rotation="0 0 -11"
@@ -427,7 +427,7 @@
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1300; easing: easeOutCubic">
       </a-plane>
       <a-plane
-        class="clickable" data-info="black-line"
+        class="clickable" data-info="p1-lines"
         position="-0.216 -0.287 0.02"
         width="0.698" height="0.023"
         rotation="0 0 -11"
@@ -437,7 +437,7 @@
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1500; easing: easeOutCubic">
       </a-plane>
       <a-plane
-        class="clickable" data-info="black-line"
+        class="clickable" data-info="p1-lines"
         position="-0.223 -0.332 0.02"
         width="0.698" height="0.023"
         rotation="0 0 -11"
@@ -458,7 +458,7 @@
 
       <!-- Большой чёрный квадрат справа-сверху (главный блок плаката) -->
       <a-plane
-        class="clickable" data-info="black-square"
+        class="clickable" data-info="p2-black-square"
         position="0.243 0.154 0.03"
         width="0.390" height="0.390"
         material="shader: flat; color: #090910; side: double"
@@ -467,9 +467,8 @@
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Жёлтый блок снизу (горизонтальный) -->
+      <!-- Жёлтый блок снизу (горизонтальный) — без текста, некликабельный -->
       <a-plane
-        class="clickable" data-info="yellow-bar"
         position="0.093 -0.456 0.03"
         width="0.296" height="0.108"
         material="shader: flat; color: #ECC105; side: double"
@@ -478,9 +477,8 @@
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 300; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Жёлтый вертикальный блок верх-середина -->
+      <!-- Жёлтый вертикальный блок верх-середина — без текста, некликабельный -->
       <a-plane
-        class="clickable" data-info="yellow-bar"
         position="-0.041 0.565 0.03"
         width="0.091" height="0.284"
         material="shader: flat; color: #ECC105; side: double"
@@ -489,9 +487,8 @@
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Жёлтый малый блок верх-право -->
+      <!-- Жёлтый малый блок верх-право — без текста, некликабельный -->
       <a-plane
-        class="clickable" data-info="yellow-bar"
         position="0.429 0.644 0.03"
         width="0.142" height="0.127"
         material="shader: flat; color: #ECC105; side: double"
@@ -502,7 +499,7 @@
 
       <!-- Зелёная диагональ (наклон +39°) -->
       <a-plane
-        class="clickable" data-info="green-diagonal"
+        class="clickable" data-info="p2-lines"
         position="-0.189 -0.027 0.04"
         width="0.415" height="0.032"
         rotation="0 0 39"
@@ -514,7 +511,7 @@
 
       <!-- Синяя диагональ — параллельна зелёной, чуть ниже-левее -->
       <a-plane
-        class="clickable" data-info="blue-diagonal"
+        class="clickable" data-info="p2-lines"
         position="-0.220 -0.093 0.04"
         width="0.415" height="0.032"
         rotation="0 0 39"
@@ -526,7 +523,7 @@
 
       <!-- Большой красный круг низ-лево (центр частично за пределами плаката) -->
       <a-circle
-        class="clickable" data-info="red-disc"
+        class="clickable" data-info="p2-red-shape"
         position="-0.464 -0.600 0.03"
         radius="0.303"
         material="shader: flat; color: #CE1417; side: double"
@@ -538,46 +535,72 @@
     </a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 2: ПЛАКАТ 3 (poster3.svg) — оверлей                    -->
-    <!-- Зелёная и синяя диагонали + малый чёрный квадрат + полигоны -->
+    <!-- Цель 2: ПЛАКАТ 3 (poster3.svg) — фигура Шагала "шагает"     -->
+    <!-- Голова (жёлтый круг) покачивается, ножка раскачивается      -->
+    <!-- Диагонали и малый квадрат — фон (не кликабельны)            -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 2" id="target-3">
 
-      <!-- Зелёная диагональ (верхняя из двух) -->
+      <!-- Зелёная диагональ (верхняя) — фон -->
       <a-plane
-        class="clickable" data-info="green-diagonal"
-        position="0.104 0.330 0.03"
+        position="0.104 0.330 0.02"
         width="0.503" height="0.046"
         rotation="0 0 39"
         material="shader: flat; color: #0D803C; side: double"
-        animation__drift="property: position; from: 0.100 0.327 0.03; to: 0.108 0.333 0.03; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.100 0.327 0.02; to: 0.108 0.333 0.02; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Синяя диагональ (нижняя из двух) -->
+      <!-- Синяя диагональ (нижняя) — фон -->
       <a-plane
-        class="clickable" data-info="blue-diagonal"
-        position="0.070 0.242 0.03"
+        position="0.070 0.242 0.02"
         width="0.513" height="0.046"
         rotation="0 0 39"
         material="shader: flat; color: #2D2C7F; side: double"
-        animation__drift="property: position; from: 0.066 0.239 0.03; to: 0.074 0.245 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 7000; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.066 0.239 0.02; to: 0.074 0.245 0.02; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 300; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Малый чёрный квадрат -->
+      <!-- Малый чёрный квадрат — фон -->
       <a-plane
-        class="clickable" data-info="black-square"
-        position="0.262 -0.018 0.04"
+        position="0.262 -0.018 0.02"
         width="0.085" height="0.085"
         material="shader: flat; color: #090910; side: double"
-        animation__breathe="property: scale; from: 0.95 0.95 1; to: 1.06 1.06 1; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.258 -0.022 0.04; to: 0.266 -0.014 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 -3; to: 0 0 3; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 600; easing: easeOutCubic">
       </a-plane>
+
+      <!-- ===== Шагающий Шагал ===== -->
+      <!-- Голова (жёлтый круг), центр (415, 395) в SVG → (0.197, 0.044) в MindAR.
+           Покачивается вверх-вниз в такт шагу. -->
+      <a-circle
+        class="clickable" data-info="p3-head"
+        position="0.197 0.044 0.06"
+        radius="0.067"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__bob="property: position; from: 0.197 0.038 0.06; to: 0.197 0.052 0.06; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 1800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
+      </a-circle>
+
+      <!-- Ножка (чёрная "штанина"-трапеция).
+           Полигон в SVG: (230.85,742.36) (230.85,483.56) (143.6,483.56) (112.81,742.36)
+           Центр ≈ (179, 612.5), высота 258, ширина ≈ 103.
+           MindAR: x=-0.199, y=-0.322, w=0.173, h=0.434.
+           Pivot для свинга задаётся через transformOrigin родителя.
+           Чтобы нога качалась "от бедра" (верх), вкладываю plane в entity
+           и смещаю plane вниз на h/2 — точка вращения окажется наверху. -->
+      <a-entity
+        position="-0.199 -0.105 0.05"
+        animation__step="property: rotation; from: 0 0 -10; to: 0 0 10; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 400; easing: easeOutCubic">
+        <a-plane
+          class="clickable" data-info="p3-leg"
+          position="0 -0.217 0"
+          width="0.173" height="0.434"
+          material="shader: flat; color: #090910; side: double">
+        </a-plane>
+      </a-entity>
 
     </a-entity>
   </a-scene>
@@ -591,45 +614,40 @@
 
     // ======== Инфо-поп-ап для фигур ========
     const INFO = {
-      'red-square': {
-        title: 'Красный квадрат',
-        body: 'Малевич, 1915. Красный квадрат — «крестьянка в двух измерениях», живое в противовес чёрному. Цвет как чистая энергия, освобождённая от вещи.'
+      // ===== Плакат 1 =====
+      'p1-lines': {
+        title: 'Витебск',
+        body: 'Витебск — один из старейших городов Республики Беларусь, расположенный на реке Западная Двина. Город обладает богатым культурно-историческим наследием и занимает важное место в истории искусства начала XX века.'
       },
-      'red-bar-1': {
-        title: 'Красный прямоугольник',
-        body: 'Удлинённая красная плоскость — заявление. У супрематистов прямоугольник перестаёт быть стеной и становится самостоятельным цветовым высказыванием, плотью самого пространства.'
+      'p1-black-square': {
+        title: 'К. С. Малевич',
+        body: 'К. С. Малевич — основатель супрематизма и идейный лидер УНОВИСа. Его работа «Чёрный квадрат» стала символом нового искусства, в котором простая геометрическая форма заменяет предметное изображение и открывает путь к свободному визуальному мышлению.'
       },
-      'red-disc': {
-        title: 'Красный круг',
-        body: 'Круг у супрематистов — небесное тело, чистое движение. Красный круг — это пульсация энергии, солнце нового мира, выкаченное из-под горизонта старого порядка.'
+      'p1-red-squares': {
+        title: 'Красные элементы',
+        body: 'Красные элементы являются символом движения и перехода от реального пространства к маршруту нового искусства. Также это отсылает к лестнице на набережной города.'
       },
-      'black-square': {
-        title: 'Чёрный квадрат',
-        body: 'Малевич, 1915. Нулевая точка живописи. Окно в «беспредметное» — отказ от всякой иллюзии глубины. Самая известная картина русского авангарда.'
+      // ===== Плакат 2 =====
+      'p2-black-square': {
+        title: 'УНОВИС',
+        body: 'УНОВИС — «Утвердители нового искусства». Объединение возникло в Витебске в 1920 году и было связано с идеями К. С. Малевича, супрематизма и поиском нового художественного языка, основанного на форме, цвете, пространстве и отказе от традиционного изображения.'
       },
-      'black-line': {
-        title: 'Линия',
-        body: 'Прямая линия у Лисицкого — основа всякой архитектуры. Она проводит границу, задаёт ритм и направление, держит композицию как стропило держит крышу.'
+      'p2-lines': {
+        title: 'Супрематизм',
+        body: 'Супрематизм — это искусство чистых форм и цвета. Он отказывается от изображения традиционной живописи и передаёт идею через геометрические формы, движение и пространство.'
       },
-      'yellow-bar': {
-        title: 'Жёлтый блок',
-        body: 'Жёлтый у супрематистов — цвет света и энергии. Маркер границы между старым и новым порядком, индустриальный сигнал, который кричит сквозь композицию.'
+      'p2-red-shape': {
+        title: 'Стена Малевича',
+        body: 'Роспись на здании «Стена Малевича» создана по эскизу К. С. Малевича «Принцип росписи стены, плоскости или всей комнаты, или целой квартиры по системе супрематизма», также известному как «Смерть обоям». Эскиз был создан в Витебске и отражает идею переноса супрематизма в реальное пространство.'
       },
-      'green-diagonal': {
-        title: 'Зелёная диагональ',
-        body: 'Диагональ взрывает статику прямоугольного мира. У Лисицкого это траектория полёта, ось космической динамики. «ПРОУН» — проект утверждения нового.'
+      // ===== Плакат 3 =====
+      'p3-head': {
+        title: 'Марк Шагал',
+        body: 'Марк Шагал — один из главных художественных символов Витебска. Его творчество связано с образом города, памятью, движением и личным восприятием пространства.'
       },
-      'blue-diagonal': {
-        title: 'Синяя диагональ',
-        body: 'Параллельные диагонали создают ощущение движения слоёв — будто плакат расслаивается в плоскостях. Так у Лисицкого пространство перестаёт быть фоном и становится действием.'
-      },
-      'blue-tri': {
-        title: 'Треугольник',
-        body: '«Клином красным бей белых!» — плакат Лисицкого, 1919. Треугольник стал у УНОВИСа знаком удара, вектора, революционного движения.'
-      },
-      'architekton': {
-        title: 'Архитектон',
-        body: 'Объёмная супрематическая композиция. Малевич проектировал архитектоны как модели городов будущего — летающих, вне гравитации, из чистых геометрических форм.'
+      'p3-leg': {
+        title: 'ВНХУ',
+        body: 'Марк Шагал основал Витебское Народное Художественное Училище (ВНХУ), ставшее важной точкой развития авангарда. Именно в этой художественной среде позднее возникло объединение УНОВИС.'
       }
     };
 
