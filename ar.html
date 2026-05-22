@@ -318,312 +318,266 @@
     <a-entity light="type: directional; color: #ffffff; intensity: 0.8" position="1 1 1"></a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 0: ПЛАКАТ 1 — классический Малевич                     -->
-    <!-- Композиция вокруг красного квадрата. Дыхание + дрейф.       -->
-    <!-- Координаты: A4 портретный, width=1 → X ∈ [-0.5; 0.5],       -->
-    <!-- height=1.414 → Y ∈ [-0.707; +0.707]                         -->
+    <!-- Цель 0: ПЛАКАТ 1 (poster1.svg) — оверлей оживляет плакат     -->
+    <!-- Все фигуры наклонены на +11° (как в SVG), едва дрейфуют      -->
+    <!-- и дышат. AR-плоскости лежат поверх своих "печатных" версий.  -->
+    <!-- ============================================================ -->
+    <!-- Координаты MindAR: width=1 → X∈[-0.5;0.5]; aspect 595×842 →  -->
+    <!-- height=1.414 → Y∈[-0.707;+0.707]. Y растёт ВВЕРХ.            -->
+    <!-- Перевод из SVG: mindar_x=(svg_cx-297.64)/595.28               -->
+    <!--                 mindar_y=(420.95-svg_cy)/595.28               -->
+    <!--                 size = svg_size / 595.28                       -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 0" id="target-1">
 
-      <!-- Красный квадрат — главный центр композиции -->
+      <!-- Большой красный прямоугольник (верх) — поверх фразы "ПРОЕКТ КЕЙС" -->
       <a-plane
-        class="clickable" data-info="red-square"
-        position="0.05 0.15 0.05"
-        width="0.32" height="0.32"
-        rotation="0 0 8"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__rot="property: rotation; from: 0 0 0; to: 0 0 16; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
-        animation__float="property: position; from: -0.02 0.10 0.05; to: 0.12 0.20 0.05; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.08 1.08 1; dir: alternate; loop: true; dur: 3200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
+        class="clickable" data-info="red-bar-1"
+        position="-0.188 0.310 0.03"
+        width="0.439" height="0.229"
+        rotation="0 0 -11"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.015 1.015 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.193 0.307 0.03; to: -0.183 0.313 0.03; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Чёрный круг с белым ядром -->
-      <a-circle
-        class="clickable" data-info="black-disc"
-        position="-0.3 -0.18 0.03"
-        radius="0.14"
-        material="shader: flat; color: #090910; side: double"
-        animation__float="property: position; from: -0.36 -0.24 0.03; to: -0.24 -0.12 0.03; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 200; easing: easeOutCubic">
-      </a-circle>
-      <a-circle
-        position="-0.3 -0.18 0.04"
-        radius="0.05"
-        material="shader: flat; color: #FFFFFF; side: double"
-        animation__float="property: position; from: -0.36 -0.24 0.04; to: -0.24 -0.12 0.04; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
-        animation__pulse="property: scale; from: 0.7 0.7 1; to: 1.3 1.3 1; dir: alternate; loop: true; dur: 2600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 350; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Жёлтый горизонтальный брусок — верхняя ось композиции -->
+      <!-- Маленький чёрный квадрат верх-лево (под угловой меткой) -->
       <a-plane
-        class="clickable" data-info="yellow-bar"
-        position="0.0 0.45 0.02"
-        width="0.55" height="0.045"
-        rotation="0 0 4"
-        material="shader: flat; color: #EDC205; side: double"
-        animation__rot="property: rotation; from: 0 0 -2; to: 0 0 10; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
-        animation__float="property: position; from: -0.06 0.42 0.02; to: 0.06 0.48 0.02; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
+        class="clickable" data-info="black-square"
+        position="-0.277 0.445 0.03"
+        width="0.077" height="0.077"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__breathe="property: scale; from: 0.95 0.95 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.280 0.442 0.03; to: -0.274 0.448 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 200; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Чёрная горизонтальная полоса (тонкая, длинная) — над лестницей квадратов -->
+      <a-plane
+        class="clickable" data-info="black-line"
+        position="0.046 0.098 0.03"
+        width="0.677" height="0.023"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.038 0.094 0.03; to: 0.054 0.102 0.03; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 350; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Красный квадрат 1 — первая ступень "лестницы" -->
+      <a-plane
+        class="clickable" data-info="red-square"
+        position="-0.042 -0.005 0.04"
+        width="0.143" height="0.143"
+        rotation="0 0 -11"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.048 -0.011 0.04; to: -0.036 0.001 0.04; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 500; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Красный квадрат 2 — вторая ступень -->
+      <a-plane
+        class="clickable" data-info="red-square"
+        position="0.092 -0.196 0.04"
+        width="0.143" height="0.143"
+        rotation="0 0 -11"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3600; delay: 400; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.086 -0.202 0.04; to: 0.098 -0.190 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 700; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Синий треугольник правый-низ -->
-      <a-triangle
-        class="clickable" data-info="blue-tri"
-        position="0.3 -0.4 0.04"
-        vertex-a="0 0.16 0"
-        vertex-b="-0.14 -0.08 0"
-        vertex-c="0.14 -0.08 0"
-        rotation="0 0 -15"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__rot="property: rotation; to: 0 0 345; loop: true; dur: 16000; easing: linear"
-        animation__float="property: position; from: 0.24 -0.46 0.04; to: 0.34 -0.34 0.04; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutCubic">
-      </a-triangle>
-
-      <!-- Зелёный архитектон-крест — баланс палитре -->
-      <a-entity position="-0.32 0.35 0.06"
-        animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 12000; easing: linear"
-        animation__float="property: position; from: -0.38 0.30 0.06; to: -0.26 0.40 0.06; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 1400; easing: easeOutCubic">
-        <a-plane class="clickable" data-info="architekton" width="0.13" height="0.02" material="shader: flat; color: #0D803C; side: double"></a-plane>
-        <a-plane class="clickable" data-info="architekton" width="0.02" height="0.13" material="shader: flat; color: #0D803C; side: double"></a-plane>
-      </a-entity>
-
-      <!-- Маленький красный круг — пульсар -->
-      <a-circle
-        class="clickable" data-info="small-red"
-        position="0.4 -0.05 0.03"
-        radius="0.04"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__pulse="property: scale; from: 0.8 0.8 1; to: 1.6 1.6 1; dir: alternate; loop: true; dur: 1800; easing: easeInOutSine"
-        animation__float="property: position; from: 0.36 -0.10 0.03; to: 0.44 0.00 0.03; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1100; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Красная диагональная полоса — горизонт -->
+      <!-- Красный квадрат 3 — третья ступень -->
       <a-plane
-        class="clickable" data-info="red-diagonal"
-        position="0 -0.55 0.01"
-        width="0.95" height="0.018"
-        rotation="0 0 -6"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__rot="property: rotation; from: 0 0 -10; to: 0 0 -2; dir: alternate; loop: true; dur: 7400; easing: easeInOutSine"
-        animation__float="property: position; from: -0.07 -0.57 0.01; to: 0.07 -0.53 0.01; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1200; delay: 900; easing: easeOutCubic">
+        class="clickable" data-info="red-square"
+        position="0.228 -0.393 0.04"
+        width="0.143" height="0.143"
+        rotation="0 0 -11"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3800; delay: 800; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.222 -0.399 0.04; to: 0.234 -0.387 0.04; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 900; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Парящие квадратики-спутники -->
-      <a-plane position="0.45 0.55 0.04" width="0.035" height="0.035"
+      <!-- Чёрные полосы вокруг лестницы — двойная пара слева, двойная пара справа -->
+      <a-plane
+        class="clickable" data-info="black-line"
+        position="-0.346 -0.088 0.02"
+        width="0.698" height="0.023"
+        rotation="0 0 -11"
         material="shader: flat; color: #090910; side: double"
-        animation__rot="property: rotation; to: 0 0 360; loop: true; dur: 9000; easing: linear"
-        animation__float="property: position; from: 0.40 0.50 0.04; to: 0.50 0.60 0.04; dir: alternate; loop: true; dur: 4600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1700; easing: easeOutCubic">
+        animation__drift="property: position; from: -0.352 -0.090 0.02; to: -0.340 -0.086 0.02; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4600; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1100; easing: easeOutCubic">
       </a-plane>
-      <a-plane position="-0.45 -0.45 0.04" width="0.03" height="0.03"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__rot="property: rotation; to: 0 0 -360; loop: true; dur: 11000; easing: linear"
-        animation__float="property: position; from: -0.5 -0.5 0.04; to: -0.4 -0.4 0.04; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1800; easing: easeOutCubic">
+      <a-plane
+        class="clickable" data-info="black-line"
+        position="-0.355 -0.133 0.02"
+        width="0.698" height="0.023"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.361 -0.135 0.02; to: -0.349 -0.131 0.02; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1300; easing: easeOutCubic">
+      </a-plane>
+      <a-plane
+        class="clickable" data-info="black-line"
+        position="-0.216 -0.287 0.02"
+        width="0.698" height="0.023"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.222 -0.289 0.02; to: -0.210 -0.285 0.02; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1500; easing: easeOutCubic">
+      </a-plane>
+      <a-plane
+        class="clickable" data-info="black-line"
+        position="-0.223 -0.332 0.02"
+        width="0.698" height="0.023"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.229 -0.334 0.02; to: -0.217 -0.330 0.02; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1700; easing: easeOutCubic">
       </a-plane>
 
     </a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 1: ПЛАКАТ 2 — Лисицкий, "Клином красным"               -->
-    <!-- Атака клина, разрушенный круг, динамика                     -->
+    <!-- Цель 1: ПЛАКАТ 2 (poster2.svg) — оверлей                    -->
+    <!-- Чёрный квадрат + жёлтые блоки + диагонали (зелёная, синяя)  -->
+    <!-- + большой красный круг внизу-слева                           -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 1" id="target-2">
 
-      <!-- Крупный белый круг — оборона -->
-      <a-circle
-        class="clickable" data-info="black-disc"
-        position="0.22 0.0 0.02"
-        radius="0.22"
-        material="shader: flat; color: #FFFFFF; side: double"
-        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.04 1.04 1; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
-        animation__float="property: position; from: 0.25 -0.02 0.02; to: 0.19 0.02 0.02; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Красный клин-треугольник, бьющий справа налево -->
-      <a-triangle
-        class="clickable" data-info="blue-tri"
-        position="-0.05 0.0 0.04"
-        vertex-a="0.35 0 0"
-        vertex-b="-0.25 0.22 0"
-        vertex-c="-0.25 -0.22 0"
-        rotation="0 0 0"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__strike="property: position; from: -0.10 0.0 0.04; to: 0.00 0.0 0.04; dir: alternate; loop: true; dur: 2800; easing: easeInOutQuad"
-        animation__breathe="property: scale; from: 0.95 1 1; to: 1.1 1 1; dir: alternate; loop: true; dur: 2400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 400; easing: easeOutCubic">
-      </a-triangle>
-
-      <!-- Чёрный квадрат сверху — статика, противовес клину -->
+      <!-- Большой чёрный квадрат справа-сверху (главный блок плаката) -->
       <a-plane
-        class="clickable" data-info="red-square"
-        position="-0.32 0.42 0.05"
-        width="0.18" height="0.18"
-        rotation="0 0 -8"
+        class="clickable" data-info="black-square"
+        position="0.243 0.154 0.03"
+        width="0.390" height="0.390"
         material="shader: flat; color: #090910; side: double"
-        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -2; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__float="property: position; from: -0.36 0.38 0.05; to: -0.28 0.46 0.05; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.015 1.015 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.239 0.151 0.03; to: 0.247 0.157 0.03; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Жёлтый блок снизу (горизонтальный) -->
+      <a-plane
+        class="clickable" data-info="yellow-bar"
+        position="0.093 -0.456 0.03"
+        width="0.296" height="0.108"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__breathe="property: scale; from: 0.98 0.98 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.088 -0.459 0.03; to: 0.098 -0.453 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 300; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Жёлтый вертикальный блок верх-середина -->
+      <a-plane
+        class="clickable" data-info="yellow-bar"
+        position="-0.041 0.565 0.03"
+        width="0.091" height="0.284"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__breathe="property: scale; from: 0.98 0.98 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 4400; delay: 600; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.044 0.562 0.03; to: -0.038 0.568 0.03; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Жёлтый малый блок верх-право -->
+      <a-plane
+        class="clickable" data-info="yellow-bar"
+        position="0.429 0.644 0.03"
+        width="0.142" height="0.127"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 4000; delay: 900; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.425 0.641 0.03; to: 0.433 0.647 0.03; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 700; easing: easeOutCubic">
       </a-plane>
 
-      <!-- Жёлтая вертикальная полоса — ось плаката -->
+      <!-- Зелёная диагональ (наклон +39°) -->
       <a-plane
-        class="clickable" data-info="black-vertical"
-        position="-0.42 0.0 0.02"
-        width="0.04" height="0.6"
-        rotation="0 0 -2"
-        material="shader: flat; color: #EDC205; side: double"
-        animation__rot="property: rotation; from: 0 0 -6; to: 0 0 4; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
-        animation__float="property: position; from: -0.45 -0.04 0.02; to: -0.39 0.04 0.02; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__in="property: scale; from: 1 0 1; to: 1 1 1; dur: 1000; delay: 900; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Синие осколки-квадратики, разлетающиеся от удара -->
-      <a-plane position="0.42 0.22 0.04" width="0.05" height="0.05"
-        rotation="0 0 18"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__rot="property: rotation; to: 0 0 378; loop: true; dur: 7000; easing: linear"
-        animation__float="property: position; from: 0.34 0.18 0.04; to: 0.46 0.26 0.04; dir: alternate; loop: true; dur: 4400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1300; easing: easeOutCubic">
-      </a-plane>
-      <a-plane position="0.40 -0.28 0.04" width="0.04" height="0.04"
-        rotation="0 0 -22"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__rot="property: rotation; to: 0 0 -382; loop: true; dur: 8000; easing: linear"
-        animation__float="property: position; from: 0.34 -0.32 0.04; to: 0.44 -0.24 0.04; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 800; delay: 1500; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Малый красный круг — пульсирующая точка прицела -->
-      <a-circle
-        class="clickable" data-info="small-red"
-        position="0.30 0.0 0.06"
-        radius="0.025"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__pulse="property: scale; from: 0.6 0.6 1; to: 1.8 1.8 1; dir: alternate; loop: true; dur: 1400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1700; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Зелёная диагональ — встречное движение -->
-      <a-plane
-        class="clickable" data-info="red-diagonal"
-        position="-0.05 -0.5 0.01"
-        width="0.85" height="0.022"
-        rotation="0 0 8"
+        class="clickable" data-info="green-diagonal"
+        position="-0.189 -0.027 0.04"
+        width="0.415" height="0.032"
+        rotation="0 0 39"
         material="shader: flat; color: #0D803C; side: double"
-        animation__rot="property: rotation; from: 0 0 4; to: 0 0 12; dir: alternate; loop: true; dur: 7000; easing: easeInOutSine"
-        animation__float="property: position; from: -0.12 -0.52 0.01; to: 0.02 -0.48 0.01; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1200; delay: 1100; easing: easeOutCubic">
+        animation__drift="property: position; from: -0.193 -0.030 0.04; to: -0.185 -0.024 0.04; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 900; easing: easeOutCubic">
       </a-plane>
+
+      <!-- Синяя диагональ — параллельна зелёной, чуть ниже-левее -->
+      <a-plane
+        class="clickable" data-info="blue-diagonal"
+        position="-0.220 -0.093 0.04"
+        width="0.415" height="0.032"
+        rotation="0 0 39"
+        material="shader: flat; color: #2D2C7F; side: double"
+        animation__drift="property: position; from: -0.224 -0.096 0.04; to: -0.216 -0.090 0.04; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 7000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 1100; easing: easeOutCubic">
+      </a-plane>
+
+      <!-- Большой красный круг низ-лево (центр частично за пределами плаката) -->
+      <a-circle
+        class="clickable" data-info="red-disc"
+        position="-0.464 -0.600 0.03"
+        radius="0.303"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
+        animation__drift="property: position; from: -0.470 -0.604 0.03; to: -0.458 -0.596 0.03; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 1300; easing: easeOutCubic">
+      </a-circle>
 
     </a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 2: ПЛАКАТ 3 — архитектон, тяжёлая композиция            -->
-    <!-- Вертикали и горизонтали, плотный чёрный, точечный акцент    -->
+    <!-- Цель 2: ПЛАКАТ 3 (poster3.svg) — оверлей                    -->
+    <!-- Зелёная и синяя диагонали + малый чёрный квадрат + полигоны -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 2" id="target-3">
 
-      <!-- Главная чёрная вертикаль — колонна архитектона -->
+      <!-- Зелёная диагональ (верхняя из двух) -->
       <a-plane
-        class="clickable" data-info="black-vertical"
-        position="-0.08 0.08 0.03"
-        width="0.07" height="0.78"
-        rotation="0 0 0"
-        material="shader: flat; color: #090910; side: double"
-        animation__rot="property: rotation; from: 0 0 -3; to: 0 0 3; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
-        animation__float="property: position; from: -0.10 0.06 0.03; to: -0.06 0.10 0.03; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 1 0 1; to: 1 1 1; dur: 1100; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Длинная горизонталь — карниз -->
-      <a-plane
-        class="clickable" data-info="yellow-bar"
-        position="0.08 0.30 0.02"
-        width="0.7" height="0.06"
-        rotation="0 0 2"
-        material="shader: flat; color: #090910; side: double"
-        animation__float="property: position; from: 0.04 0.28 0.02; to: 0.12 0.32 0.02; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 0; to: 0 0 4; dir: alternate; loop: true; dur: 7200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 300; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Жёлтый круг — солнце над архитектурой -->
-      <a-circle
-        class="clickable" data-info="black-disc"
-        position="0.30 0.50 0.04"
-        radius="0.11"
-        material="shader: flat; color: #EDC205; side: double"
-        animation__breathe="property: scale; from: 0.94 0.94 1; to: 1.06 1.06 1; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine"
-        animation__float="property: position; from: 0.26 0.46 0.04; to: 0.34 0.54 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 500; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Малый красный квадрат — акцент в плотной чёрной массе -->
-      <a-plane
-        class="clickable" data-info="red-square"
-        position="0.18 -0.08 0.05"
-        width="0.13" height="0.13"
-        rotation="0 0 -6"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__rot="property: rotation; from: 0 0 -10; to: 0 0 2; dir: alternate; loop: true; dur: 5500; easing: easeInOutSine"
-        animation__float="property: position; from: 0.14 -0.12 0.05; to: 0.22 -0.04 0.05; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.95 0.95 1; to: 1.08 1.08 1; dir: alternate; loop: true; dur: 3000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 800; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Синяя горизонталь снизу — фундамент -->
-      <a-plane
-        class="clickable" data-info="red-diagonal"
-        position="0.05 -0.42 0.02"
-        width="0.65" height="0.05"
-        rotation="0 0 -3"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__rot="property: rotation; from: 0 0 -5; to: 0 0 1; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
-        animation__float="property: position; from: 0.00 -0.44 0.02; to: 0.10 -0.40 0.02; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 1000; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Зелёный треугольник — динамика в архитектуре -->
-      <a-triangle
-        class="clickable" data-info="blue-tri"
-        position="-0.32 -0.28 0.04"
-        vertex-a="0 0.13 0"
-        vertex-b="-0.11 -0.07 0"
-        vertex-c="0.11 -0.07 0"
-        rotation="0 0 25"
+        class="clickable" data-info="green-diagonal"
+        position="0.104 0.330 0.03"
+        width="0.503" height="0.046"
+        rotation="0 0 39"
         material="shader: flat; color: #0D803C; side: double"
-        animation__rot="property: rotation; to: 0 0 385; loop: true; dur: 14000; easing: linear"
-        animation__float="property: position; from: -0.36 -0.32 0.04; to: -0.28 -0.24 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 1200; easing: easeOutCubic">
-      </a-triangle>
+        animation__drift="property: position; from: 0.100 0.327 0.03; to: 0.108 0.333 0.03; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Пульсирующий красный круг — точка фокуса -->
-      <a-circle
-        class="clickable" data-info="small-red"
-        position="-0.36 0.42 0.04"
-        radius="0.04"
-        material="shader: flat; color: #CF1417; side: double"
-        animation__pulse="property: scale; from: 0.7 0.7 1; to: 1.5 1.5 1; dir: alternate; loop: true; dur: 1600; easing: easeInOutSine"
-        animation__float="property: position; from: -0.40 0.38 0.04; to: -0.32 0.46 0.04; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 1500; easing: easeOutCubic">
-      </a-circle>
+      <!-- Синяя диагональ (нижняя из двух) -->
+      <a-plane
+        class="clickable" data-info="blue-diagonal"
+        position="0.070 0.242 0.03"
+        width="0.513" height="0.046"
+        rotation="0 0 39"
+        material="shader: flat; color: #2D2C7F; side: double"
+        animation__drift="property: position; from: 0.066 0.239 0.03; to: 0.074 0.245 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 7000; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 300; easing: easeOutCubic">
+      </a-plane>
 
-      <!-- Чёрно-красный архитектон-крест -->
-      <a-entity position="0.40 -0.55 0.06"
-        animation__rot="property: rotation; to: 0 0 -360; loop: true; dur: 13000; easing: linear"
-        animation__float="property: position; from: 0.36 -0.58 0.06; to: 0.44 -0.52 0.06; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 1700; easing: easeOutCubic">
-        <a-plane class="clickable" data-info="architekton" width="0.14" height="0.022" material="shader: flat; color: #090910; side: double"></a-plane>
-        <a-plane class="clickable" data-info="architekton" width="0.022" height="0.14" material="shader: flat; color: #CF1417; side: double"></a-plane>
-      </a-entity>
+      <!-- Малый чёрный квадрат -->
+      <a-plane
+        class="clickable" data-info="black-square"
+        position="0.262 -0.018 0.04"
+        width="0.085" height="0.085"
+        material="shader: flat; color: #090910; side: double"
+        animation__breathe="property: scale; from: 0.95 0.95 1; to: 1.06 1.06 1; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
+        animation__drift="property: position; from: 0.258 -0.022 0.04; to: 0.266 -0.014 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -3; to: 0 0 3; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 600; easing: easeOutCubic">
+      </a-plane>
 
     </a-entity>
   </a-scene>
@@ -641,33 +595,37 @@
         title: 'Красный квадрат',
         body: 'Малевич, 1915. Красный квадрат — «крестьянка в двух измерениях», живое в противовес чёрному. Цвет как чистая энергия, освобождённая от вещи.'
       },
-      'black-disc': {
-        title: 'Круг',
-        body: 'Одна из трёх супрематических праформ вместе с квадратом и крестом. Круг — движение, планета, полное отрицание земного притяжения.'
+      'red-bar-1': {
+        title: 'Красный прямоугольник',
+        body: 'Удлинённая красная плоскость — заявление. У супрематистов прямоугольник перестаёт быть стеной и становится самостоятельным цветовым высказыванием, плотью самого пространства.'
+      },
+      'red-disc': {
+        title: 'Красный круг',
+        body: 'Круг у супрематистов — небесное тело, чистое движение. Красный круг — это пульсация энергии, солнце нового мира, выкаченное из-под горизонта старого порядка.'
+      },
+      'black-square': {
+        title: 'Чёрный квадрат',
+        body: 'Малевич, 1915. Нулевая точка живописи. Окно в «беспредметное» — отказ от всякой иллюзии глубины. Самая известная картина русского авангарда.'
+      },
+      'black-line': {
+        title: 'Линия',
+        body: 'Прямая линия у Лисицкого — основа всякой архитектуры. Она проводит границу, задаёт ритм и направление, держит композицию как стропило держит крышу.'
+      },
+      'yellow-bar': {
+        title: 'Жёлтый блок',
+        body: 'Жёлтый у супрематистов — цвет света и энергии. Маркер границы между старым и новым порядком, индустриальный сигнал, который кричит сквозь композицию.'
+      },
+      'green-diagonal': {
+        title: 'Зелёная диагональ',
+        body: 'Диагональ взрывает статику прямоугольного мира. У Лисицкого это траектория полёта, ось космической динамики. «ПРОУН» — проект утверждения нового.'
+      },
+      'blue-diagonal': {
+        title: 'Синяя диагональ',
+        body: 'Параллельные диагонали создают ощущение движения слоёв — будто плакат расслаивается в плоскостях. Так у Лисицкого пространство перестаёт быть фоном и становится действием.'
       },
       'blue-tri': {
         title: 'Треугольник',
         body: '«Клином красным бей белых!» — плакат Лисицкого, 1919. Треугольник стал у УНОВИСа знаком удара, вектора, революционного движения.'
-      },
-      'yellow-bar': {
-        title: 'Жёлтая горизонталь',
-        body: 'Горизонталь — основание нового мира. Жёлтый у супрематистов — цвет света и энергии, маркер границы между старым и новым порядком.'
-      },
-      'red-diagonal': {
-        title: 'Диагональ',
-        body: 'Диагональ взрывает статику прямоугольного мира. Для Лисицкого это траектория полёта, ось космической динамики. «ПРОУН» — проект утверждения нового.'
-      },
-      'black-vertical': {
-        title: 'Вертикаль',
-        body: 'Минимум средств — максимум смысла. Вертикаль как ось мира, опора супрематической архитектуры. Чашник и Суетин строили из таких элементов фарфор и ткани.'
-      },
-      'small-red': {
-        title: 'Точка',
-        body: 'Элементарная частица супрематизма. По Малевичу: из точки рождается линия, из линии — плоскость, из плоскости — новая вселенная.'
-      },
-      'unovis-text': {
-        title: 'УНОВИС',
-        body: 'Утвердители Нового Искусства. Витебск, 1919–1922. Малевич, Лисицкий, Чашник, Суетин, Хидекель, Юдин. Коллектив, впервые объявивший искусство инструментом построения мира.'
       },
       'architekton': {
         title: 'Архитектон',
