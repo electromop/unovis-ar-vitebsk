@@ -239,12 +239,67 @@
       opacity: 0.85;
     }
 
+    /* ========== Витрина плакатов — 3 миниатюры в ряд ========== */
+    .posters {
+      margin-top: calc(var(--u) * 8);   /* 64px от первого экрана */
+    }
+    .posters-title {
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: calc(var(--u) * 3);  /* 24px */
+    }
+    .posters-title::before,
+    .posters-title::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--red);
+      vertical-align: middle;
+      margin: 0 calc(var(--u) * 2);
+    }
+    .posters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(var(--u) * 2);          /* 16px = gutter */
+    }
+    .poster-thumb {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: var(--white);
+      border: 1px solid var(--red);
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .poster-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 595 / 842;   /* A4 портретный */
+      object-fit: cover;
+    }
+    .poster-thumb .thumb-label {
+      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-align: center;
+      padding: calc(var(--u) * 1) 0;     /* 8px */
+      background: var(--black);
+      color: var(--white);
+    }
+
     /* ========== Карточки — отделены большим отступом от hero, текст по левому краю ========== */
     .cards {
       display: flex;
       flex-direction: column;
       gap: calc(var(--u) * 2);          /* 16px между карточками */
-      margin-top: calc(var(--u) * 8);   /* 64px от первого экрана */
+      margin-top: calc(var(--u) * 5);   /* 40px от витрины плакатов */
     }
 
     .card {
@@ -340,7 +395,7 @@
     </section>
 
     <p class="lede">
-      Наведите камеру смартфона на плакат и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
+      Наведите камеру смартфона на&nbsp;один из&nbsp;трёх плакатов и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
     </p>
 
     <a href="ar.html?go=1" class="cta" id="cta-ar">ЗАПУСТИТЬ AR</a>
@@ -348,14 +403,33 @@
 
   <!-- Ссылка на карточки — прижата к низу первого экрана (viewport bottom) -->
   <a href="#about" class="more-link">
-    Подробнее о&nbsp;проекте
+    Плакаты и&nbsp;о&nbsp;проекте
     <span class="arrow">↓</span>
   </a>
 
   </section><!-- /first-screen -->
 
+  <!-- Витрина плакатов — 3 миниатюры с подписями -->
+  <section class="posters" id="about" aria-label="Плакаты проекта">
+    <h2 class="posters-title">ТРИ ПЛАКАТА</h2>
+    <div class="posters-grid">
+      <div class="poster-thumb">
+        <img src="poster1.svg" alt="Плакат I">
+        <div class="thumb-label">ПЛАКАТ I</div>
+      </div>
+      <div class="poster-thumb">
+        <img src="poster2.svg" alt="Плакат II">
+        <div class="thumb-label">ПЛАКАТ II</div>
+      </div>
+      <div class="poster-thumb">
+        <img src="poster3.svg" alt="Плакат III">
+        <div class="thumb-label">ПЛАКАТ III</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Карточки — на втором экране, по скроллу -->
-  <section class="cards" id="about">
+  <section class="cards">
 
     <article class="card">
       <h3>МАРШРУТ НОВОГО ИСКУССТВА</h3>
