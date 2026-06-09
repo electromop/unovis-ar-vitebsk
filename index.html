@@ -169,6 +169,19 @@
       margin: 0 auto;
     }
 
+    /* Подпись под шапкой: ВИТЕБСК · 1920—1922 */
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: calc(var(--u) * 6);
+      margin-top: calc(var(--u) * 3);            /* 24px */
+      font-family: 'Onest', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
     /* ========== Описание + CTA ========== */
     .lede {
       margin-top: calc(var(--u) * 5);
@@ -220,67 +233,12 @@
       opacity: 0.85;
     }
 
-    /* ========== Витрина плакатов — 3 миниатюры в ряд ========== */
-    .posters {
-      margin-top: calc(var(--u) * 8);   /* 64px от первого экрана */
-    }
-    .posters-title {
-      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      letter-spacing: 3px;
-      color: var(--white);
-      text-align: center;
-      margin-bottom: calc(var(--u) * 3);  /* 24px */
-    }
-    .posters-title::before,
-    .posters-title::after {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 1px;
-      background: var(--red);
-      vertical-align: middle;
-      margin: 0 calc(var(--u) * 2);
-    }
-    .posters-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: calc(var(--u) * 2);          /* 16px = gutter */
-    }
-    .poster-thumb {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      background: var(--white);
-      border: 1px solid var(--red);
-      overflow: hidden;
-      text-decoration: none;
-    }
-    .poster-thumb img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 595 / 842;   /* A4 портретный */
-      object-fit: cover;
-    }
-    .poster-thumb .thumb-label {
-      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-align: center;
-      padding: calc(var(--u) * 1) 0;     /* 8px */
-      background: var(--black);
-      color: var(--white);
-    }
-
     /* ========== Карточки — отделены большим отступом от hero, текст по левому краю ========== */
     .cards {
       display: flex;
       flex-direction: column;
       gap: calc(var(--u) * 2);          /* 16px между карточками */
-      margin-top: calc(var(--u) * 5);   /* 40px от витрины плакатов */
+      margin-top: calc(var(--u) * 8);   /* 64px от первого экрана */
     }
 
     .card {
@@ -363,7 +321,11 @@
 
   <!-- Hero — занимает оставшуюся высоту первого экрана, контент по центру -->
   <section class="hero-block">
-    <img src="header.svg" class="hero-svg" alt="Наследие УНОВИСа · Витебск 1920—1922">
+    <img src="header.svg" class="hero-svg" alt="Наследие УНОВИСа">
+    <div class="meta">
+      <span>ВИТЕБСК</span>
+      <span>1920—1922</span>
+    </div>
 
     <p class="lede">
       Наведите камеру смартфона на&nbsp;один из&nbsp;трёх плакатов и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
@@ -376,33 +338,14 @@
 
   <!-- Ссылка на карточки — прижата к низу первого экрана (viewport bottom) -->
   <a href="#about" class="more-link">
-    Плакаты и&nbsp;о&nbsp;проекте
+    Подробнее о&nbsp;проекте
     <span class="arrow">↓</span>
   </a>
 
   </section><!-- /first-screen -->
 
-  <!-- Витрина плакатов — 3 миниатюры с подписями -->
-  <section class="posters" id="about" aria-label="Плакаты проекта">
-    <h2 class="posters-title">ТРИ ПЛАКАТА</h2>
-    <div class="posters-grid">
-      <div class="poster-thumb">
-        <img src="poster1.svg" alt="Плакат I">
-        <div class="thumb-label">ПЛАКАТ I</div>
-      </div>
-      <div class="poster-thumb">
-        <img src="poster2.svg" alt="Плакат II">
-        <div class="thumb-label">ПЛАКАТ II</div>
-      </div>
-      <div class="poster-thumb">
-        <img src="poster3.svg" alt="Плакат III">
-        <div class="thumb-label">ПЛАКАТ III</div>
-      </div>
-    </div>
-  </section>
-
   <!-- Карточки — на втором экране, по скроллу -->
-  <section class="cards">
+  <section class="cards" id="about">
 
     <article class="card">
       <h3>МАРШРУТ НОВОГО ИСКУССТВА</h3>
