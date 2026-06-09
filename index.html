@@ -160,30 +160,13 @@
       text-align: center;
       padding: calc(var(--u) * 4) 0;
     }
-    .hero h1 {
-      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-weight: 400;
-      font-size: 56px;
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      text-align: center;
-    }
-    .hero h1 .accent {
-      color: var(--red);
+    /* SVG-шапка — масштабируется по ширине контейнера, в вектор → не шакалится */
+    .hero-svg {
       display: block;
-      margin-top: calc(var(--u) * 1);        /* 8px — на сетке */
-    }
-
-    .meta {
-      display: flex;
-      justify-content: center;
-      gap: calc(var(--u) * 6);
-      margin-top: calc(var(--u) * 3);            /* 24px */
-      font-family: 'Onest', system-ui, sans-serif;  /* как у лида ниже */
-      font-weight: 500;                          /* Medium */
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-align: center;
+      width: 100%;
+      max-width: 360px;            /* 4 колонки сетки */
+      height: auto;
+      margin: 0 auto;
     }
 
     /* ========== Описание + CTA ========== */
@@ -199,26 +182,24 @@
       /* без max-width — занимает всю ширину контента (4 колонки) */
     }
 
+    /* SVG-кнопка — резиновая, фон/текст уже внутри SVG (не шакалится) */
     .cta {
       display: block;
       width: 100%;
-      max-width: 208px;                    /* спан колонок 2–3 + gutter (96+16+96) на 4-колонной сетке */
+      max-width: 208px;                    /* спан колонок 2–3 + gutter */
       margin: calc(var(--u) * 5) auto 0;
-      padding: calc(var(--u) * 2) 0;       /* 16px — было 24, на сетке */
-      background: var(--red);
-      color: var(--white);
-      border: none;
-      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-weight: 400;
-      font-size: 16px;                     /* было 22 */
-      letter-spacing: 3px;
-      text-align: center;
-      cursor: pointer;
       text-decoration: none;
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      cursor: pointer;
+      transition: transform 0.08s ease;
+      -webkit-tap-highlight-color: transparent;
     }
     .cta:active {
       transform: translateY(1px);
+    }
+    .cta-svg img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .more-link {
@@ -343,8 +324,7 @@
 
     /* ========== Адаптация на маленьких экранах ========== */
     @media (max-width: 360px) {
-      .hero h1 { font-size: 48px; }
-      .meta { gap: calc(var(--u) * 4); }
+      .hero-svg { max-width: 100%; }
     }
 
     /* ========== Десктоп: центрируем мобильную колонку ========== */
@@ -383,22 +363,15 @@
 
   <!-- Hero — занимает оставшуюся высоту первого экрана, контент по центру -->
   <section class="hero-block">
-    <section class="hero">
-      <h1>
-        НАСЛЕДИЕ
-        <span class="accent">УНОВИСА</span>
-      </h1>
-      <div class="meta">
-        <span>ВИТЕБСК</span>
-        <span>1920—1922</span>
-      </div>
-    </section>
+    <img src="header.svg" class="hero-svg" alt="Наследие УНОВИСа · Витебск 1920—1922">
 
     <p class="lede">
       Наведите камеру смартфона на&nbsp;один из&nbsp;трёх плакатов и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
     </p>
 
-    <a href="ar.html?go=1" class="cta" id="cta-ar">ЗАПУСТИТЬ AR</a>
+    <a href="ar.html?go=1" class="cta cta-svg" id="cta-ar" aria-label="Запустить AR">
+      <img src="button.svg" alt="">
+    </a>
   </section>
 
   <!-- Ссылка на карточки — прижата к низу первого экрана (viewport bottom) -->
