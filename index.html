@@ -188,16 +188,13 @@
       margin-top: calc(var(--u) * 5);
       font-family: 'Onest', system-ui, sans-serif;
       font-weight: 500;                 /* Medium для лида */
-      font-size: 13px;
-      line-height: 1.55;
+      /* Fluid: 10.5px на 320px-экране → 13px на 430px+, всегда 2 строки */
+      font-size: clamp(10.5px, 3.1vw, 13px);
+      line-height: 1.5;
       color: var(--white);
       opacity: 0.92;
       text-align: center;
-      text-wrap: balance;               /* красиво ломает на 2 равные строки */
-    }
-    /* На совсем узких экранах слегка уменьшаем шрифт чтобы 2 строки гарантированно влезли */
-    @media (max-width: 360px) {
-      .lede { font-size: 12px; }
+      text-wrap: balance;               /* красиво ломает строки на равные */
     }
 
     /* SVG-кнопка — резиновая, фон/текст уже внутри SVG (не шакалится) */
@@ -331,7 +328,7 @@
     </div>
 
     <p class="lede">
-      Наведите камеру на&nbsp;плакат — и&nbsp;авангард оживёт в&nbsp;городской среде.
+      Наведите камеру смартфона на&nbsp;один из&nbsp;трёх плакатов и&nbsp;увидите, как авангард оживает в&nbsp;городской среде.
     </p>
 
     <a href="ar.html?go=1" class="cta cta-svg" id="cta-ar" aria-label="Запустить AR">
