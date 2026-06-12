@@ -171,17 +171,17 @@
       margin: 0 auto;
     }
 
-    /* Подпись под шапкой: ВИТЕБСК · 1920—1922 */
+    /* Подпись под шапкой: ВИТЕБСК · 1920—1922 — растянута по краям видимого текста шапки */
     .meta {
       display: flex;
-      justify-content: center;
-      gap: calc(var(--u) * 6);
-      margin-top: calc(var(--u) * 3);            /* 24px */
+      justify-content: space-between;
+      width: 100%;
+      max-width: 224px;                          /* ≈ видимый текст шапки (86% от 260px) */
+      margin: calc(var(--u) * 3) auto 0;         /* 24px сверху, центр по горизонтали */
       font-family: 'Onest', system-ui, sans-serif;
       font-weight: 500;
       font-size: 14px;
       letter-spacing: 2px;
-      text-align: center;
     }
 
     /* ========== Описание + CTA ========== */
@@ -198,11 +198,12 @@
       text-wrap: balance;               /* красиво ломает строки на равные */
     }
 
-    /* SVG-кнопка — резиновая, фон/текст уже внутри SVG (не шакалится) */
+    /* SVG-кнопка — резиновая, фон/текст уже внутри SVG (не шакалится).
+       Ширина выровнена с видимым текстом шапки и meta (224px). */
     .cta {
       display: block;
       width: 100%;
-      max-width: 208px;                    /* спан колонок 2–3 + gutter */
+      max-width: 224px;
       margin: calc(var(--u) * 5) auto 0;
       text-decoration: none;
       cursor: pointer;
