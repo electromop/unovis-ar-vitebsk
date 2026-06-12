@@ -249,15 +249,14 @@
       border: 1px solid var(--red);
       padding: calc(var(--u) * 3);      /* 24px — на сетке */
     }
-    .card h3 {
-      font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
-      font-weight: 400;
-      font-size: 22px;                  /* было 28px — уменьшил */
-      line-height: 1.1;
-      letter-spacing: 1.5px;
-      color: var(--white);
-      margin-bottom: calc(var(--u) * 2); /* 16px — на сетке */
-      text-align: left;
+    /* SVG-заголовок карточки — в вектор, не шакалится. Высота фиксирована,
+       ширина по соотношению viewBox (текст 1 длиннее, текст 2/3 короче). */
+    .card-heading {
+      display: block;
+      height: 22px;
+      width: auto;
+      max-width: 100%;                  /* безопасно для самых узких экранов */
+      margin-bottom: calc(var(--u) * 2);
     }
     .card p {
       font-family: 'Onest', system-ui, sans-serif;
@@ -350,7 +349,7 @@
   <section class="cards" id="about">
 
     <article class="card">
-      <h3>МАРШРУТ НОВОГО ИСКУССТВА</h3>
+      <img src="heading1.svg" class="card-heading" alt="Маршрут нового искусства">
       <p>
         Это маршрут по&nbsp;Витебску, который раскрывает наследие УНОВИСа через современный дизайн, городские плакаты и&nbsp;AR-взаимодействие.
       </p>
@@ -360,7 +359,7 @@
     </article>
 
     <article class="card">
-      <h3>ЧТО ТАКОЕ УНОВИС?</h3>
+      <img src="heading2.svg" class="card-heading" alt="Что такое УНОВИС?">
       <p>
         Это объединение художников, которое было создано в&nbsp;1920 году в&nbsp;городе Витебске и&nbsp;его основал К.&nbsp;С.&nbsp;Малевич.
       </p>
@@ -370,7 +369,7 @@
     </article>
 
     <article class="card">
-      <h3>ПОЧЕМУ ЭТО ВАЖНО</h3>
+      <img src="heading3.svg" class="card-heading" alt="Почему это важно">
       <p>
         Деятельность объединения УНОВИС&nbsp;— это часть культурной идентичности Витебска.
       </p>
