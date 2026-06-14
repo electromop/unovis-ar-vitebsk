@@ -78,10 +78,19 @@
     }
     @keyframes ar-spin { to { transform: rotate(360deg); } }
     #ar-loading p {
-      font-size: 13px;
-      opacity: 0.75;
-      letter-spacing: 3px;
+      font-size: 14px;
+      opacity: 0.85;
+      letter-spacing: 0.4px;
       margin: 0;
+      text-align: center;
+      max-width: 280px;
+      padding: 0 24px;
+      line-height: 1.5;
+      transition: opacity 0.45s ease;
+      min-height: 22px;             /* фиксированный высотой блок чтобы не дёргался при смене текста */
+    }
+    #ar-loading p.fading {
+      opacity: 0;
     }
 
     /* Стартовый экран */
@@ -261,10 +270,11 @@
 <body>
 
   <!-- Loading splash — показывается сразу при заходе на страницу,
-       прячется когда MindAR прогревается (arReady) или по таймауту-страховке. -->
+       прячется когда MindAR прогревается (arReady) или по таймауту-страховке.
+       Сообщения внутри циклично сменяются (см. JS ниже). -->
   <div id="ar-loading" aria-hidden="false">
     <div class="ar-spinner"></div>
-    <p>ЗАПУСК · КАМЕРЫ</p>
+    <p id="loading-msg">Подгружаем авангард</p>
   </div>
 
   <!-- Старт -->
@@ -753,8 +763,42 @@
 
     // ===== Loading splash — управление видимостью =====
     const arLoading = document.getElementById('ar-loading');
+    const loadingMsgEl = document.getElementById('loading-msg');
+
+    // Сообщения цикла загрузки — первое уже в HTML, остальные крутятся по очереди.
+    const LOADING_MESSAGES = [
+      'Подгружаем авангард',
+      'Секунду, искусство грузится',
+      'Город готовится проявить новый слой',
+      'Витебск загружается в новом режиме',
+      'Идёт загрузка нового искусства'
+    ];
+    let loadingMsgIdx = 0;
+    let loadingMsgTimer = null;
+    function startLoadingMessages() {
+      if (loadingMsgTimer || !loadingMsgEl) return;
+      loadingMsgTimer = setInterval(() => {
+        // плавно прячем текущий
+        loadingMsgEl.classList.add('fading');
+        setTimeout(() => {
+          loadingMsgIdx = (loadingMsgIdx + 1) % LOADING_MESSAGES.length;
+          loadingMsgEl.textContent = LOADING_MESSAGES[loadingMsgIdx];
+          loadingMsgEl.classList.remove('fading');
+        }, 450);                  // должно совпадать с transition opacity в CSS
+      }, 2200);
+    }
+    function stopLoadingMessages() {
+      if (loadingMsgTimer) {
+        clearInterval(loadingMsgTimer);
+        loadingMsgTimer = null;
+      }
+    }
+    // Стартуем ротацию сразу — пока грузятся скрипты A-Frame/MindAR
+    startLoadingMessages();
+
     function hideLoading() {
       if (arLoading && !arLoading.classList.contains('hidden')) {
+        stopLoadingMessages();
         arLoading.classList.add('hidden');
         // Полностью убрать через 400ms (после анимации opacity)
         setTimeout(() => { arLoading.style.display = 'none'; }, 400);
