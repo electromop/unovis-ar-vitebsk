@@ -3,3 +3,8 @@ package.json
 package-lock.json
 compile-targets.mjs
 .DS_Store
+*.tmp.*
+*.old.*
+*.bak.*
+gen_targets.py
+_targets_block.html

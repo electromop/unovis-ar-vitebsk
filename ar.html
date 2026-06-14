@@ -328,291 +328,776 @@
     <a-entity light="type: directional; color: #ffffff; intensity: 0.8" position="1 1 1"></a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 0: ПЛАКАТ 1 (poster1.svg) — оверлей оживляет плакат     -->
-    <!-- Все фигуры наклонены на +11° (как в SVG), едва дрейфуют      -->
-    <!-- и дышат. AR-плоскости лежат поверх своих "печатных" версий.  -->
-    <!-- ============================================================ -->
-    <!-- Координаты MindAR: width=1 → X∈[-0.5;0.5]; aspect 595×842 →  -->
-    <!-- height=1.414 → Y∈[-0.707;+0.707]. Y растёт ВВЕРХ.            -->
-    <!-- Перевод из SVG: mindar_x=(svg_cx-297.64)/595.28               -->
-    <!--                 mindar_y=(420.95-svg_cy)/595.28               -->
-    <!--                 size = svg_size / 595.28                       -->
+    <!-- Цель 0: ПЛАКАТ 1 (poster1.svg)                    -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 0" id="target-1">
 
-      <!-- Большой красный прямоугольник (верх) — поверх фразы "ПРОЕКТ КЕЙС" -->
-      <a-plane
-        class="clickable" data-info="p1-red-squares"
-        position="-0.188 0.310 0.03"
-        width="0.439" height="0.229"
+      <!-- большой красный прямоугольник верх -->
+      <a-plane class="clickable" data-info="p1-bigred"
+        position="-0.1880 0.3104 0.04" width="0.4390" height="0.2292"
         rotation="0 0 -11"
         material="shader: flat; color: #CE1417; side: double"
-        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.015 1.015 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__drift="property: position; from: -0.193 0.307 0.03; to: -0.183 0.313 0.03; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Маленький чёрный квадрат верх-лево (под угловой меткой) -->
-      <a-plane
-        class="clickable" data-info="p1-black-square"
-        position="-0.277 0.445 0.03"
-        width="0.077" height="0.077"
-        rotation="0 0 -11"
-        material="shader: flat; color: #090910; side: double"
-        animation__breathe="property: scale; from: 0.95 0.95 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3600; easing: easeInOutSine"
-        animation__drift="property: position; from: -0.280 0.442 0.03; to: -0.274 0.448 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 200; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Чёрная горизонтальная полоса (тонкая, длинная) — над лестницей квадратов -->
-      <a-plane
-        class="clickable" data-info="p1-lines"
-        position="0.046 0.098 0.03"
-        width="0.677" height="0.023"
-        rotation="0 0 -11"
-        material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: 0.038 0.094 0.03; to: 0.054 0.102 0.03; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 350; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Красный квадрат 1 — первая ступень "лестницы" -->
-      <a-plane
-        class="clickable" data-info="p1-red-squares"
-        position="-0.042 -0.005 0.04"
-        width="0.143" height="0.143"
+        animation__drift="property: position; from: -0.1936 0.3073 0.04; to: -0.1824 0.3135 0.04; dir: alternate; loop: true; dur: 5626; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.965 0.965 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 3209; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 7733; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 844; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- красный квадрат лестницы 1 -->
+      <a-plane class="clickable" data-info="p1-stairs"
+        position="-0.0421 -0.0055 0.04" width="0.1428" height="0.1428"
         rotation="0 0 -11"
         material="shader: flat; color: #CE1417; side: double"
-        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine"
-        animation__drift="property: position; from: -0.048 -0.011 0.04; to: -0.036 0.001 0.04; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 500; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Красный квадрат 2 — вторая ступень -->
-      <a-plane
-        class="clickable" data-info="p1-red-squares"
-        position="0.092 -0.196 0.04"
-        width="0.143" height="0.143"
+        animation__drift="property: position; from: -0.0475 -0.0086 0.04; to: -0.0367 -0.0024 0.04; dir: alternate; loop: true; dur: 4883; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.040 1.040 1; dir: alternate; loop: true; dur: 3054; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 7798; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 901; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- красный квадрат лестницы 2 -->
+      <a-plane class="clickable" data-info="p1-stairs"
+        position="0.0918 -0.1959 0.04" width="0.1428" height="0.1428"
         rotation="0 0 -11"
         material="shader: flat; color: #CE1417; side: double"
-        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3600; delay: 400; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.086 -0.202 0.04; to: 0.098 -0.190 0.04; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 700; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Красный квадрат 3 — третья ступень -->
-      <a-plane
-        class="clickable" data-info="p1-red-squares"
-        position="0.228 -0.393 0.04"
-        width="0.143" height="0.143"
+        animation__drift="property: position; from: 0.0859 -0.2017 0.04; to: 0.0977 -0.1901 0.04; dir: alternate; loop: true; dur: 6218; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.042 1.042 1; dir: alternate; loop: true; dur: 4657; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 5526; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1188; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- красный квадрат лестницы 3 -->
+      <a-plane class="clickable" data-info="p1-stairs"
+        position="0.2281 -0.3931 0.04" width="0.1428" height="0.1428"
         rotation="0 0 -11"
         material="shader: flat; color: #CE1417; side: double"
-        animation__breathe="property: scale; from: 0.96 0.96 1; to: 1.05 1.05 1; dir: alternate; loop: true; dur: 3800; delay: 800; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.222 -0.399 0.04; to: 0.234 -0.387 0.04; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 -14; to: 0 0 -8; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; delay: 900; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Чёрные полосы вокруг лестницы — двойная пара слева, двойная пара справа -->
-      <a-plane
-        class="clickable" data-info="p1-lines"
-        position="-0.346 -0.088 0.02"
-        width="0.698" height="0.023"
+        animation__drift="property: position; from: 0.2219 -0.3989 0.04; to: 0.2343 -0.3873 0.04; dir: alternate; loop: true; dur: 5893; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.966 0.966 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 4563; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 6878; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 852; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- чёрная полоса -->
+      <a-plane class="clickable" data-info="p1-stripes"
+        position="0.0463 0.0982 0.03" width="0.6767" height="0.0234"
         rotation="0 0 -11"
         material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: -0.352 -0.090 0.02; to: -0.340 -0.086 0.02; dir: alternate; loop: true; dur: 5400; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1100; easing: easeOutCubic">
-      </a-plane>
-      <a-plane
-        class="clickable" data-info="p1-lines"
-        position="-0.355 -0.133 0.02"
-        width="0.698" height="0.023"
+        animation__drift="property: position; from: 0.0429 0.0948 0.03; to: 0.0497 0.1016 0.03; dir: alternate; loop: true; dur: 5908; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.046 1.046 1; dir: alternate; loop: true; dur: 4494; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 7381; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1074; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- чёрная полоса -->
+      <a-plane class="clickable" data-info="p1-stripes"
+        position="-0.3455 -0.0880 0.03" width="0.6985" height="0.0234"
         rotation="0 0 -11"
         material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: -0.361 -0.135 0.02; to: -0.349 -0.131 0.02; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1300; easing: easeOutCubic">
-      </a-plane>
-      <a-plane
-        class="clickable" data-info="p1-lines"
-        position="-0.216 -0.287 0.02"
-        width="0.698" height="0.023"
+        animation__drift="property: position; from: -0.3490 -0.0947 0.03; to: -0.3420 -0.0813 0.03; dir: alternate; loop: true; dur: 4822; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.971 0.971 1; to: 1.047 1.047 1; dir: alternate; loop: true; dur: 4266; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 6981; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1095; delay: 400; easing: easeOutCubic"></a-plane>
+      <!-- чёрная полоса -->
+      <a-plane class="clickable" data-info="p1-stripes"
+        position="-0.3544 -0.1328 0.03" width="0.6985" height="0.0234"
         rotation="0 0 -11"
         material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: -0.222 -0.289 0.02; to: -0.210 -0.285 0.02; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1500; easing: easeOutCubic">
-      </a-plane>
-      <a-plane
-        class="clickable" data-info="p1-lines"
-        position="-0.223 -0.332 0.02"
-        width="0.698" height="0.023"
+        animation__drift="property: position; from: -0.3582 -0.1361 0.03; to: -0.3506 -0.1295 0.03; dir: alternate; loop: true; dur: 5433; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.975 0.975 1; to: 1.050 1.050 1; dir: alternate; loop: true; dur: 4751; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 6453; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 851; delay: 480; easing: easeOutCubic"></a-plane>
+      <!-- чёрная полоса -->
+      <a-plane class="clickable" data-info="p1-stripes"
+        position="-0.2155 -0.2870 0.03" width="0.6985" height="0.0234"
         rotation="0 0 -11"
         material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: -0.229 -0.334 0.02; to: -0.217 -0.330 0.02; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.98 1 1; to: 1.02 1 1; dir: alternate; loop: true; dur: 5200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 1700; easing: easeOutCubic">
-      </a-plane>
-
+        animation__drift="property: position; from: -0.2200 -0.2918 0.03; to: -0.2110 -0.2822 0.03; dir: alternate; loop: true; dur: 5994; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.037 1.037 1; dir: alternate; loop: true; dur: 4372; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 6593; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1159; delay: 560; easing: easeOutCubic"></a-plane>
+      <!-- чёрная полоса -->
+      <a-plane class="clickable" data-info="p1-stripes"
+        position="-0.2227 -0.3322 0.03" width="0.6985" height="0.0234"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2294 -0.3378 0.03; to: -0.2160 -0.3266 0.03; dir: alternate; loop: true; dur: 6995; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.973 0.973 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 3501; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 6169; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1036; delay: 640; easing: easeOutCubic"></a-plane>
+      <!-- малый чёрный квадрат верх-лево -->
+      <a-plane class="clickable" data-info="p1-blacksq"
+        position="-0.2763 0.4453 0.03" width="0.0774" height="0.0774"
+        rotation="0 0 -11"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2808 0.4383 0.03; to: -0.2718 0.4523 0.03; dir: alternate; loop: true; dur: 6781; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 4573; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -12.50; to: 0 0 -9.50; dir: alternate; loop: true; dur: 5729; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 917; delay: 720; easing: easeOutCubic"></a-plane>
     </a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 1: ПЛАКАТ 2 (poster2.svg) — оверлей                    -->
-    <!-- Чёрный квадрат + жёлтые блоки + диагонали (зелёная, синяя)  -->
-    <!-- + большой красный круг внизу-слева                           -->
+    <!-- Цель 1: ПЛАКАТ 2 (poster2.svg)                    -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 1" id="target-2">
 
-      <!-- Большой чёрный квадрат справа-сверху (главный блок плаката) -->
-      <a-plane
-        class="clickable" data-info="p2-black-square"
-        position="0.243 0.154 0.03"
-        width="0.390" height="0.390"
+      <!-- большой чёрный квадрат -->
+      <a-plane class="clickable" data-info="p2-blacksq"
+        position="0.2428 0.1540 0.03" width="0.3904" height="0.3904"
+        rotation="0 0 0"
         material="shader: flat; color: #090910; side: double"
-        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.015 1.015 1; dir: alternate; loop: true; dur: 4800; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.239 0.151 0.03; to: 0.247 0.157 0.03; dir: alternate; loop: true; dur: 6200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Жёлтый блок снизу (горизонтальный) — без текста, некликабельный -->
-      <a-plane
-        position="0.093 -0.456 0.03"
-        width="0.296" height="0.108"
+        animation__drift="property: position; from: 0.2365 0.1478 0.03; to: 0.2491 0.1602 0.03; dir: alternate; loop: true; dur: 6143; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.965 0.965 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 4931; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7823; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1167; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- жёлтый горизонтальный блок снизу -->
+      <a-plane class="clickable" data-info="p2-yellow"
+        position="0.0934 -0.4566 0.03" width="0.2959" height="0.1077"
+        rotation="0 0 0"
         material="shader: flat; color: #ECC105; side: double"
-        animation__breathe="property: scale; from: 0.98 0.98 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.088 -0.459 0.03; to: 0.098 -0.453 0.03; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 300; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Жёлтый вертикальный блок верх-середина — без текста, некликабельный -->
-      <a-plane
-        position="-0.041 0.565 0.03"
-        width="0.091" height="0.284"
+        animation__drift="property: position; from: 0.0891 -0.4622 0.03; to: 0.0977 -0.4510 0.03; dir: alternate; loop: true; dur: 6120; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.978 0.978 1; to: 1.043 1.043 1; dir: alternate; loop: true; dur: 3292; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6584; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 871; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- жёлтый вертикальный сверху -->
+      <a-plane class="clickable" data-info="p2-yellow"
+        position="-0.0412 0.5651 0.03" width="0.2842" height="0.0911"
+        rotation="0 0 -90"
         material="shader: flat; color: #ECC105; side: double"
-        animation__breathe="property: scale; from: 0.98 0.98 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 4400; delay: 600; easing: easeInOutSine"
-        animation__drift="property: position; from: -0.044 0.562 0.03; to: -0.038 0.568 0.03; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1000; delay: 500; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Жёлтый малый блок верх-право — без текста, некликабельный -->
-      <a-plane
-        position="0.429 0.644 0.03"
-        width="0.142" height="0.127"
+        animation__drift="property: position; from: -0.0452 0.5599 0.03; to: -0.0372 0.5703 0.03; dir: alternate; loop: true; dur: 5576; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.975 0.975 1; to: 1.039 1.039 1; dir: alternate; loop: true; dur: 4195; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 7135; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 985; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- жёлтый малый верх-право -->
+      <a-plane class="clickable" data-info="p2-yellow"
+        position="0.4292 0.6436 0.03" width="0.1271" height="0.1417"
+        rotation="0 0 -90"
         material="shader: flat; color: #ECC105; side: double"
-        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 4000; delay: 900; easing: easeInOutSine"
-        animation__drift="property: position; from: 0.425 0.641 0.03; to: 0.433 0.647 0.03; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 700; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Зелёная диагональ (наклон +39°) -->
-      <a-plane
-        class="clickable" data-info="p2-lines"
-        position="-0.189 -0.027 0.04"
-        width="0.415" height="0.032"
-        rotation="0 0 39"
+        animation__drift="property: position; from: 0.4253 0.6366 0.03; to: 0.4331 0.6506 0.03; dir: alternate; loop: true; dur: 6587; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.970 0.970 1; to: 1.045 1.045 1; dir: alternate; loop: true; dur: 4763; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 5949; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 878; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- красная плашка верх-лево -->
+      <a-plane class="clickable" data-info="p2-redshape"
+        position="-0.2647 0.6223 0.04" width="0.3559" height="0.1697"
+        rotation="0 0 0"
+        material="shader: flat; color: #CD161A; side: double"
+        animation__drift="property: position; from: -0.2702 0.6161 0.04; to: -0.2592 0.6285 0.04; dir: alternate; loop: true; dur: 6229; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4220; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7417; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1070; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- зелёная диагональ -->
+      <a-plane class="clickable" data-info="p2-greenline"
+        position="-0.1895 -0.0269 0.04" width="0.4152" height="0.0318"
+        rotation="0 0 38.97"
         material="shader: flat; color: #0D803C; side: double"
-        animation__drift="property: position; from: -0.193 -0.030 0.04; to: -0.185 -0.024 0.04; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 900; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Синяя диагональ — параллельна зелёной, чуть ниже-левее -->
-      <a-plane
-        class="clickable" data-info="p2-lines"
-        position="-0.220 -0.093 0.04"
-        width="0.415" height="0.032"
-        rotation="0 0 39"
+        animation__drift="property: position; from: -0.1935 -0.0321 0.04; to: -0.1855 -0.0217 0.04; dir: alternate; loop: true; dur: 4547; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.032 1.032 1; dir: alternate; loop: true; dur: 4812; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37.47; to: 0 0 40.47; dir: alternate; loop: true; dur: 7699; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1184; delay: 400; easing: easeOutCubic"></a-plane>
+      <!-- синяя диагональ -->
+      <a-plane class="clickable" data-info="p2-blueline"
+        position="-0.2204 -0.0929 0.04" width="0.4152" height="0.0318"
+        rotation="0 0 38.97"
         material="shader: flat; color: #2D2C7F; side: double"
-        animation__drift="property: position; from: -0.224 -0.096 0.04; to: -0.216 -0.090 0.04; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 37; to: 0 0 41; dir: alternate; loop: true; dur: 7000; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 1100; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Большой красный круг низ-лево (центр частично за пределами плаката) -->
-      <a-circle
-        class="clickable" data-info="p2-red-shape"
-        position="-0.464 -0.600 0.03"
-        radius="0.303"
+        animation__drift="property: position; from: -0.2245 -0.0985 0.04; to: -0.2163 -0.0873 0.04; dir: alternate; loop: true; dur: 4956; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.966 0.966 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 3006; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37.47; to: 0 0 40.47; dir: alternate; loop: true; dur: 6578; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1056; delay: 480; easing: easeOutCubic"></a-plane>
+      <!-- красная плашка низ-право -->
+      <a-plane class="clickable" data-info="p2-redshape"
+        position="0.3656 -0.3658 0.04" width="0.5109" height="0.2737"
+        rotation="0 0 0"
         material="shader: flat; color: #CE1417; side: double"
-        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.02 1.02 1; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine"
-        animation__drift="property: position; from: -0.470 -0.604 0.03; to: -0.458 -0.596 0.03; dir: alternate; loop: true; dur: 6400; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; delay: 1300; easing: easeOutCubic">
-      </a-circle>
-
+        animation__drift="property: position; from: 0.3596 -0.3708 0.04; to: 0.3716 -0.3608 0.04; dir: alternate; loop: true; dur: 4935; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.977 0.977 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 4308; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7579; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1111; delay: 560; easing: easeOutCubic"></a-plane>
+      <!-- большой красный круг -->
+      <a-circle class="clickable" data-info="p2-redcircle"
+        position="-0.4633 -0.6005 0.02" radius="0.3033"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.4671 -0.6050 0.02; to: -0.4595 -0.5960 0.02; dir: alternate; loop: true; dur: 5161; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.971 0.971 1; to: 1.046 1.046 1; dir: alternate; loop: true; dur: 4086; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1106; delay: 640; easing: easeOutCubic"></a-circle>
     </a-entity>
 
     <!-- ============================================================ -->
-    <!-- Цель 2: ПЛАКАТ 3 (poster3.svg) — фигура Шагала "шагает"     -->
-    <!-- Голова (жёлтый круг) покачивается, ножка раскачивается      -->
-    <!-- Диагонали и малый квадрат — фон (не кликабельны)            -->
+    <!-- Цель 2: ПЛАКАТ 3 (poster3.svg)                    -->
     <!-- ============================================================ -->
     <a-entity mindar-image-target="targetIndex: 2" id="target-3">
 
-      <!-- Зелёная диагональ (верхняя) — фон -->
-      <a-plane
-        position="0.104 0.330 0.02"
-        width="0.503" height="0.046"
-        rotation="0 0 39"
-        material="shader: flat; color: #0D803C; side: double"
-        animation__drift="property: position; from: 0.100 0.327 0.02; to: 0.108 0.333 0.02; dir: alternate; loop: true; dur: 5600; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Синяя диагональ (нижняя) — фон -->
-      <a-plane
-        position="0.070 0.242 0.02"
-        width="0.513" height="0.046"
-        rotation="0 0 39"
-        material="shader: flat; color: #2D2C7F; side: double"
-        animation__drift="property: position; from: 0.066 0.239 0.02; to: 0.074 0.245 0.02; dir: alternate; loop: true; dur: 5800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 300; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- Малый чёрный квадрат — фон -->
-      <a-plane
-        position="0.262 -0.018 0.02"
-        width="0.085" height="0.085"
-        material="shader: flat; color: #090910; side: double"
-        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 600; easing: easeOutCubic">
-      </a-plane>
-
-      <!-- ===== Шагающий Шагал ===== -->
-      <!-- Голова (жёлтый круг), центр (415, 395) в SVG → (0.197, 0.044) в MindAR.
-           Покачивается вверх-вниз в такт шагу. -->
-      <a-circle
-        class="clickable" data-info="p3-head"
-        position="0.197 0.044 0.06"
-        radius="0.067"
+      <!-- фигура Шагала (звезда) -->
+      <a-plane class="clickable" data-info="p3-chagall"
+        position="0.1482 -0.3014 0.03" width="0.3575" height="0.4270"
+        rotation="0 0 0"
         material="shader: flat; color: #ECC105; side: double"
-        animation__bob="property: position; from: 0.197 0.038 0.06; to: 0.197 0.052 0.06; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.97 0.97 1; to: 1.03 1.03 1; dir: alternate; loop: true; dur: 1800; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; easing: easeOutCubic">
-      </a-circle>
-
-      <!-- Ножка (чёрная "штанина"-трапеция).
-           Полигон в SVG: (230.85,742.36) (230.85,483.56) (143.6,483.56) (112.81,742.36)
-           Центр ≈ (179, 612.5), высота 258, ширина ≈ 103.
-           MindAR: x=-0.199, y=-0.322, w=0.173, h=0.434.
-           Pivot для свинга задаётся через transformOrigin родителя.
-           Чтобы нога качалась "от бедра" (верх), вкладываю plane в entity
-           и смещаю plane вниз на h/2 — точка вращения окажется наверху. -->
-      <a-entity
-        position="-0.199 -0.105 0.05"
-        animation__step="property: rotation; from: 0 0 -10; to: 0 0 10; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 400; easing: easeOutCubic">
-        <a-plane
-          class="clickable" data-info="p3-leg"
-          position="0 -0.217 0"
-          width="0.173" height="0.434"
-          material="shader: flat; color: #090910; side: double">
-        </a-plane>
-      </a-entity>
-
+        animation__drift="property: position; from: 0.1439 -0.3045 0.03; to: 0.1525 -0.2983 0.03; dir: alternate; loop: true; dur: 5986; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.978 0.978 1; to: 1.047 1.047 1; dir: alternate; loop: true; dur: 3629; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6480; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 829; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- малый чёрный квадрат -->
+      <a-plane class="clickable" data-info="p3-blacksq"
+        position="0.2620 -0.0178 0.04" width="0.0851" height="0.0851"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.2580 -0.0231 0.04; to: 0.2660 -0.0125 0.04; dir: alternate; loop: true; dur: 4822; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.962 0.962 1; to: 1.040 1.040 1; dir: alternate; loop: true; dur: 3141; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7681; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1192; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- красная плашка-дом -->
+      <a-plane class="clickable" data-info="p3-house"
+        position="-0.2113 -0.3226 0.03" width="0.1983" height="0.4348"
+        rotation="0 0 0"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.2148 -0.3282 0.03; to: -0.2078 -0.3170 0.03; dir: alternate; loop: true; dur: 6751; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 4242; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7233; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 908; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- чёрный диск-луна -->
+      <a-circle class="clickable" data-info="p3-moon"
+        position="-0.1280 0.1416 0.04" radius="0.1920"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.1347 0.1356 0.04; to: -0.1213 0.1476 0.04; dir: alternate; loop: true; dur: 5323; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4375; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1024; delay: 240; easing: easeOutCubic"></a-circle>
     </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 3: ПЛАКАТ 4 (poster4.svg)                    -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 3" id="target-4">
+
+      <!-- большой чёрный квадрат -->
+      <a-plane class="clickable" data-info="p4-bigsq"
+        position="0.0734 -0.3466 0.03" width="0.5078" height="0.5078"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0668 -0.3514 0.03; to: 0.0800 -0.3418 0.03; dir: alternate; loop: true; dur: 5515; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.037 1.037 1; dir: alternate; loop: true; dur: 4204; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7768; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 917; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- наклонный чёрный квадрат Малевича -->
+      <a-plane class="clickable" data-info="p4-malevich"
+        position="-0.1090 0.3248 0.04" width="0.3843" height="0.3843"
+        rotation="0 0 16.41"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.1144 0.3218 0.04; to: -0.1036 0.3278 0.04; dir: alternate; loop: true; dur: 4741; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.965 0.965 1; to: 1.048 1.048 1; dir: alternate; loop: true; dur: 4760; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 14.91; to: 0 0 17.91; dir: alternate; loop: true; dur: 6853; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 836; delay: 80; easing: easeOutCubic"></a-plane>
+    </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 4: ПЛАКАТ 5 (poster5.svg)                    -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 4" id="target-5">
+
+      <!-- горизонталь чёрная -->
+      <a-plane class="clickable" data-info="p5-cross"
+        position="0.0011 -0.2109 0.03" width="0.5698" height="0.0362"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.0040 -0.2150 0.03; to: 0.0062 -0.2068 0.03; dir: alternate; loop: true; dur: 6488; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 4915; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7838; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1095; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- вертикаль чёрная лево -->
+      <a-plane class="clickable" data-info="p5-cross"
+        position="-0.3019 0.0920 0.03" width="0.5698" height="0.0362"
+        rotation="0 0 90"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.3068 0.0859 0.03; to: -0.2970 0.0981 0.03; dir: alternate; loop: true; dur: 6167; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.032 1.032 1; dir: alternate; loop: true; dur: 3882; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 6951; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1016; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- чёрная диагональ -->
+      <a-plane class="clickable" data-info="p5-blackdiag"
+        position="0.2256 0.3378 0.04" width="0.4401" height="0.0332"
+        rotation="0 0 38.97"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.2210 0.3313 0.04; to: 0.2302 0.3443 0.04; dir: alternate; loop: true; dur: 4721; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.973 0.973 1; to: 1.050 1.050 1; dir: alternate; loop: true; dur: 3201; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37.47; to: 0 0 40.47; dir: alternate; loop: true; dur: 5748; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1006; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- красная диагональ -->
+      <a-plane class="clickable" data-info="p5-reddiag"
+        position="0.1952 0.2703 0.04" width="0.4450" height="0.0332"
+        rotation="0 0 38.97"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.1893 0.2641 0.04; to: 0.2011 0.2765 0.04; dir: alternate; loop: true; dur: 4947; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.965 0.965 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 3918; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 37.47; to: 0 0 40.47; dir: alternate; loop: true; dur: 6074; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1016; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- горизонталь чёрная верх -->
+      <a-plane class="clickable" data-info="p5-cross"
+        position="0.0044 0.3887 0.03" width="0.5698" height="0.0362"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0007 0.3838 0.03; to: 0.0081 0.3936 0.03; dir: alternate; loop: true; dur: 4808; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.969 0.969 1; to: 1.047 1.047 1; dir: alternate; loop: true; dur: 4127; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 5901; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 825; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- вертикаль чёрная право -->
+      <a-plane class="clickable" data-info="p5-cross"
+        position="0.3040 0.0920 0.03" width="0.5698" height="0.0362"
+        rotation="0 0 90"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.2984 0.0868 0.03; to: 0.3096 0.0972 0.03; dir: alternate; loop: true; dur: 4560; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.979 0.979 1; to: 1.049 1.049 1; dir: alternate; loop: true; dur: 4738; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 6468; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 885; delay: 400; easing: easeOutCubic"></a-plane>
+    </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 5: ПЛАКАТ 6 (poster6.svg)                    -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 5" id="target-6">
+
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="-0.0818 0.3830 0.03" width="0.4473" height="0.0346"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.0864 0.3781 0.03; to: -0.0772 0.3879 0.03; dir: alternate; loop: true; dur: 6142; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.978 0.978 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 3004; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 7099; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 935; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="-0.0205 0.3829 0.03" width="0.4473" height="0.0346"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.0272 0.3768 0.03; to: -0.0138 0.3890 0.03; dir: alternate; loop: true; dur: 5668; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.968 0.968 1; to: 1.049 1.049 1; dir: alternate; loop: true; dur: 4604; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 7776; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1138; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="0.0408 0.3830 0.03" width="0.4473" height="0.0346"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.0349 0.3794 0.03; to: 0.0467 0.3866 0.03; dir: alternate; loop: true; dur: 5715; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.031 1.031 1; dir: alternate; loop: true; dur: 4506; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 7720; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 831; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="0.1021 0.3829 0.03" width="0.4473" height="0.0346"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.0961 0.3797 0.03; to: 0.1081 0.3861 0.03; dir: alternate; loop: true; dur: 6892; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.970 0.970 1; to: 1.048 1.048 1; dir: alternate; loop: true; dur: 4087; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 6144; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 829; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="0.1633 0.3830 0.03" width="0.4473" height="0.0346"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.1565 0.3797 0.03; to: 0.1701 0.3863 0.03; dir: alternate; loop: true; dur: 5261; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.961 0.961 1; to: 1.031 1.031 1; dir: alternate; loop: true; dur: 4765; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 6463; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1006; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- красная полоса -->
+      <a-plane class="clickable" data-info="p6-redstripes"
+        position="0.2241 0.3897 0.03" width="0.4338" height="0.0336"
+        rotation="0 0 90"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.2206 0.3831 0.03; to: 0.2276 0.3963 0.03; dir: alternate; loop: true; dur: 5508; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.031 1.031 1; dir: alternate; loop: true; dur: 3167; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 7217; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1136; delay: 400; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="0.1095 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: 0.1042 -0.3760 0.03; to: 0.1148 -0.3658 0.03; dir: alternate; loop: true; dur: 5568; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.044 1.044 1; dir: alternate; loop: true; dur: 3488; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 6587; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1002; delay: 480; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="0.0438 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: 0.0403 -0.3765 0.03; to: 0.0473 -0.3653 0.03; dir: alternate; loop: true; dur: 6372; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.966 0.966 1; to: 1.045 1.045 1; dir: alternate; loop: true; dur: 3148; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 5538; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1034; delay: 560; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="-0.0218 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: -0.0273 -0.3762 0.03; to: -0.0163 -0.3656 0.03; dir: alternate; loop: true; dur: 4909; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.961 0.961 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 3543; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 6042; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 978; delay: 640; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="-0.0875 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: -0.0940 -0.3774 0.03; to: -0.0810 -0.3644 0.03; dir: alternate; loop: true; dur: 6013; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.966 0.966 1; to: 1.039 1.039 1; dir: alternate; loop: true; dur: 4112; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 6739; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1113; delay: 720; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="-0.1532 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: -0.1601 -0.3771 0.03; to: -0.1463 -0.3647 0.03; dir: alternate; loop: true; dur: 6666; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.960 0.960 1; to: 1.046 1.046 1; dir: alternate; loop: true; dur: 3613; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 5924; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 868; delay: 800; easing: easeOutCubic"></a-plane>
+      <!-- синяя полоса -->
+      <a-plane class="clickable" data-info="p6-bluestripes"
+        position="-0.2188 -0.3709 0.03" width="0.4592" height="0.0346"
+        rotation="0 0 -90"
+        material="shader: flat; color: #2C2F7C; side: double"
+        animation__drift="property: position; from: -0.2229 -0.3775 0.03; to: -0.2147 -0.3643 0.03; dir: alternate; loop: true; dur: 6766; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 3431; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 6904; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 904; delay: 880; easing: easeOutCubic"></a-plane>
+      <!-- жёлтая фигура центр -->
+      <a-plane class="clickable" data-info="p6-yellow"
+        position="-0.0991 0.0601 0.05" width="0.7972" height="0.7537"
+        rotation="0 0 0"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: -0.1048 0.0537 0.05; to: -0.0934 0.0665 0.05; dir: alternate; loop: true; dur: 6570; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.970 0.970 1; to: 1.048 1.048 1; dir: alternate; loop: true; dur: 4732; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 5708; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 847; delay: 960; easing: easeOutCubic"></a-plane>
+    </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 6: ПЛАКАТ 7 (poster7.svg)                    -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 6" id="target-7">
+
+      <!-- большая чёрная шляпа -->
+      <a-plane class="clickable" data-info="p7-hat"
+        position="0.0082 0.3652 0.03" width="0.5239" height="0.1626"
+        rotation="0 0 3.08"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0027 0.3589 0.03; to: 0.0137 0.3715 0.03; dir: alternate; loop: true; dur: 4680; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.960 0.960 1; to: 1.045 1.045 1; dir: alternate; loop: true; dur: 4304; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 1.58; to: 0 0 4.58; dir: alternate; loop: true; dur: 6572; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 882; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- красный угол верх-лево -->
+      <a-plane class="clickable" data-info="p7-tile"
+        position="-0.2220 0.4534 0.04" width="0.0852" height="0.0729"
+        rotation="0 0 93.08"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.2280 0.4482 0.04; to: -0.2160 0.4586 0.04; dir: alternate; loop: true; dur: 6251; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.971 0.971 1; to: 1.032 1.032 1; dir: alternate; loop: true; dur: 4935; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 91.58; to: 0 0 94.58; dir: alternate; loop: true; dur: 6110; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1079; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- зелёный угол центр-верх -->
+      <a-plane class="clickable" data-info="p7-tile"
+        position="-0.0071 0.4562 0.04" width="0.0798" height="0.0525"
+        rotation="0 0 93.08"
+        material="shader: flat; color: #0D803C; side: double"
+        animation__drift="property: position; from: -0.0102 0.4517 0.04; to: -0.0040 0.4607 0.04; dir: alternate; loop: true; dur: 6763; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 3631; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 91.58; to: 0 0 94.58; dir: alternate; loop: true; dur: 6993; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 820; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- красный угол верх-право -->
+      <a-plane class="clickable" data-info="p7-tile"
+        position="0.2161 0.4962 0.04" width="0.1235" height="0.0953"
+        rotation="0 0 93.08"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.2095 0.4924 0.04; to: 0.2227 0.5000 0.04; dir: alternate; loop: true; dur: 5522; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.973 0.973 1; to: 1.037 1.037 1; dir: alternate; loop: true; dur: 4146; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 91.58; to: 0 0 94.58; dir: alternate; loop: true; dur: 7164; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1117; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- нос (малый чёрный квадрат) -->
+      <a-plane class="clickable" data-info="p7-nose"
+        position="0.0734 0.2253 0.05" width="0.0587" height="0.0587"
+        rotation="0 0 -8.52"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0674 0.2186 0.05; to: 0.0794 0.2320 0.05; dir: alternate; loop: true; dur: 5469; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.977 0.977 1; to: 1.050 1.050 1; dir: alternate; loop: true; dur: 4660; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -10.02; to: 0 0 -7.02; dir: alternate; loop: true; dur: 6225; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1011; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- рот лево -->
+      <a-plane class="clickable" data-info="p7-mouth"
+        position="-0.1384 0.2295 0.04" width="0.2179" height="0.0256"
+        rotation="0 0 -180"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.1415 0.2236 0.04; to: -0.1353 0.2354 0.04; dir: alternate; loop: true; dur: 5860; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.976 0.976 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4371; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -181.50; to: 0 0 -178.50; dir: alternate; loop: true; dur: 6516; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 936; delay: 400; easing: easeOutCubic"></a-plane>
+      <!-- рот право -->
+      <a-plane class="clickable" data-info="p7-mouth"
+        position="0.1587 0.2294 0.04" width="0.2263" height="0.0256"
+        rotation="0 0 171.48"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.1551 0.2236 0.04; to: 0.1623 0.2352 0.04; dir: alternate; loop: true; dur: 6066; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.977 0.977 1; to: 1.047 1.047 1; dir: alternate; loop: true; dur: 3455; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 169.98; to: 0 0 172.98; dir: alternate; loop: true; dur: 6317; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1035; delay: 480; easing: easeOutCubic"></a-plane>
+      <!-- малый штрих -->
+      <a-plane class="clickable" data-info="p7-mouth"
+        position="-0.2362 0.2060 0.04" width="0.0726" height="0.0224"
+        rotation="0 0 90"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2406 0.1997 0.04; to: -0.2318 0.2123 0.04; dir: alternate; loop: true; dur: 5432; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.043 1.043 1; dir: alternate; loop: true; dur: 3816; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 6844; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 942; delay: 560; easing: easeOutCubic"></a-plane>
+      <!-- жёлтая бровь лево -->
+      <a-plane class="clickable" data-info="p7-brows"
+        position="-0.1055 0.1403 0.04" width="0.1520" height="0.0256"
+        rotation="0 0 -180"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: -0.1120 0.1334 0.04; to: -0.0990 0.1472 0.04; dir: alternate; loop: true; dur: 5643; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.967 0.967 1; to: 1.040 1.040 1; dir: alternate; loop: true; dur: 4391; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -181.50; to: 0 0 -178.50; dir: alternate; loop: true; dur: 7696; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 969; delay: 640; easing: easeOutCubic"></a-plane>
+      <!-- жёлтая бровь право -->
+      <a-plane class="clickable" data-info="p7-brows"
+        position="0.1906 0.1403 0.04" width="0.1579" height="0.0256"
+        rotation="0 0 -180"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: 0.1838 0.1368 0.04; to: 0.1974 0.1438 0.04; dir: alternate; loop: true; dur: 5569; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.049 1.049 1; dir: alternate; loop: true; dur: 3543; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -181.50; to: 0 0 -178.50; dir: alternate; loop: true; dur: 5656; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 855; delay: 720; easing: easeOutCubic"></a-plane>
+      <!-- глаз лево -->
+      <a-circle class="clickable" data-info="p7-eyes"
+        position="-0.2074 0.1403 0.05" radius="0.0156"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2128 0.1359 0.05; to: -0.2020 0.1447 0.05; dir: alternate; loop: true; dur: 5784; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.969 0.969 1; to: 1.050 1.050 1; dir: alternate; loop: true; dur: 3236; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1095; delay: 800; easing: easeOutCubic"></a-circle>
+      <!-- глаз право -->
+      <a-circle class="clickable" data-info="p7-eyes"
+        position="0.0832 0.1403 0.05" radius="0.0156"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0794 0.1371 0.05; to: 0.0870 0.1435 0.05; dir: alternate; loop: true; dur: 6286; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.960 0.960 1; to: 1.049 1.049 1; dir: alternate; loop: true; dur: 4102; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 986; delay: 880; easing: easeOutCubic"></a-circle>
+      <!-- вертикальный стержень -->
+      <a-plane class="clickable" data-info="p7-bar"
+        position="0.0076 0.0293 0.03" width="0.4260" height="0.0256"
+        rotation="0 0 -90"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0029 0.0225 0.03; to: 0.0123 0.0361 0.03; dir: alternate; loop: true; dur: 5852; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.043 1.043 1; dir: alternate; loop: true; dur: 3255; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 6730; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1059; delay: 960; easing: easeOutCubic"></a-plane>
+      <!-- горизонтальный стержень -->
+      <a-plane class="clickable" data-info="p7-bar"
+        position="0.0453 -0.1837 0.04" width="0.1010" height="0.0256"
+        rotation="0 0 -180"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.0411 -0.1883 0.04; to: 0.0495 -0.1791 0.04; dir: alternate; loop: true; dur: 6148; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 3392; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -181.50; to: 0 0 -178.50; dir: alternate; loop: true; dur: 7222; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1140; delay: 1040; easing: easeOutCubic"></a-plane>
+      <!-- красное тело-круг -->
+      <a-circle class="clickable" data-info="p7-body"
+        position="0.0127 -0.1837 0.03" radius="0.1271"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.0059 -0.1894 0.03; to: 0.0195 -0.1780 0.03; dir: alternate; loop: true; dur: 5212; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 4122; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 955; delay: 1120; easing: easeOutCubic"></a-circle>
+    </a-entity>
+
+    <!-- ============================================================ -->
+    <!-- Цель 7: ПЛАКАТ 8 (poster8.svg)                    -->
+    <!-- ============================================================ -->
+    <a-entity mindar-image-target="targetIndex: 7" id="target-8">
+
+      <!-- большая чёрная башня -->
+      <a-plane class="clickable" data-info="p8-tower"
+        position="-0.0166 0.1119 0.03" width="0.2067" height="0.4231"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.0207 0.1072 0.03; to: -0.0125 0.1166 0.03; dir: alternate; loop: true; dur: 6875; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.972 0.972 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 3904; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7311; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1145; delay: 0; easing: easeOutCubic"></a-plane>
+      <!-- красный прямоугольник лево -->
+      <a-plane class="clickable" data-info="p8-bigred"
+        position="-0.1580 0.0422 0.04" width="0.2483" height="0.2836"
+        rotation="0 0 0"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.1619 0.0373 0.04; to: -0.1541 0.0471 0.04; dir: alternate; loop: true; dur: 5195; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.973 0.973 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 4359; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6872; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 847; delay: 80; easing: easeOutCubic"></a-plane>
+      <!-- чёрный прямоугольник -->
+      <a-plane class="clickable" data-info="p8-blackbox"
+        position="-0.1953 0.0038 0.05" width="0.2483" height="0.2069"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2016 -0.0022 0.05; to: -0.1890 0.0098 0.05; dir: alternate; loop: true; dur: 5771; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 3050; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 5689; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 925; delay: 160; easing: easeOutCubic"></a-plane>
+      <!-- малый чёрный брус -->
+      <a-plane class="clickable" data-info="p8-bar"
+        position="-0.2001 -0.1165 0.06" width="0.0967" height="0.0337"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2070 -0.1219 0.06; to: -0.1932 -0.1111 0.06; dir: alternate; loop: true; dur: 4798; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.969 0.969 1; to: 1.048 1.048 1; dir: alternate; loop: true; dur: 4178; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6296; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1167; delay: 240; easing: easeOutCubic"></a-plane>
+      <!-- зелёная диагональ короткая -->
+      <a-plane class="clickable" data-info="p8-diag"
+        position="0.2416 0.2307 0.04" width="0.1724" height="0.0296"
+        rotation="0 0 50"
+        material="shader: flat; color: #0D803C; side: double"
+        animation__drift="property: position; from: 0.2358 0.2257 0.04; to: 0.2474 0.2357 0.04; dir: alternate; loop: true; dur: 5499; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.044 1.044 1; dir: alternate; loop: true; dur: 4828; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 48.50; to: 0 0 51.50; dir: alternate; loop: true; dur: 5936; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1198; delay: 320; easing: easeOutCubic"></a-plane>
+      <!-- синяя горизонталь -->
+      <a-plane class="clickable" data-info="p8-bluebar"
+        position="0.0923 -0.1335 0.04" width="0.4092" height="0.0337"
+        rotation="0 0 -180"
+        material="shader: flat; color: #2D2C7F; side: double"
+        animation__drift="property: position; from: 0.0876 -0.1372 0.04; to: 0.0970 -0.1298 0.04; dir: alternate; loop: true; dur: 6621; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.969 0.969 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 4878; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -181.50; to: 0 0 -178.50; dir: alternate; loop: true; dur: 5997; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1033; delay: 400; easing: easeOutCubic"></a-plane>
+      <!-- красный квадрат правый -->
+      <a-plane class="clickable" data-info="p8-redsq"
+        position="0.3062 -0.0324 0.04" width="0.1344" height="0.1344"
+        rotation="0 0 0"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.3027 -0.0373 0.04; to: 0.3097 -0.0275 0.04; dir: alternate; loop: true; dur: 6675; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.980 0.980 1; to: 1.042 1.042 1; dir: alternate; loop: true; dur: 4945; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7312; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1113; delay: 480; easing: easeOutCubic"></a-plane>
+      <!-- малый красный квадрат -->
+      <a-plane class="clickable" data-info="p8-redsq"
+        position="0.1032 -0.2209 0.04" width="0.0591" height="0.0591"
+        rotation="0 0 0"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.0969 -0.2275 0.04; to: 0.1095 -0.2143 0.04; dir: alternate; loop: true; dur: 6247; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.977 0.977 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 4837; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6151; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1180; delay: 560; easing: easeOutCubic"></a-plane>
+      <!-- малый чёрный квадратик -->
+      <a-plane class="clickable" data-info="p8-accent"
+        position="-0.1953 0.2603 0.05" width="0.0591" height="0.0591"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: -0.2017 0.2555 0.05; to: -0.1889 0.2651 0.05; dir: alternate; loop: true; dur: 5512; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.977 0.977 1; to: 1.036 1.036 1; dir: alternate; loop: true; dur: 4592; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7635; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1048; delay: 640; easing: easeOutCubic"></a-plane>
+      <!-- малый синий квадратик -->
+      <a-plane class="clickable" data-info="p8-accent"
+        position="-0.2361 0.2971 0.05" width="0.0591" height="0.0591"
+        rotation="0 0 0"
+        material="shader: flat; color: #2D2C7F; side: double"
+        animation__drift="property: position; from: -0.2416 0.2930 0.05; to: -0.2306 0.3012 0.05; dir: alternate; loop: true; dur: 4817; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.035 1.035 1; dir: alternate; loop: true; dur: 3687; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6809; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1076; delay: 720; easing: easeOutCubic"></a-plane>
+      <!-- малый зелёный квадратик -->
+      <a-plane class="clickable" data-info="p8-accent"
+        position="-0.3287 -0.1625 0.05" width="0.0406" height="0.0406"
+        rotation="0 0 0"
+        material="shader: flat; color: #0D803C; side: double"
+        animation__drift="property: position; from: -0.3320 -0.1661 0.05; to: -0.3254 -0.1589 0.05; dir: alternate; loop: true; dur: 6068; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.044 1.044 1; dir: alternate; loop: true; dur: 3131; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7199; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1008; delay: 800; easing: easeOutCubic"></a-plane>
+      <!-- красная точка -->
+      <a-circle class="clickable" data-info="p8-dot"
+        position="0.3225 0.3234 0.05" radius="0.0222"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.3182 0.3185 0.05; to: 0.3268 0.3283 0.05; dir: alternate; loop: true; dur: 4755; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.964 0.964 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4853; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1156; delay: 880; easing: easeOutCubic"></a-circle>
+      <!-- красный круг -->
+      <a-circle class="clickable" data-info="p8-dot"
+        position="-0.3429 0.0347 0.05" radius="0.0551"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: -0.3460 0.0282 0.05; to: -0.3398 0.0412 0.05; dir: alternate; loop: true; dur: 6858; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.968 0.968 1; to: 1.030 1.030 1; dir: alternate; loop: true; dur: 3720; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1185; delay: 960; easing: easeOutCubic"></a-circle>
+      <!-- чёрный брус -->
+      <a-plane class="clickable" data-info="p8-bar"
+        position="0.1857 -0.0742 0.04" width="0.2137" height="0.0509"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.1811 -0.0808 0.04; to: 0.1903 -0.0676 0.04; dir: alternate; loop: true; dur: 6216; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.971 0.971 1; to: 1.045 1.045 1; dir: alternate; loop: true; dur: 4638; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7970; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 912; delay: 1040; easing: easeOutCubic"></a-plane>
+      <!-- жёлтая диагональ -->
+      <a-plane class="clickable" data-info="p8-diag"
+        position="0.2684 0.1341 0.04" width="0.2860" height="0.0337"
+        rotation="0 0 50"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: 0.2634 0.1300 0.04; to: 0.2734 0.1382 0.04; dir: alternate; loop: true; dur: 6489; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.961 0.961 1; to: 1.037 1.037 1; dir: alternate; loop: true; dur: 4390; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 48.50; to: 0 0 51.50; dir: alternate; loop: true; dur: 7156; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1170; delay: 1120; easing: easeOutCubic"></a-plane>
+      <!-- зелёная диагональ -->
+      <a-plane class="clickable" data-info="p8-diag"
+        position="0.2905 -0.0743 0.04" width="0.2860" height="0.0337"
+        rotation="0 0 50"
+        material="shader: flat; color: #0D803C; side: double"
+        animation__drift="property: position; from: 0.2868 -0.0792 0.04; to: 0.2942 -0.0694 0.04; dir: alternate; loop: true; dur: 5022; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.980 0.980 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 4857; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 48.50; to: 0 0 51.50; dir: alternate; loop: true; dur: 7113; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1103; delay: 1200; easing: easeOutCubic"></a-plane>
+      <!-- жёлтый прямоугольник -->
+      <a-plane class="clickable" data-info="p8-yellow"
+        position="-0.2361 -0.0244 0.04" width="0.2323" height="0.1504"
+        rotation="0 0 0"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: -0.2414 -0.0275 0.04; to: -0.2308 -0.0213 0.04; dir: alternate; loop: true; dur: 6255; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.039 1.039 1; dir: alternate; loop: true; dur: 3102; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6565; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 994; delay: 1280; easing: easeOutCubic"></a-plane>
+      <!-- вертикальный чёрный -->
+      <a-plane class="clickable" data-info="p8-bar"
+        position="0.1635 0.0385 0.04" width="0.1745" height="0.0337"
+        rotation="0 0 90"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.1592 0.0337 0.04; to: 0.1678 0.0433 0.04; dir: alternate; loop: true; dur: 5882; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.975 0.975 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4540; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 88.50; to: 0 0 91.50; dir: alternate; loop: true; dur: 7226; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 929; delay: 1360; easing: easeOutCubic"></a-plane>
+      <!-- чёрное окно -->
+      <a-plane class="clickable" data-info="p8-window"
+        position="0.1108 0.0934 0.05" width="0.0488" height="0.0647"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.1045 0.0885 0.05; to: 0.1171 0.0983 0.05; dir: alternate; loop: true; dur: 6709; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.961 0.961 1; to: 1.049 1.049 1; dir: alternate; loop: true; dur: 3459; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 5781; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1199; delay: 1440; easing: easeOutCubic"></a-plane>
+      <!-- красное окно -->
+      <a-plane class="clickable" data-info="p8-window"
+        position="0.2163 0.0911 0.05" width="0.0488" height="0.0647"
+        rotation="0 0 0"
+        material="shader: flat; color: #CE1417; side: double"
+        animation__drift="property: position; from: 0.2095 0.0879 0.05; to: 0.2231 0.0943 0.05; dir: alternate; loop: true; dur: 4627; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.979 0.979 1; to: 1.034 1.034 1; dir: alternate; loop: true; dur: 3041; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6124; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 922; delay: 1520; easing: easeOutCubic"></a-plane>
+      <!-- тонкая чёрная линия -->
+      <a-plane class="clickable" data-info="p8-line"
+        position="0.1558 0.1230 0.06" width="0.1699" height="0.0055"
+        rotation="0 0 0"
+        material="shader: flat; color: #090910; side: double"
+        animation__drift="property: position; from: 0.1523 0.1173 0.06; to: 0.1593 0.1287 0.06; dir: alternate; loop: true; dur: 6810; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.979 0.979 1; to: 1.039 1.039 1; dir: alternate; loop: true; dur: 3524; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7010; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 885; delay: 1600; easing: easeOutCubic"></a-plane>
+      <!-- длинная жёлтая диагональ -->
+      <a-plane class="clickable" data-info="p8-diag"
+        position="-0.0267 0.0310 0.04" width="0.7011" height="0.0337"
+        rotation="0 0 50"
+        material="shader: flat; color: #ECC105; side: double"
+        animation__drift="property: position; from: -0.0321 0.0241 0.04; to: -0.0213 0.0379 0.04; dir: alternate; loop: true; dur: 4969; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.976 0.976 1; to: 1.033 1.033 1; dir: alternate; loop: true; dur: 3637; easing: easeInOutSine"
+        animation__rot="property: rotation; from: 0 0 48.50; to: 0 0 51.50; dir: alternate; loop: true; dur: 5942; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1096; delay: 1680; easing: easeOutCubic"></a-plane>
+    </a-entity>
+
   </a-scene>
 
   <script>
@@ -623,42 +1108,59 @@
     const sceneEl = document.querySelector('a-scene');
 
     // ======== Инфо-поп-ап для фигур ========
+    // Плейсхолдеры пока — конкретные тексты подвяжем когда пришлёшь.
+    const PLACEHOLDER = { title: 'Описание скоро появится', body: 'Текст для этого элемента будет добавлен позже.' };
     const INFO = {
       // ===== Плакат 1 =====
-      'p1-lines': {
-        title: 'Витебск',
-        body: 'Витебск — один из старейших городов Республики Беларусь, расположенный на реке Западная Двина. Город обладает богатым культурно-историческим наследием и занимает важное место в истории искусства начала XX века.'
-      },
-      'p1-black-square': {
-        title: 'К. С. Малевич',
-        body: 'К. С. Малевич — основатель супрематизма и идейный лидер УНОВИСа. Его работа «Чёрный квадрат» стала символом нового искусства, в котором простая геометрическая форма заменяет предметное изображение и открывает путь к свободному визуальному мышлению.'
-      },
-      'p1-red-squares': {
-        title: 'Красные элементы',
-        body: 'Красные элементы являются символом движения и перехода от реального пространства к маршруту нового искусства. Также это отсылает к лестнице на набережной города.'
-      },
+      'p1-bigred':   PLACEHOLDER,
+      'p1-stairs':   PLACEHOLDER,
+      'p1-stripes':  PLACEHOLDER,
+      'p1-blacksq':  PLACEHOLDER,
       // ===== Плакат 2 =====
-      'p2-black-square': {
-        title: 'УНОВИС',
-        body: 'УНОВИС — «Утвердители нового искусства». Объединение возникло в Витебске в 1920 году и было связано с идеями К. С. Малевича, супрематизма и поиском нового художественного языка, основанного на форме, цвете, пространстве и отказе от традиционного изображения.'
-      },
-      'p2-lines': {
-        title: 'Супрематизм',
-        body: 'Супрематизм — это искусство чистых форм и цвета. Он отказывается от изображения традиционной живописи и передаёт идею через геометрические формы, движение и пространство.'
-      },
-      'p2-red-shape': {
-        title: 'Стена Малевича',
-        body: 'Роспись на здании «Стена Малевича» создана по эскизу К. С. Малевича «Принцип росписи стены, плоскости или всей комнаты, или целой квартиры по системе супрематизма», также известному как «Смерть обоям». Эскиз был создан в Витебске и отражает идею переноса супрематизма в реальное пространство.'
-      },
+      'p2-blacksq':    PLACEHOLDER,
+      'p2-yellow':     PLACEHOLDER,
+      'p2-redshape':   PLACEHOLDER,
+      'p2-greenline':  PLACEHOLDER,
+      'p2-blueline':   PLACEHOLDER,
+      'p2-redcircle':  PLACEHOLDER,
       // ===== Плакат 3 =====
-      'p3-head': {
-        title: 'Марк Шагал',
-        body: 'Марк Шагал — один из главных художественных символов Витебска. Его творчество связано с образом города, памятью, движением и личным восприятием пространства.'
-      },
-      'p3-leg': {
-        title: 'ВНХУ',
-        body: 'Марк Шагал основал Витебское Народное Художественное Училище (ВНХУ), ставшее важной точкой развития авангарда. Именно в этой художественной среде позднее возникло объединение УНОВИС.'
-      }
+      'p3-chagall':  PLACEHOLDER,
+      'p3-blacksq':  PLACEHOLDER,
+      'p3-house':    PLACEHOLDER,
+      'p3-moon':     PLACEHOLDER,
+      // ===== Плакат 4 =====
+      'p4-bigsq':    PLACEHOLDER,
+      'p4-malevich': PLACEHOLDER,
+      // ===== Плакат 5 =====
+      'p5-cross':     PLACEHOLDER,
+      'p5-blackdiag': PLACEHOLDER,
+      'p5-reddiag':   PLACEHOLDER,
+      // ===== Плакат 6 =====
+      'p6-redstripes':  PLACEHOLDER,
+      'p6-bluestripes': PLACEHOLDER,
+      'p6-yellow':      PLACEHOLDER,
+      // ===== Плакат 7 (лицо) =====
+      'p7-hat':    PLACEHOLDER,
+      'p7-tile':   PLACEHOLDER,
+      'p7-nose':   PLACEHOLDER,
+      'p7-mouth':  PLACEHOLDER,
+      'p7-brows':  PLACEHOLDER,
+      'p7-eyes':   PLACEHOLDER,
+      'p7-bar':    PLACEHOLDER,
+      'p7-body':   PLACEHOLDER,
+      // ===== Плакат 8 (архитектура) =====
+      'p8-tower':    PLACEHOLDER,
+      'p8-bigred':   PLACEHOLDER,
+      'p8-blackbox': PLACEHOLDER,
+      'p8-bar':      PLACEHOLDER,
+      'p8-diag':     PLACEHOLDER,
+      'p8-bluebar':  PLACEHOLDER,
+      'p8-redsq':    PLACEHOLDER,
+      'p8-accent':   PLACEHOLDER,
+      'p8-dot':      PLACEHOLDER,
+      'p8-yellow':   PLACEHOLDER,
+      'p8-window':   PLACEHOLDER,
+      'p8-line':     PLACEHOLDER
     };
 
     const popup = document.getElementById('info-popup');
@@ -834,11 +1336,16 @@
       alert('Не удалось запустить AR.\n\nПроверь:\n1. Сайт открыт по https:// или localhost\n2. Браузер получил доступ к камере\n3. Файл targets.mind лежит рядом с ar.html');
     });
 
-    // Таргет-события — все 3 плаката шарят один баннер/хинт
+    // Таргет-события — все 8 плакатов шарят один баннер/хинт
     const targets = [
-      { el: document.querySelector('#target-1'), label: 'ПЛАКАТ I' },
-      { el: document.querySelector('#target-2'), label: 'ПЛАКАТ II' },
-      { el: document.querySelector('#target-3'), label: 'ПЛАКАТ III' }
+      { el: document.querySelector('#target-1'), label: 'ПЛАКАТ 1' },
+      { el: document.querySelector('#target-2'), label: 'ПЛАКАТ 2' },
+      { el: document.querySelector('#target-3'), label: 'ПЛАКАТ 3' },
+      { el: document.querySelector('#target-4'), label: 'ПЛАКАТ 4' },
+      { el: document.querySelector('#target-5'), label: 'ПЛАКАТ 5' },
+      { el: document.querySelector('#target-6'), label: 'ПЛАКАТ 6' },
+      { el: document.querySelector('#target-7'), label: 'ПЛАКАТ 7' },
+      { el: document.querySelector('#target-8'), label: 'ПЛАКАТ 8' }
     ];
     let activeTargets = 0;
     targets.forEach(({ el, label }) => {
