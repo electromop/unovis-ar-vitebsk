@@ -439,7 +439,7 @@
         animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7823; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1167; delay: 0; easing: easeOutCubic"></a-plane>
       <!-- жёлтый горизонтальный блок снизу -->
-      <a-plane class="clickable" data-info="p2-yellow"
+      <a-plane 
         position="0.0934 -0.4566 0.03" width="0.2959" height="0.1077"
         rotation="0 0 0"
         material="shader: flat; color: #ECC105; side: double"
@@ -448,7 +448,7 @@
         animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6584; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 871; delay: 80; easing: easeOutCubic"></a-plane>
       <!-- жёлтый вертикальный сверху -->
-      <a-plane class="clickable" data-info="p2-yellow"
+      <a-plane 
         position="-0.0412 0.5651 0.03" width="0.2842" height="0.0911"
         rotation="0 0 -90"
         material="shader: flat; color: #ECC105; side: double"
@@ -457,7 +457,7 @@
         animation__rot="property: rotation; from: 0 0 -91.50; to: 0 0 -88.50; dir: alternate; loop: true; dur: 7135; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 985; delay: 160; easing: easeOutCubic"></a-plane>
       <!-- жёлтый малый верх-право -->
-      <a-plane class="clickable" data-info="p2-yellow"
+      <a-plane 
         position="0.4292 0.6436 0.03" width="0.1271" height="0.1417"
         rotation="0 0 -90"
         material="shader: flat; color: #ECC105; side: double"
@@ -502,7 +502,7 @@
         animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7579; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1111; delay: 560; easing: easeOutCubic"></a-plane>
       <!-- большой красный круг -->
-      <a-circle class="clickable" data-info="p2-redcircle"
+      <a-circle 
         position="-0.4633 -0.6005 0.02" radius="0.3033"
         material="shader: flat; color: #CE1417; side: double"
         animation__drift="property: position; from: -0.4671 -0.6050 0.02; to: -0.4595 -0.5960 0.02; dir: alternate; loop: true; dur: 5161; easing: easeInOutSine"
@@ -516,7 +516,7 @@
     <a-entity mindar-image-target="targetIndex: 2" id="target-3">
 
       <!-- фигура Шагала (звезда) -->
-      <a-plane class="clickable" data-info="p3-chagall"
+      <a-plane 
         position="0.1482 -0.3014 0.03" width="0.3575" height="0.4270"
         rotation="0 0 0"
         material="shader: flat; color: #ECC105; side: double"
@@ -525,7 +525,7 @@
         animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 6480; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 829; delay: 0; easing: easeOutCubic"></a-plane>
       <!-- малый чёрный квадрат -->
-      <a-plane class="clickable" data-info="p3-blacksq"
+      <a-plane 
         position="0.2620 -0.0178 0.04" width="0.0851" height="0.0851"
         rotation="0 0 0"
         material="shader: flat; color: #090910; side: double"
@@ -533,24 +533,25 @@
         animation__breathe="property: scale; from: 0.962 0.962 1; to: 1.040 1.040 1; dir: alternate; loop: true; dur: 3141; easing: easeInOutSine"
         animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7681; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1192; delay: 80; easing: easeOutCubic"></a-plane>
-      <!-- красная плашка-дом -->
-      <a-plane class="clickable" data-info="p3-house"
-        position="-0.2113 -0.3226 0.03" width="0.1983" height="0.4348"
-        rotation="0 0 0"
-        material="shader: flat; color: #CE1417; side: double"
-        animation__drift="property: position; from: -0.2148 -0.3282 0.03; to: -0.2078 -0.3170 0.03; dir: alternate; loop: true; dur: 6751; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.963 0.963 1; to: 1.041 1.041 1; dir: alternate; loop: true; dur: 4242; easing: easeInOutSine"
-        animation__rot="property: rotation; from: 0 0 -1.50; to: 0 0 1.50; dir: alternate; loop: true; dur: 7233; easing: easeInOutSine"
-        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 908; delay: 160; easing: easeOutCubic"></a-plane>
-      <!-- чёрный диск-луна -->
+      <!-- ножка ВНХУ — обёрнута в entity для шага: pivot ВВЕРХУ ноги,
+           qачается ±8° каждые 900мс (как шаги). a-plane смещён вниз на h/2,
+           чтобы при повороте entity нога качалась "от бедра". -->
+      <a-entity position="-0.2113 -0.1052 0.03"
+        animation__step="property: rotation; from: 0 0 -8; to: 0 0 8; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
+        animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; delay: 160; easing: easeOutCubic">
+        <a-plane class="clickable" data-info="p3-house"
+          position="0 -0.2174 0" width="0.1983" height="0.4348"
+          material="shader: flat; color: #CE1417; side: double"></a-plane>
+      </a-entity>
+      <!-- голова-круг — покачивается вверх-вниз в такт шага -->
       <a-circle class="clickable" data-info="p3-moon"
         position="-0.1280 0.1416 0.04" radius="0.1920"
         material="shader: flat; color: #090910; side: double"
-        animation__drift="property: position; from: -0.1347 0.1356 0.04; to: -0.1213 0.1476 0.04; dir: alternate; loop: true; dur: 5323; easing: easeInOutSine"
-        animation__breathe="property: scale; from: 0.974 0.974 1; to: 1.038 1.038 1; dir: alternate; loop: true; dur: 4375; easing: easeInOutSine"
+        animation__bob="property: position; from: -0.1280 0.1356 0.04; to: -0.1280 0.1476 0.04; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"
+        animation__breathe="property: scale; from: 0.985 0.985 1; to: 1.015 1.015 1; dir: alternate; loop: true; dur: 1800; easing: easeInOutSine"
         animation__in="property: scale; from: 0 0 0; to: 1 1 1; dur: 1024; delay: 240; easing: easeOutCubic"></a-circle>
       <!-- зелёная диагональ (fix: пропустил в первой версии) -->
-      <a-plane class="clickable" data-info="p3-greenline"
+      <a-plane 
         position="0.1043 0.3298 0.04" width="0.5031" height="0.0462"
         rotation="0 0 39"
         material="shader: flat; color: #0D803C; side: double"
@@ -559,7 +560,7 @@
         animation__rot="property: rotation; from: 0 0 37.5; to: 0 0 40.5; dir: alternate; loop: true; dur: 6800; easing: easeInOutSine"
         animation__in="property: scale; from: 0 1 1; to: 1 1 1; dur: 1100; delay: 320; easing: easeOutCubic"></a-plane>
       <!-- синяя диагональ (fix: пропустил в первой версии) -->
-      <a-plane class="clickable" data-info="p3-blueline"
+      <a-plane 
         position="0.0699 0.2422 0.04" width="0.5135" height="0.0462"
         rotation="0 0 39"
         material="shader: flat; color: #2D2C7F; side: double"
@@ -1151,28 +1152,58 @@
     const sceneEl = document.querySelector('a-scene');
 
     // ======== Инфо-поп-ап для фигур ========
-    // Плейсхолдеры пока — конкретные тексты подвяжем когда пришлёшь.
+    // Тексты с финального брифа.
+    // Шапка по плакатам, общие тексты переиспользуются если на одном плакате
+    // одна тема покрывает несколько фигур (например все красные квадраты).
+    const T_VITEBSK = {
+      title: 'Витебск',
+      body: 'Витебск — один из старейших городов Республики Беларусь, расположенный на&nbsp;реке Западная Двина. Город обладает богатым культурно-историческим наследием и&nbsp;занимает важное место в&nbsp;истории искусства начала&nbsp;XX&nbsp;века.'
+    };
+    const T_MALEVICH = {
+      title: 'К. С. Малевич',
+      body: 'К.&nbsp;С.&nbsp;Малевич — основатель супрематизма и&nbsp;идейный лидер УНОВИСа. Его работа «Чёрный квадрат» стала символом нового искусства, в&nbsp;котором простая геометрическая форма заменяет предметное изображение и&nbsp;открывает путь к&nbsp;свободному визуальному мышлению.'
+    };
+    const T_REDELEMENTS = {
+      title: 'Красные элементы',
+      body: 'Красные элементы являются символом движения и&nbsp;перехода от&nbsp;реального пространства к&nbsp;маршруту нового искусства. Также это отсылает к&nbsp;лестнице на&nbsp;набережной города.'
+    };
+    const T_UNOVIS = {
+      title: 'УНОВИС',
+      body: 'УНОВИС — «Утвердители нового искусства». Объединение возникло в&nbsp;Витебске в&nbsp;1920&nbsp;году и&nbsp;было связано с&nbsp;идеями К.&nbsp;С.&nbsp;Малевича, супрематизма и&nbsp;поиском нового художественного языка, основанного на&nbsp;форме, цвете, пространстве и&nbsp;отказе от&nbsp;традиционного изображения.'
+    };
+    const T_SUPREMATISM = {
+      title: 'Супрематизм',
+      body: 'Супрематизм — это искусство чистых форм и&nbsp;цвета. Он&nbsp;отказывается от&nbsp;изображения традиционной живописи и&nbsp;передаёт идею через геометрические формы, движение и&nbsp;пространство.'
+    };
+    const T_MALEVICHWALL = {
+      title: 'Стена Малевича',
+      body: 'Роспись на&nbsp;здании «Стена Малевича» создана по&nbsp;эскизу К.&nbsp;С.&nbsp;Малевича «Принцип росписи стены, плоскости или&nbsp;всей комнаты, или&nbsp;целой квартиры по&nbsp;системе супрематизма», также известному как «Смерть обоям». Эскиз был создан в&nbsp;Витебске и&nbsp;отражает идею переноса супрематизма в&nbsp;реальное пространство.'
+    };
+    const T_CHAGALL = {
+      title: 'Марк Шагал',
+      body: 'Марк Шагал — один из&nbsp;главных художественных символов Витебска. Его творчество связано с&nbsp;образом города, памятью, движением и&nbsp;личным восприятием пространства.'
+    };
+    const T_VNHU = {
+      title: 'ВНХУ',
+      body: 'Марк Шагал основал Витебское Народное Художественное Училище (ВНХУ), ставшее важной точкой развития авангарда. Именно в&nbsp;этой художественной среде позднее возникло объединение УНОВИС.'
+    };
+    // Плейсхолдер для плакатов 4–8 (тексты пока не присланы)
     const PLACEHOLDER = { title: 'Описание скоро появится', body: 'Текст для этого элемента будет добавлен позже.' };
+
     const INFO = {
       // ===== Плакат 1 =====
-      'p1-bigred':   PLACEHOLDER,
-      'p1-stairs':   PLACEHOLDER,
-      'p1-stripes':  PLACEHOLDER,
-      'p1-blacksq':  PLACEHOLDER,
+      'p1-stripes':  T_VITEBSK,
+      'p1-blacksq':  T_MALEVICH,
+      'p1-stairs':   T_REDELEMENTS,
+      'p1-bigred':   T_REDELEMENTS,
       // ===== Плакат 2 =====
-      'p2-blacksq':    PLACEHOLDER,
-      'p2-yellow':     PLACEHOLDER,
-      'p2-redshape':   PLACEHOLDER,
-      'p2-greenline':  PLACEHOLDER,
-      'p2-blueline':   PLACEHOLDER,
-      'p2-redcircle':  PLACEHOLDER,
+      'p2-blacksq':    T_UNOVIS,
+      'p2-greenline':  T_SUPREMATISM,
+      'p2-blueline':   T_SUPREMATISM,
+      'p2-redshape':   T_MALEVICHWALL,
       // ===== Плакат 3 =====
-      'p3-chagall':   PLACEHOLDER,
-      'p3-blacksq':   PLACEHOLDER,
-      'p3-house':     PLACEHOLDER,
-      'p3-moon':      PLACEHOLDER,
-      'p3-greenline': PLACEHOLDER,
-      'p3-blueline':  PLACEHOLDER,
+      'p3-moon':       T_CHAGALL,
+      'p3-house':      T_VNHU,
       // ===== Плакат 4 =====
       'p4-bigsq':    PLACEHOLDER,
       'p4-malevich': PLACEHOLDER,
@@ -1220,7 +1251,8 @@
       const entry = INFO[key];
       if (!entry) return;
       popupTitle.textContent = entry.title;
-      popupBody.textContent = entry.body;
+      // innerHTML — чтобы &nbsp; работали как неразрывный пробел, а не литерал
+      popupBody.innerHTML = entry.body;
       popup.classList.add('active');
       popup.setAttribute('aria-hidden', 'false');
     }
