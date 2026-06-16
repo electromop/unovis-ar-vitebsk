@@ -214,11 +214,11 @@
     .popup-card {
       background: #FFFFFF;
       color: #111;
-      padding: 34px 28px 28px;
+      padding: 28px 26px 26px;
       max-width: 360px;
       width: 100%;
       position: relative;
-      border-left: 6px solid #CF1417;
+      border-left: 14px solid #CF1417;     /* толстая красная полоса слева как на референсе */
       font-family: 'Onest', system-ui, -apple-system, sans-serif;
       box-shadow: 8px 8px 0 rgba(216, 48, 26, 0.25);
       transform: translateY(12px);
@@ -229,34 +229,34 @@
     }
     .popup-title {
       font-family: 'Onest', system-ui, sans-serif;
-      font-weight: 900;                 /* Black — плотный жирный как на референсе */
+      font-weight: 900;
       font-size: 22px;
       letter-spacing: 0.5px;
-      margin: 0 0 10px;
+      margin: 0 0 6px;                  /* плотно к красной полосе под ним */
       color: #111;
       text-transform: uppercase;
       line-height: 1.1;
     }
     .popup-accent {
       height: 3px;
-      width: 38%;                       /* короткая красная полоса под заголовком */
+      width: 38%;
       background: #CF1417;
-      margin: 0 0 18px;
+      margin: 0 0 14px;                 /* воздух перед телом */
     }
     .popup-body {
       font-family: 'Onest', system-ui, sans-serif;
       font-size: 14px;
-      line-height: 1.45;                /* плотнее, как на референсе */
+      line-height: 1.45;
       color: #1a1a1a;
-      text-align: left;                 /* ragged-right, никаких "рек" пробелов */
+      text-align: left;
       text-wrap: pretty;
       hyphens: none;
       overflow-wrap: break-word;
     }
-    /* Первое предложение (lead) — отделено отступом перед второй фразой */
+    /* Lead — первое предложение, компактно отделено от тела */
     .popup-body .popup-lead {
       display: block;
-      margin-bottom: 0.6em;
+      margin-bottom: 0.5em;
     }
     .popup-close {
       position: absolute;
