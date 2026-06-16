@@ -1166,6 +1166,10 @@
       },
       init: function () {
         const self = this;
+        // ВАЖНО: убрать material-компонент A-Frame, иначе он перетрёт наш шейдер
+        if (this.el.hasAttribute('material')) {
+          this.el.removeAttribute('material');
+        }
         this.uniforms = {
           time:      { value: this.data.seed },
           baseColor: { value: new THREE.Color(this.data.color) }
@@ -1184,12 +1188,12 @@
             uniform vec3 baseColor;
             varying vec2 vUv;
             void main() {
-              // Диагональный бегущий блик: волна синуса, нормализованная в [0,1]
-              float wave = sin((vUv.x * 1.2 + vUv.y * 0.8) * 3.14159 - time * 2.8);
-              // pow для узкой яркой полосы (большая степень = тоньше блик)
-              float shine = pow(max(wave, 0.0), 5.0) * 0.7;
-              // Базовый цвет + белый шайн в зоне блика
-              vec3 col = baseColor + vec3(shine);
+              // Бегущий блик по диагонали. Ширину волны увеличил, степень понизил
+              // — широкая яркая полоса вместо узкого тонкого блика.
+              float wave = sin((vUv.x * 1.5 + vUv.y * 0.8) * 3.14159 - time * 3.5);
+              float shine = pow(max(wave, 0.0), 2.0);    // ширина полосы
+              // mix → яркий хайлайт без чрезмерной засветки
+              vec3 col = mix(baseColor, vec3(1.0), shine * 0.85);
               gl_FragColor = vec4(col, 1.0);
             }
           `,
@@ -1200,13 +1204,18 @@
           const mesh = self.el.getObject3D('mesh');
           if (mesh) mesh.material = self.shaderMaterial;
         };
+        // На случай если mesh уже есть И на случай если он создастся позже
         if (this.el.getObject3D('mesh')) apply();
-        else this.el.addEventListener('object3dset', apply);
+        this.el.addEventListener('object3dset', apply);
       },
       tick: function (t) {
         if (this.uniforms) {
-          // seed смещает фазу на разную позицию для каждого элемента
           this.uniforms.time.value = (t / 1000.0) + this.data.seed;
+          // Защита: если кто-то перезаписал материал, восстановим
+          const mesh = this.el.getObject3D('mesh');
+          if (mesh && mesh.material !== this.shaderMaterial) {
+            mesh.material = this.shaderMaterial;
+          }
         }
       }
     });
