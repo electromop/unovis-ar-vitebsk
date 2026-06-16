@@ -342,9 +342,15 @@
             uniform vec3 baseColor;
             varying vec2 vUv;
             void main() {
-              float wave = sin((vUv.x * 1.5 + vUv.y * 0.8) * 3.14159 - time * 3.5);
-              float shine = pow(max(wave, 0.0), 2.0);
-              vec3 col = mix(baseColor, vec3(1.0), shine * 0.85);
+              // Тёплый хайлайт — базовый цвет, сдвинутый к белому на 30%.
+              vec3 hi = mix(baseColor, vec3(1.0), 0.30);
+              // Диагональная нормализованная координата (мягкий уклон)
+              float diag = vUv.x * 0.65 + vUv.y * 0.35;
+              // Плавная синусоида, медленно перемещается → нежная градиентная волна
+              float wave = sin((diag * 2.2 - time * 0.65) * 3.14159);
+              // smoothstep даёт мягкие S-образные переходы вместо резких границ
+              float shine = smoothstep(-0.4, 0.9, wave);
+              vec3 col = mix(baseColor, hi, shine);
               gl_FragColor = vec4(col, 1.0);
             }
           `,
