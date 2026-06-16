@@ -8,7 +8,7 @@
   <!-- Onest для UI-надписей. Шрифт уже в кеше после визита на лендинг → +0ms. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;900&display=swap">
 
   <!-- Синхронная загрузка — критично для iOS Safari: с defer ломается user-gesture
        window для getUserMedia после клика на лендинге, камера не запрашивается. -->
@@ -229,36 +229,34 @@
     }
     .popup-title {
       font-family: 'Onest', system-ui, sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: 1px;
-      margin: 0 0 12px;
+      font-weight: 900;                 /* Black — плотный жирный как на референсе */
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      margin: 0 0 10px;
       color: #111;
       text-transform: uppercase;
       line-height: 1.1;
     }
     .popup-accent {
       height: 3px;
-      width: 100%;
-      max-width: 100%;
+      width: 60%;                       /* короткая красная полоса под заголовком */
       background: #CF1417;
-      margin: 0 0 20px;
+      margin: 0 0 18px;
     }
     .popup-body {
       font-family: 'Onest', system-ui, sans-serif;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.45;                /* плотнее, как на референсе */
       color: #1a1a1a;
-      text-align: justify;
+      text-align: left;                 /* ragged-right, никаких "рек" пробелов */
       text-wrap: pretty;
       hyphens: none;
       overflow-wrap: break-word;
     }
-    /* Первое предложение (lead) — выровнено по левому краю, отделено отступом */
+    /* Первое предложение (lead) — отделено отступом перед второй фразой */
     .popup-body .popup-lead {
       display: block;
-      text-align: left;
-      margin-bottom: 0.7em;
+      margin-bottom: 0.6em;
     }
     .popup-close {
       position: absolute;
