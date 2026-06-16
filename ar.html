@@ -248,9 +248,15 @@
       font-size: 14px;
       line-height: 1.45;
       color: #1a1a1a;
-      text-align: left;
+      text-align: justify;
       text-wrap: pretty;
-      hyphens: none;
+      /* Переносы по слогам разрешены ТОЛЬКО для слов длиннее 10 букв и
+         только если до/после переноса остаётся >=4 буквы. Короткие слова
+         не ломаются дефисом, длинные («супрематизма», «расположенный»)
+         разбиваются по слогам — нет ни «рек», ни «лесенок». */
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphenate-limit-chars: 10 4 4;
       overflow-wrap: break-word;
     }
     /* Lead — первое предложение, компактно отделено от тела */
