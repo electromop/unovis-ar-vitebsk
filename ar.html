@@ -218,7 +218,7 @@
       max-width: 360px;
       width: 100%;
       position: relative;
-      border-left: 22px solid #CF1417;     /* толстая красная полоса слева как на референсе */
+      border-left: 11px solid #CF1417;     /* толщина левой красной полосы */
       font-family: 'Onest', system-ui, -apple-system, sans-serif;
       box-shadow: 8px 8px 0 rgba(216, 48, 26, 0.25);
       transform: translateY(12px);
@@ -230,18 +230,18 @@
     .popup-title {
       font-family: 'Onest', system-ui, sans-serif;
       font-weight: 900;
-      font-size: 22px;
-      letter-spacing: 0.5px;
-      margin: 0 0 6px;                  /* плотно к красной полосе под ним */
+      font-size: 15px;                  /* в 1.5x меньше прежнего */
+      letter-spacing: 0.2px;
+      margin: 0 0 6px;
       color: #111;
       text-transform: uppercase;
       line-height: 1.1;
     }
     .popup-accent {
       height: 3px;
-      width: 38%;
+      width: 57%;                       /* в 1.5x длиннее прежнего (38 → 57) */
       background: #CF1417;
-      margin: 0 0 14px;                 /* воздух перед телом */
+      margin: 0 0 14px;
     }
     .popup-body {
       font-family: 'Onest', system-ui, sans-serif;
