@@ -247,8 +247,10 @@
       line-height: 1.65;
       letter-spacing: 0.3px;
       color: #1a1a1a;
-      text-align: justify;
+      text-align: left;             /* без justify — никаких "рек" пробелов */
+      text-wrap: pretty;            /* умное разбиение, без сирот */
       hyphens: none;
+      overflow-wrap: break-word;
     }
     .popup-close {
       position: absolute;
