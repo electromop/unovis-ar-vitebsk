@@ -230,12 +230,16 @@
     .popup-title {
       font-family: 'Onest', system-ui, sans-serif;
       font-weight: 900;
-      font-size: 15px;                  /* в 1.5x меньше прежнего */
-      letter-spacing: 0.2px;
+      font-size: 17px;
+      letter-spacing: -0.3px;
       margin: 0 0 6px;
       color: #111;
       text-transform: uppercase;
       line-height: 1.1;
+      /* Сжать буквы по горизонтали — visually condensed без condensed-варианта шрифта */
+      display: inline-block;
+      transform: scaleX(0.82);
+      transform-origin: left center;
     }
     .popup-accent {
       height: 3px;
