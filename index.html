@@ -265,7 +265,7 @@
       line-height: 1.4;
       color: var(--white);
       opacity: 0.85;
-      text-align: left;
+      text-align: justify;
       text-wrap: pretty;
       /* Авто-переносы только для слов от 10 букв, минимум 4 буквы до/после
          переноса. Короткие слова целы, длинные («супрематизма») разбиваются
@@ -277,7 +277,7 @@
     /* Первый абзац первой карточки — выравнивание по левому краю.
        Селектор: первая .card в .cards → первый <p> внутри неё. */
     .cards .card:first-child p:first-of-type {
-      text-align: left;
+      text-align: justify;
     }
     .card p + p {
       margin-top: calc(var(--u) * 1);    /* 8px — компактный межабзацный отступ */
