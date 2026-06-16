@@ -252,6 +252,12 @@
       hyphens: none;
       overflow-wrap: break-word;
     }
+    /* Первое предложение (lead) — выровнено по левому краю, без растягивания */
+    .popup-body .popup-lead {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.5em;
+    }
     .popup-close {
       position: absolute;
       top: 6px;
@@ -1357,8 +1363,19 @@
       const entry = INFO[key];
       if (!entry) return;
       popupTitle.textContent = entry.title;
+      let html = entry.body;
+      // На плакате 1 — первое предложение (lead) выравниваем влево, остальное justified.
+      // Regex ищет первый "." / "!" / "?" за которым идёт <br> ИЛИ пробел + ЗАГЛАВНАЯ+строчная
+      // (lookahead на капитал+строчную защищает от разрыва на инициалах вроде "К. С.")
+      if (key.startsWith('p1-')) {
+        const m = html.match(/^(.*?[.!?])(<br>|\s+(?=[А-Я][а-я]))([\s\S]*)$/);
+        if (m) {
+          // m[1] = lead, m[2] = разделитель (br или пробел), m[3] = остальное
+          html = `<span class="popup-lead">${m[1]}</span>${m[3]}`;
+        }
+      }
       // innerHTML — чтобы &nbsp; работали как неразрывный пробел, а не литерал
-      popupBody.innerHTML = entry.body;
+      popupBody.innerHTML = html;
       popup.classList.add('active');
       popup.setAttribute('aria-hidden', 'false');
     }
